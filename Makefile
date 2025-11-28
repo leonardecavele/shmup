@@ -2,6 +2,7 @@
 NAME = ft_shmup
 CC = cc
 INCDIR = includes
+SRCDIR = srcs
 BUILD = .build
 
 # flags
@@ -10,6 +11,8 @@ MAKEFLAGS+= -j $$(nproc)
 
 # files
 SRCS =\
+	main.c\
+	frame.c
 
 OBJS = $(SRCS:%.c=$(BUILD)/%.o)
 DEPS = $(OBJS:.o=.d)
@@ -22,9 +25,9 @@ $(NAME):
 	@$(MAKE) build --no-print-directory
 
 build: $(OBJS)
-	$(AR) $(NAME) $(OBJS)
+	$(CC) $(CLFAGS) $(OBJS) -o $(NAME)
 
-$(BUILD)/%.o: %.c
+$(BUILD)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
