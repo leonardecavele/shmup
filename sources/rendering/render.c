@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 22:08:21 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 11:49:23 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/29 21:36:04 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ extern bool	resize(void)
 	refresh();
 	clear();
 	getmaxyx(stdscr, height, width);
-	if (height >= MIN_HEIGHT && width >= MIN_WIDTH)
+	if (height >= MIN_HEIGHT && width >= MIN_WIDTH
+		&& height <= MAX_HEIGHT && width <= MAX_WIDTH)
 		return (true);
 	mvprintw(height / 2, (width / 2) - (strlen(message) / 2), message);
 	return (false);
