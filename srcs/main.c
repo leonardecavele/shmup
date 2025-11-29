@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 21:47:32 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 11:55:37 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/29 14:11:47 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,16 @@ int	main(int ac, char **av)
 	int		c;
 
 	fd = open(av[1], O_RDONLY);
-	if (fd < 0)
+	if (fd < 0 || fd > FD_MAX || ((read(fd, NULL, 0) < 0)))
 	{
-		dprintf(2, "%sInvalid path to map.\n", RED);
+		dprintf(2, "%sPath to map is invalid or it cannot be opened.\n", RED);
 		dprintf(2, "example: ./ft_shmup map/00%s\n", RESET);
 		return (3);
 	}
 
 	frame_start = frame_time = frame_end = fps = 0.0;
 
-	parse(&game, fd);			// get map info
+	parse(&game, fd);				// get map info // MUST HANDLE FAILED PARSING
 	close(fd);
 	fd = -1;
 	handle_signal();				// to properly exit
@@ -83,7 +83,8 @@ int	main(int ac, char **av)
 		if (to_resize)
 		{
 			correct_size = resize();
-			if (correct_size) to_resize = false;
+			if (correct_size)
+				to_resize = false;
 			usleep(5000);
 		}
 		if (correct_size == true)

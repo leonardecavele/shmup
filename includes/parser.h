@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 11:37:54 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 11:47:21 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/29 13:48:07 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 # include "game.h"
 
-void	parse(t_game *game, int fd);
+# define FD_MAX				1024
+# define INFO_LINE_SIZE		16
+
+# define MIN_BOARD_HEIGHT	30
+# define MIN_BOARD_WIDTH	30
+
+bool	parse(t_game *game, int fd);
 
 #endif
