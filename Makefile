@@ -61,8 +61,10 @@ F_PARSING	:=	parser.c		\
 F_RENDERING :=	render.c		\
 				frame.c			\
 				display_board.c	\
+				camera.c		\
 
 F_GAME		:=	game.c			\
+				hero.c			\
 
 # VARS GENERATION =====================================================================
 $(foreach comp,$(COMPONENTS),$(eval $(call generate_var_sources_dir,$(comp))))

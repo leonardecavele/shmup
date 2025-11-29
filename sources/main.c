@@ -15,6 +15,7 @@
 #include "game.h"
 #include "render.h"
 #include "parser.h"
+#include "text_formatting.h"
 
 static volatile sig_atomic_t	to_resize = true;
 static volatile sig_atomic_t	fd = -1;
@@ -47,7 +48,7 @@ int	main(int ac, char **av)
 	if (ac != 2)
 	{
 		dprintf(2, "%sPlease give a path to a map as second argument.\n", RED);
-		dprintf(2, "example: ./ft_shmup map/00%s\n", RESET);
+		dprintf(2, "example: ./ft_shmup map/00%s\n", RST);
 		return (2);
 	}
 
@@ -60,7 +61,7 @@ int	main(int ac, char **av)
 	if (fd < 0 || fd > FD_MAX || ((read(fd, NULL, 0) < 0)))
 	{
 		dprintf(2, "%sPath to map is invalid or it cannot be opened.\n", RED);
-		dprintf(2, "example: ./ft_shmup map/00%s\n", RESET);
+		dprintf(2, "example: ./ft_shmup map/00%s\n", RST);
 		return (3);
 	}
 
@@ -68,7 +69,7 @@ int	main(int ac, char **av)
 
 	if (!parse(&game, fd))			// get map info // MUST HANDLE FAILED PARSING
 	{
-		dprintf(2, "%sMap is invalid.\n%s", RED, RESET);
+		dprintf(2, "%sMap is invalid.\n%s", RED, RST);
 		return (4);
 	}
 	close(fd);
@@ -78,6 +79,7 @@ int	main(int ac, char **av)
 	cbreak();						// keys instantly works
 	noecho();						// typed char are not printed
 	nodelay(stdscr, true);			// getch returns ERR if no char
+	keypad(stdscr, TRUE);
 	curs_set(0);					// hide cursor
 
 	while (playing)
@@ -97,9 +99,9 @@ int	main(int ac, char **av)
 			if (update_game(c, &game))
 				playing = false;
 
-			clear();
-			mvprintw(5, 10, "running");
-			// render();
+			//clear();
+			// mvprintw(5, 10, "running");
+			render(&game);
 		}
 
 		frame_end = get_time();

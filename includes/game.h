@@ -35,12 +35,12 @@ typedef struct s_camera
 typedef struct	s_game
 {
 	unsigned char	board[MAX_BOARD_HEIGHT][MAX_BOARD_WIDTH];
-	unsigned short	board_height;
-	unsigned short	board_width;
+	short			board_height;
+	short			board_width;
 	t_entity		entities[MAX_ENTITY];
 	t_camera		camera;
 }					t_game;
   
-int	update_game(int c, t_game *game);
+int		update_game(int c, t_game *game);
 
 #endif

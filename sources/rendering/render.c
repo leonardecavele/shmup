@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 22:08:21 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 11:49:23 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/29 16:09:06 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,13 @@ extern bool	resize(void)
 	getmaxyx(stdscr, height, width);
 	if (height >= MIN_HEIGHT && width >= MIN_WIDTH)
 		return (true);
-	mvprintw(height / 2, (width / 2) - (strlen(message) / 2), message);
+	mvprintw(height  >> 1, (width  >> 1) - (strlen(message)  >> 1), message);
 	return (false);
 }
 
 extern void	render(t_game *game)
 {
-	(void)game;
-
+	display_board(game);
 	// draw map
 	// draw character
 	// draw enemies
