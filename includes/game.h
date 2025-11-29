@@ -56,6 +56,8 @@ typedef struct	s_game
 	unsigned char	board[MAX_BOARD_HEIGHT][MAX_BOARD_WIDTH];
 	short			board_height;
 	short			board_width;
+	int				score;
+	int				hp;
 	t_entity		entities[MAX_ENTITY];
 	unsigned short	ent_qty;
 	t_camera		camera;

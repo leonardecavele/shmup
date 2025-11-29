@@ -102,5 +102,7 @@ extern int	parse(t_game *game, int fd)
 	}
 	if (error || enemy_count < 1 || boss_count != 1 || hero_count != 1)
 		return (WRONG_ENTITIES);
+	game->camera.x = game->entities[0].x - 80 / 2;
+	game->camera.y = game->entities[0].y - 32 / 2;
 	return (0);
 }
