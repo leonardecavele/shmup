@@ -16,6 +16,7 @@
 
 static void	update_passive_behaviour(t_game *game)
 {
+	(void)game;
 	// animate sprites
 	// move_projectiles
 }
