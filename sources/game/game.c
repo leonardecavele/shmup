@@ -15,7 +15,7 @@
 
 extern int	update_game(int c, t_game *game)		// if returns not 0, game is ended
 {
-	(void)c;
-	(void)game;
+	// c -> user input
+	// modifies entity positions (& cam ??)
 	return (0);
 }
