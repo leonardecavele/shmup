@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 22:08:21 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 21:36:04 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/30 00:31:08 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 extern bool	resize(void)
 {
-	const char	message[] = "Please get a larger window.";
+	const char	message[] = "Please get a window betwen 32x80 and 42x90.";
 	int			height, width;
 	
 	height = width = 0;
