@@ -16,18 +16,29 @@
 # include "entities.h"
 
 # define MAX_ENTITY			30
-# define MAX_PROJECTILES	100
+# define MAX_PROJECTILES	10
 # define MAX_BOARD_WIDTH	1000
 # define MAX_BOARD_HEIGHT	1000
-# define CAM_TRESH	8
+# define CAM_TRESH			8
 
-typedef struct	s_entity
+typedef	struct		s_projectile
+{
+	unsigned short	x;
+	unsigned short	y;
+	unsigned short	x_dir;
+	unsigned short	y_dir;
+	bool			active;
+}					t_projectile;
+
+typedef struct		s_entity
 {
 	unsigned char	type;
 	unsigned short	x;
 	unsigned short	y;
 	unsigned short	x_dir;
 	unsigned short	y_dir;
+	t_projectile	projectiles[MAX_PROJECTILES];
+	bool			alive;
 }					t_entity;
 
 typedef struct s_camera

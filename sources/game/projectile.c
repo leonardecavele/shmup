@@ -6,10 +6,13 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 20:03:55 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/29 21:49:29 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/11/29 22:38:50 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "entities.h"
+#include "game.h"
 
-// extern void	
+extern int	update_projectile(t_game *game, t_projectile *proj)
+{
+	return (0);
+}
