@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 09:17:26 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 11:51:28 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/29 16:08:10 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@
 # define MIN_HEIGHT	30
 
 bool	resize(void);
+void	display_board(t_game *game);
 
 #endif
