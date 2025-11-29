@@ -64,6 +64,6 @@ void	move_hero(int c, t_game *game);
 void	hero_attack(t_entity *hero);
 void	hero_attack_dir(t_projectile *hero_proj, int c);
 void	move_entity(t_game *game, short which, short move);
-void	update_projectiles(t_game *game);
+void	update_projectiles(t_game *game, int frame);
 
 #endif

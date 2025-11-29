@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 20:03:55 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/30 00:43:31 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/11/30 00:45:29 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ extern void	update_projectiles(t_game *game, int frame)
 {
 	int hit = 0;
 
-	if (frame % 2)
+	if (frame % 3)
 		return;
 	int i = 0;
 	// for (int i = 0; i < game->ent_qty; ++i)
