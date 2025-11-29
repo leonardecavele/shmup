@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 21:47:32 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 14:11:47 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/29 15:58:33 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,11 @@ int	main(int ac, char **av)
 
 	frame_start = frame_time = frame_end = fps = 0.0;
 
-	parse(&game, fd);				// get map info // MUST HANDLE FAILED PARSING
+	if (!parse(&game, fd))			// get map info // MUST HANDLE FAILED PARSING
+	{
+		dprintf(2, "%sMap is invalid.\n%s", RED, RESET);
+		return (4);
+	}
 	close(fd);
 	fd = -1;
 	handle_signal();				// to properly exit
