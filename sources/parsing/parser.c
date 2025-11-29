@@ -79,6 +79,13 @@ extern int	parse(t_game *game, int fd)
 				if (game->board[i][j] == HERO)
 				{
 					if (!hero_count)
+					{
+						game->entities[0].type = HERO;
+						game->entities[0].x = j;
+						game->entities[0].y = i;
+						game->entities[0].x_dir = 0;
+						game->entities[0].y_dir = 0;
+					}
 					hero_count++;
 				}
 				else if (game->board[i][j] == ENEMY1 || game->board[i][j] == ENEMY2
