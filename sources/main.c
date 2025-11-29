@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 21:47:32 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 18:26:20 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/29 18:48:09 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ int	main(int ac, char **av)
 			dprintf(2, "Height doesnt match the info line.\n%s", RESET);
 		else if (ret == WRONG_ENTITIES)
 			dprintf(2, "Entities are incorrect.\n%s", RESET);
+		else if (ret == TOO_MUCH_ENTITIES)
+			dprintf(2, "Too much entities.\n%s", RESET);
 		return (4);
 	}
 	close(fd);

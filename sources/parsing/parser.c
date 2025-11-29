@@ -63,6 +63,7 @@ extern int	parse(t_game *game, int fd)
 		return (WRONG_HEIGHT_SIZE);
 
 	int	j, hero_count, enemy_count, boss_count, error, i = -1;
+	int ent_qty = 1;
 
 	hero_count = enemy_count = boss_count = error = 0;
 	while (++i < 1000)
@@ -85,14 +86,34 @@ extern int	parse(t_game *game, int fd)
 						game->entities[0].y = i;
 						game->entities[0].x_dir = 0;
 						game->entities[0].y_dir = 0;
+						hero_count++;
 					}
-					hero_count++;
 				}
 				else if (game->board[i][j] == ENEMY1 || game->board[i][j] == ENEMY2
 						|| game->board[i][j] == ENEMY3)
+				{
+					if (ent_qty == MAX_ENTITY)
+						return (TOO_MUCH_ENTITY);
+					game->entities[ent_qty].entity = game->board[i][j];
+					game->entities[ent_qty].x = j;
+					game->entities[ent_qty].y = i;
+					game->entities[ent_qty].x_dir = 0;
+					game->entities[ent_qty].y_dir = 0;
+					ent_qty++;
 					enemy_count++;
+				}
 				else if (game->board[i][j] == BOSS)
-					boss_count++;
+				{
+					if (!boss_count)
+					{
+						game->entities[1].entity = BOSS;
+						game->entities[1].x = j;
+						game->entities[1].y = i;
+						game->entities[1].x_dir = 0;
+						game->entities[1].y_dir = 0;
+						boss_count++;
+					}
+				}
 				else if (game->board[i][j] != WALL && game->board[i][j] != EMPTY && game->board[i][j] != GROUND)
 					error++;
 			}
