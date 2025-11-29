@@ -6,17 +6,18 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 00:16:18 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 00:37:44 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/29 01:14:09 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "shmup.h"
 #include "frame.h"
 
 extern void	sleep_remaining(double time)
 {
     struct timespec	remaining;
 
-    if (time < 1)
+    if (time <= 0.0)
         return ;
     remaining.tv_sec = time;
     remaining.tv_nsec = (time - remaining.tv_sec) * 1e9;
