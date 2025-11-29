@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   shmup.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/28 22:08:21 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 00:53:35 by ldecavel         ###   ########.fr       */
+/*   Created: 2025/11/29 00:50:08 by ldecavel          #+#    #+#             */
+/*   Updated: 2025/11/29 00:51:24 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shmup.h"
+#ifndef SHMUP_H
+# define SHMUP_H
 
-// to simulate layers we can draw in a specific order
+# include <stdbool.h>
+# include <ncurses.h>
 
-void	render(void)
-{
-	// draw map
-	// draw character
-	// draw enemies
-	// refresh();
-}
+#endif
