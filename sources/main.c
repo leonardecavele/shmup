@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 21:47:32 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 18:26:20 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/29 23:31:08 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	main(int ac, char **av)
 	}
 	close(fd);
 	fd = -1;
+	srand(time(NULL));
 	handle_signal();				// to properly exit
 	initscr();						// init screen
 	cbreak();						// keys instantly works

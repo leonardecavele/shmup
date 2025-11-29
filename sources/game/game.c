@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 08:56:10 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 11:49:09 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/29 22:16:46 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static int handle_user_input(int c, t_game *game)
 }
 extern int	update_game(int c, t_game *game)
 {
+	update_enemy_behaviour(game);
 	update_passive_behaviour(game);
 	if (handle_user_input(c, game))
 		return (1);

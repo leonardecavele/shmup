@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 08:57:01 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 19:54:26 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/11/29 23:17:41 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define MAX_BOARD_WIDTH	1000
 # define MAX_BOARD_HEIGHT	1000
 # define CAM_TRESH			8
+# define ENEMY_SHOOT_RANGE	10
 
 typedef	struct		s_projectile
 {
@@ -60,6 +61,7 @@ typedef struct	s_game
 int		update_game(int c, t_game *game);
 void	move_hero(int c, t_game *game);
 void	hero_attack(t_game *game);
+void	update_enemy_behaviour(t_game *game);
 void	move_entity(t_game *game, short which, short move);
 
 #endif
