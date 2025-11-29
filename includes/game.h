@@ -18,6 +18,7 @@
 # define MAX_ENTITY			30
 # define MAX_BOARD_WIDTH	1000
 # define MAX_BOARD_HEIGHT	1000
+# define CAM_TRESH	8
 
 typedef struct	s_entity
 {

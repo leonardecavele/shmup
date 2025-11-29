@@ -18,6 +18,7 @@
 
 # define MIN_WIDTH	80
 # define MIN_HEIGHT	30
+# define CAM_TRESH	8
 
 bool	resize(void);
 void	render(t_game *game);
