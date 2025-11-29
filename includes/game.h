@@ -43,8 +43,6 @@ typedef struct	s_game
 	short			board_width;
 	t_entity		entities[MAX_ENTITY];
 	unsigned short	ent_qty;
-	t_entity		projectiles[MAX_PROJECTILES];
-	unsigned short	proj_qty;
 	t_camera		camera;
 }					t_game;
   
