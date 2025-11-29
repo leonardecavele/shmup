@@ -14,18 +14,6 @@
 #include "parser.h"
 #include "entities.h"
 
-//static bool	check_wall(char board[MAX_BOARD_HEIGHT][MAX_BOARD_WIDTH], int x, int y)
-//{
-//	static bool sentinel[MAX_BOARD_HEIGHT][MAX_BOARD_WIDTH] = {0};
-//
-//	if (board[y][x] == EMPTY || board[y][x] == WALL)
-//	{
-//		sentinel[y][x] = true;
-//	}
-//
-//
-//}
-
 static int	get_length(char info_line[INFO_LINE_SIZE])
 {
 	static int	i = 0;
@@ -59,8 +47,6 @@ extern bool	parse(t_game *game, int fd)
 		|| game->board_width > 1000 - 1	|| game->board_width < MIN_BOARD_WIDTH)
 		return (false);
 
-
-
 	current_line = 0;
 	while (true)
 	{
@@ -75,7 +61,6 @@ extern bool	parse(t_game *game, int fd)
 	}
 	if (current_line != game->board_height)
 		return (false);
-
 
 	int	j, hero_count, enemy_count, boss_count, error, i = -1;
 
@@ -106,11 +91,6 @@ extern bool	parse(t_game *game, int fd)
 		}
 	}
 	if (error || enemy_count < 1 || boss_count != 1 || hero_count != 1)
-	{
 		return (false);
-	}
-
-//	if (!check_wall(game->board, 0, 0))
-//		return (false);
 	return (true);
 }
