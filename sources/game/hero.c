@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 17:30:39 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/29 19:54:29 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/11/30 00:20:10 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 #include "render.h"
 #include "ncurses.h"
 
-extern void	move_hero(int c, t_game *game)
+extern void	move_hero(int c, t_game *game, int frame)
 {
+	if (frame % 3 == 0)
+		return ;
 	int max_y, max_x;
 	int screen_x, screen_y;
 	getmaxyx(stdscr, max_y, max_x);

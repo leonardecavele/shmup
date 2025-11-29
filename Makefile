@@ -6,7 +6,7 @@
 #    By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/29 14:33:54 by abetemps          #+#    #+#              #
-#    Updated: 2025/11/29 15:57:09 by ldecavel         ###   ########lyon.fr    #
+#    Updated: 2025/11/30 00:16:17 by ldecavel         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ WARN_FLAGS	:= -Wall -Werror -Wextra
 C_FLAGS		:= $(WARN_FLAGS) $(DEPS_FLAGS)
 INC_FLAGS 	:= -I$(DIR_INC)
 
-LINK		:= -lncurses
+LINK		:= -lncurses -lm
 
 COMP 		:= $(CC) $(C_FLAGS) $(INC_FLAGS)
 
@@ -67,6 +67,7 @@ F_GAME		:=	game.c			\
 				hero.c			\
 				entity.c		\
 				projectile.c	\
+				enemy.c			\
 
 # VARS GENERATION =====================================================================
 $(foreach comp,$(COMPONENTS),$(eval $(call generate_var_sources_dir,$(comp))))

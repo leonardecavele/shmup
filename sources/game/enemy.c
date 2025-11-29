@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 22:13:58 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 23:53:45 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/30 00:14:43 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	shoot_up(t_entity *enemy, int i)
 	enemy->projectiles[i].y_dir = -1;
 }
 
-static void	shoot_down(t_entity *enemy, int i)
+static void	shoot_bot(t_entity *enemy, int i)
 {
 	enemy->projectiles[i].active = true;
 	enemy->projectiles[i].x = enemy->x;
@@ -100,7 +100,7 @@ static void	update_enemy1(t_entity *enemy, int frame)
 	shoot_left(enemy, 1);
 	shoot_right(enemy, 2);
 	shoot_up(enemy, 3);
-	shoot_down(enemy, 4);
+	shoot_bot(enemy, 4);
 	shoot_up_left(enemy, 5);
 	shoot_up_right(enemy, 6);
 	shoot_bot_left(enemy, 7);
@@ -111,8 +111,8 @@ static void	update_enemy2(t_entity *enemy, t_entity *hero, int frame)
 {
 	int		i = -1;
 	int		distance, dx, dy;
-	bool	can_shoot = true;
 
+	dx = dy = 0;
 	if ((frame >= 15 && frame <= 30) && (frame >= 45 && frame <= 60))
 		goto skip_shoot;
 	while (i < MAX_PROJECTILES)
@@ -126,9 +126,9 @@ static void	update_enemy2(t_entity *enemy, t_entity *hero, int frame)
 	if (hero->x - enemy->x > hero->y - enemy->y)
 	{
 		if (hero->y < enemy->y && hero->x > enemy->x)
-			shoot_top_right(enemy, i);
+			shoot_up_right(enemy, i);
 		else if (hero->y < enemy->y && hero->x < enemy->x)
-			shoot_top_left(enemy, i);
+			shoot_up_left(enemy, i);
 	}
 	else if (hero->x - enemy->x < hero->y - enemy->y)
 	{
@@ -139,8 +139,8 @@ static void	update_enemy2(t_entity *enemy, t_entity *hero, int frame)
 	}
 skip_shoot:
 	do {
-        enemy->dir_x = rand() % 3 - 1;
-        enemy->dir_y = rand() % 3 - 1;
+        enemy->x_dir = rand() % 3 - 1;
+        enemy->y_dir = rand() % 3 - 1;
     } while (!dx && !dy);
 }
 
@@ -148,7 +148,6 @@ static void	update_enemy3(t_entity *enemy, t_entity *hero, int frame)
 {
 	int		i = -1;
 	int		distance, dx, dy;
-	bool	can_shoot = true;
 
 	while (i < MAX_PROJECTILES)
 		if (!enemy->projectiles[++i].active)
@@ -170,12 +169,12 @@ static void	update_enemy3(t_entity *enemy, t_entity *hero, int frame)
 		if (hero->y - enemy->y > 0)
 			shoot_bot(enemy, i);
 		else
-			shoot_top(enemy, i);
+			shoot_up(enemy, i);
 	}
 	if ((frame >= 5 && frame <= 25) && (frame >= 35 && frame <= 45))
 	do {
-        enemy->dir_x = rand() % 3 - 1;
-        enemy->dir_y = rand() % 3 - 1;
+        enemy->x_dir = rand() % 3 - 1;
+        enemy->y_dir = rand() % 3 - 1;
     } while (!dx && !dy);
 }
 
@@ -185,7 +184,7 @@ extern void	update_enemy_behaviour(t_game *game, int frame)
 
 	while (i < game->ent_qty)
 	{
-		if (game->entities[i].is_alive)
+		if (game->entities[i].alive)
 		{
 			if (game->entities[i].type == ENEMY1)
 				update_enemy1(&game->entities[i], frame);
