@@ -6,17 +6,18 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 08:57:01 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 19:54:26 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/11/29 23:22:38 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAME_H
 # define GAME_H
 
+# include <stdbool.h>
 # include "entities.h"
 
 # define MAX_ENTITY			30
-# define MAX_PROJECTILES	10
+# define MAX_PROJECTILES	8
 # define MAX_BOARD_WIDTH	1000
 # define MAX_BOARD_HEIGHT	1000
 # define CAM_TRESH			8
@@ -38,6 +39,7 @@ typedef struct		s_entity
 	unsigned short	x_dir;
 	unsigned short	y_dir;
 	t_projectile	projectiles[MAX_PROJECTILES];
+	unsigned short	active_proj_qty;
 	bool			alive;
 }					t_entity;
 
@@ -59,7 +61,9 @@ typedef struct	s_game
   
 int		update_game(int c, t_game *game);
 void	move_hero(int c, t_game *game);
-void	hero_attack(t_game *game);
+void	hero_attack(t_entity *hero);
+void	hero_attack_dir(t_projectile *hero_proj, int c);
 void	move_entity(t_game *game, short which, short move);
+void	update_projectiles(t_game *game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 17:30:39 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/29 19:54:29 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/11/30 00:39:26 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,54 @@ extern void	move_hero(int c, t_game *game)
 		++game->camera.x;
 }
 
-extern void	hero_attack(t_game *game)
+extern void	hero_attack_dir(t_projectile *hero_proj, int c)
 {
-	(void) game;
+	for (int i = 0; i < MAX_PROJECTILES; ++i)
+	{
+		if (hero_proj[i].active)
+			continue;
+		switch (c)
+		{
+			case (KEY_UP):
+				mvprintw(0, 30, "T");
+				hero_proj[i].x_dir = 0;
+				hero_proj[i].y_dir = -1;
+				break;
+			case (KEY_DOWN):
+				mvprintw(0, 30, "D");
+				hero_proj[i].x_dir = 0;
+				hero_proj[i].y_dir = 1;
+				break;
+			case (KEY_LEFT):
+				mvprintw(0, 30, "L");
+				hero_proj[i].x_dir = -1;
+				hero_proj[i].y_dir = 0;
+				break;
+			case (KEY_RIGHT):
+				mvprintw(0, 30, "R");
+				hero_proj[i].x_dir = 1;
+				hero_proj[i].y_dir = 0;
+				break;
+		}
+	}
+}
+
+extern void	hero_attack(t_entity *hero)
+{
+	int					i = 0;
+
+	for (int j = 0; j < MAX_PROJECTILES; ++j)
+	{
+		mvprintw(0, 40 + j + 1, (hero->projectiles[j].active ? "x" : "o"));
+	}
+	if (hero->active_proj_qty == MAX_PROJECTILES)
+	{
+		return;
+	}
+	while (i < MAX_PROJECTILES && hero->projectiles[i].active)
+		++i;
+	hero->projectiles[i].x = hero->x;
+	hero->projectiles[i].y = hero->y;
+	hero->projectiles[i].active = true;
+	++hero->active_proj_qty;
 }

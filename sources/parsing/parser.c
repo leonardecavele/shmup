@@ -84,7 +84,7 @@ extern int	parse(t_game *game, int fd)
 						game->entities[0].x = j;
 						game->entities[0].y = i;
 						game->entities[0].x_dir = 0;
-						game->entities[0].y_dir = 0;
+						game->entities[0].y_dir = -1;
 					}
 					hero_count++;
 				}
