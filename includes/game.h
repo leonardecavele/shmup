@@ -20,18 +20,25 @@
 typedef struct	s_entity
 {
 	unsigned char	entity;
-	short			x;
-	short			y;
-	short			x_dir;
-	short			y_dir;
+	unsigned short	x;
+	unsigned short	y;
+	unsigned short	x_dir;
+	unsigned short	y_dir;
 }					t_entity;
+
+typedef struct s_camera
+{
+	unsigned short	x;
+	unsigned short	y;
+}					t_camera;
 
 typedef struct	s_game
 {
 	unsigned char	board[MAX_BOARD_HEIGHT][MAX_BOARD_WIDTH];
-	int				board_height;
-	int				board_width;
+	unsigned short	board_height;
+	unsigned short	board_width;
 	t_entity		entities[MAX_ENTITY];
+	t_camera		camera;
 }					t_game;
   
 int	update_game(int c, t_game *game);
