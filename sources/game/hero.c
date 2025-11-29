@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 17:30:39 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/29 18:23:49 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/11/29 18:38:11 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ extern void	move_hero(int c, t_game *game)
 {
 	switch (c)
 	{
-		case ('z'):
+		case ('w'):
 			move_entity(game, 0, UP);
 			break;
 		case ('s'):

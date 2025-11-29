@@ -71,15 +71,15 @@ int	main(int ac, char **av)
 	{
 		dprintf(2, "%sMap is invalid.\n", RED);
 		if (ret == WRONG_INFO_LINE)
-			dprintf(2, "Info line is incorrect.\n%s", RESET);
+			dprintf(2, "Info line is incorrect.\n%s", RST);
 		else if (ret == WRONG_SIZE_INFO)
-			dprintf(2, "Info line sizes are incorrect.\n%s", RESET);
+			dprintf(2, "Info line sizes are incorrect.\n%s", RST);
 		else if (ret == WRONG_WIDTH_SIZE)
-			dprintf(2, "Width doesnt match the info line.\n%s", RESET);
+			dprintf(2, "Width doesnt match the info line.\n%s", RST);
 		else if (ret == WRONG_HEIGHT_SIZE)
-			dprintf(2, "Height doesnt match the info line.\n%s", RESET);
+			dprintf(2, "Height doesnt match the info line.\n%s", RST);
 		else if (ret == WRONG_ENTITIES)
-			dprintf(2, "Entities are incorrect.\n%s", RESET);
+			dprintf(2, "Entities are incorrect.\n%s", RST);
 		return (4);
 	}
 	close(fd);
