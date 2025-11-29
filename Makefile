@@ -25,7 +25,7 @@ $(NAME):
 	@$(MAKE) build --no-print-directory
 
 build: $(OBJS)
-	$(CC) $(CLFAGS) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -lncurses 
 
 $(BUILD)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
