@@ -14,12 +14,10 @@
 # define RENDER_H
 
 # include <stdbool.h>
+# include "text_formatting.h"
 
 # define MIN_WIDTH	80
 # define MIN_HEIGHT	30
-
-#define RESET	"\033[0m"
-#define RED		"\033[31m"
 
 bool	resize(void);
 
