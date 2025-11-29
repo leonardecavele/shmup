@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 21:47:32 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 15:58:33 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/29 18:26:20 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int ac, char **av)
 	t_game	game = {0};
 	bool	correct_size, playing = true;
 	double	frame_start, frame_time, frame_end, fps;
-	int		c;
+	int		c, ret;
 
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0 || fd > FD_MAX || ((read(fd, NULL, 0) < 0)))
@@ -66,9 +66,19 @@ int	main(int ac, char **av)
 
 	frame_start = frame_time = frame_end = fps = 0.0;
 
-	if (!parse(&game, fd))			// get map info // MUST HANDLE FAILED PARSING
+	if ((ret = parse(&game, fd)))			// get map info // MUST HANDLE FAILED PARSING
 	{
-		dprintf(2, "%sMap is invalid.\n%s", RED, RESET);
+		dprintf(2, "%sMap is invalid.\n", RED);
+		if (ret == WRONG_INFO_LINE)
+			dprintf(2, "Info line is incorrect.\n%s", RESET);
+		else if (ret == WRONG_SIZE_INFO)
+			dprintf(2, "Info line sizes are incorrect.\n%s", RESET);
+		else if (ret == WRONG_WIDTH_SIZE)
+			dprintf(2, "Width doesnt match the info line.\n%s", RESET);
+		else if (ret == WRONG_HEIGHT_SIZE)
+			dprintf(2, "Height doesnt match the info line.\n%s", RESET);
+		else if (ret == WRONG_ENTITIES)
+			dprintf(2, "Entities are incorrect.\n%s", RESET);
 		return (4);
 	}
 	close(fd);

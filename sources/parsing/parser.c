@@ -28,7 +28,7 @@ static int	get_length(char info_line[INFO_LINE_SIZE])
 	return (res);
 }
 
-extern bool	parse(t_game *game, int fd)
+extern int	parse(t_game *game, int fd)
 {
 	char	info_line[INFO_LINE_SIZE];
 	int		current_line, nread;
@@ -37,7 +37,7 @@ extern bool	parse(t_game *game, int fd)
 
 	nread = read(fd, info_line, INFO_LINE_SIZE + 1);
 	if (nread != INFO_LINE_SIZE + 1 || info_line[INFO_LINE_SIZE - 1] != '$')
-		return (false);
+		return (WRONG_INFO_LINE);
 	game->board_height = get_length(info_line);	// get info
 	game->board_width = get_length(info_line);	// get info
 
@@ -45,7 +45,7 @@ extern bool	parse(t_game *game, int fd)
 	if (game->board_height == -1 || game->board_width == -1
 		|| game->board_height > 1000 - 1 || game->board_height < MIN_BOARD_HEIGHT
 		|| game->board_width > 1000 - 1	|| game->board_width < MIN_BOARD_WIDTH)
-		return (false);
+		return (WRONG_SIZE_INFO);
 
 	current_line = 0;
 	while (true)
@@ -54,13 +54,13 @@ extern bool	parse(t_game *game, int fd)
 		if (nread != game->board_width + 1)
 			break ;
 		if (game->board[current_line][game->board_width] != '\n')
-			return (false);
+			return (WRONG_WIDTH_SIZE);
 		current_line++;
 		if (current_line == 1000)
 			break ;
 	}
 	if (current_line != game->board_height)
-		return (false);
+		return (WRONG_HEIGHT_SIZE);
 
 	int	j, hero_count, enemy_count, boss_count, error, i = -1;
 
@@ -77,7 +77,10 @@ extern bool	parse(t_game *game, int fd)
 					|| game->board[i][game->board_width - 1] != EMPTY)
 					error++;
 				if (game->board[i][j] == HERO)
+				{
+					if (!hero_count)
 					hero_count++;
+				}
 				else if (game->board[i][j] == ENEMY1 || game->board[i][j] == ENEMY2
 						|| game->board[i][j] == ENEMY3)
 					enemy_count++;
@@ -91,6 +94,6 @@ extern bool	parse(t_game *game, int fd)
 		}
 	}
 	if (error || enemy_count < 1 || boss_count != 1 || hero_count != 1)
-		return (false);
-	return (true);
+		return (WRONG_ENTITIES);
+	return (0);
 }
