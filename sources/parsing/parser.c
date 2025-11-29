@@ -16,6 +16,12 @@
 
 //static bool	check_wall(char board[MAX_BOARD_HEIGHT][MAX_BOARD_WIDTH], int x, int y)
 //{
+//	static bool sentinel[MAX_BOARD_HEIGHT][MAX_BOARD_WIDTH] = {0};
+//
+//	if (board[y][x] == EMPTY || board[y][x] == WALL)
+//	{
+//		sentinel[y][x] = true;
+//	}
 //
 //
 //}
@@ -81,6 +87,10 @@ extern bool	parse(t_game *game, int fd)
 		{
 			if (i < game->board_height && j < game->board_width)
 			{
+				if (game->board[0][j] != EMPTY || game->board[i][0] != EMPTY
+					|| game->board[game->board_height - 1][j] != EMPTY
+					|| game->board[i][game->board_width - 1] != EMPTY)
+					error++;
 				if (game->board[i][j] == HERO)
 					hero_count++;
 				else if (game->board[i][j] == ENEMY1 || game->board[i][j] == ENEMY2
