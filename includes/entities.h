@@ -22,4 +22,12 @@
 # define EMPTY	'.' 
 # define GROUND '^'
 
+enum	e_mooves
+{
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT,
+};
+
 #endif

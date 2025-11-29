@@ -65,6 +65,7 @@ F_RENDERING :=	render.c		\
 
 F_GAME		:=	game.c			\
 				hero.c			\
+				entity.c		\
 
 # VARS GENERATION =====================================================================
 $(foreach comp,$(COMPONENTS),$(eval $(call generate_var_sources_dir,$(comp))))

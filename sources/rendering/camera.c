@@ -6,13 +6,13 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 17:18:40 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/29 17:18:46 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/11/29 18:24:49 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 
-extern void	moove_camera(int c, t_game *game)
+extern void	move_camera(int c, t_game *game)
 {
 
 	switch (c)

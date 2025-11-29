@@ -19,8 +19,8 @@ extern int	update_game(int c, t_game *game)		// if returns not 0, game is ended
 	// c -> user input
 	// modifies entity positions (& cam ??)
 	if (c == 'h' || c == 'j' || c == 'k' || c == 'l')
-		moove_camera(c, game);
+		move_camera(c, game);
 	else if (c == 'w' || c == 's' || c == 'a' || c == 'd')
-		moove_hero(c, game);
+		move_hero(c, game);
 	return (0);
 }
