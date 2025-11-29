@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 08:57:01 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 11:51:56 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/29 13:59:27 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ typedef struct	s_entity
 typedef struct	s_game
 {
 	unsigned char	board[MAX_BOARD_HEIGHT][MAX_BOARD_WIDTH];
+	int				board_height;
+	int				board_width;
 	t_entity		entities[MAX_ENTITY];
 }					t_game;
   
