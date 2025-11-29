@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 08:57:01 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 00:05:04 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/30 00:39:44 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ typedef struct	s_game
 	unsigned char	board[MAX_BOARD_HEIGHT][MAX_BOARD_WIDTH];
 	short			board_height;
 	short			board_width;
+	int				score;
+	int				hp;
 	t_entity		entities[MAX_ENTITY];
 	unsigned short	ent_qty;
 	t_camera		camera;

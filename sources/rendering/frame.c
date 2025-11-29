@@ -6,11 +6,12 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 00:16:18 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 00:17:44 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/30 00:46:49 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shmup.h"
+#include "game.h"
 #include "frame.h"
 
 extern void	sleep_remaining(double time)
@@ -32,7 +33,7 @@ extern double	get_time(void)
 	return (tp.tv_sec + tp.tv_nsec / 1e9);
 }
 
-extern void	display_fps(double time) 
+extern void	display_fps(double time, t_game *game)
 {
 	static int		seconds = 0;
 	static int		minutes = 0;
@@ -62,5 +63,6 @@ extern void	display_fps(double time)
 		hours++;
 		minutes = 0;
 	}
-	mvprintw(0, 12, "%02dh%02dm%02ds", hours, minutes, seconds);
+	mvprintw(0, 11, "%02dh%02dm%02ds", hours, minutes, seconds);
+	mvprintw(0, 21, "%d %d", game->score, game->hp);
 }

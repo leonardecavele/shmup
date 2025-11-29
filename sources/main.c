@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 21:47:32 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 23:31:08 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/30 00:46:34 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ int	main(int ac, char **av)
 	keypad(stdscr, TRUE);
 	curs_set(0);					// hide cursor
 
+	game.score = 0;
+	game.hp = 3;
 	while (playing)
 	{
 		frame_start = get_time();
@@ -109,9 +111,6 @@ int	main(int ac, char **av)
 			c = getch();
 			if (update_game(c, &game))
 				playing = false;
-
-			//clear();
-			// mvprintw(5, 10, "running");
 			render(&game);
 		}
 
@@ -119,7 +118,7 @@ int	main(int ac, char **av)
 		frame_time = frame_end - frame_start;
 		if (frame_time < TARGET_FRAME_TIME)
 			sleep_remaining(TARGET_FRAME_TIME - frame_time);
-		display_fps(get_time() - frame_start);
+		display_fps(get_time() - frame_start, &game);
 		refresh();
 	}
 	endwin();
