@@ -25,6 +25,8 @@ WARN_FLAGS	:= -Wall -Werror -Wextra
 C_FLAGS		:= $(WARN_FLAGS) $(DEPS_FLAGS)
 INC_FLAGS 	:= -I$(DIR_INC)
 
+LINK		:= -lncurses
+
 COMP 		:= $(CC) $(C_FLAGS) $(INC_FLAGS)
 
 ANTI_RELINK	:= Makefile $(DIR_INC)
@@ -54,12 +56,13 @@ COMPONENTS :=	PARSING		\
 # FILES ===============================================================================
 F_MAIN		:=	main.c
 
-F_PARSING	:=	parser.c	\
+F_PARSING	:=	parser.c		\
 
-F_RENDERING :=	render.c	\
-				frame.c		\
+F_RENDERING :=	render.c		\
+				frame.c			\
+				display_board.c	\
 
-F_GAME		:=	game.c		\
+F_GAME		:=	game.c			\
 
 # VARS GENERATION =====================================================================
 $(foreach comp,$(COMPONENTS),$(eval $(call generate_var_sources_dir,$(comp))))
@@ -75,7 +78,7 @@ DEPS := $(foreach comp, $(COMPONENTS), $(DEPS_$(comp))) \
 
 # COMPILATION =========================================================================
 $(NAME) : $(OBJS)
-	$(COMP) $^ -o $@ 
+	$(COMP) $^ -o $@ $(LINK)
 	@echo ✨ $(NAME) compiled ✨
 
 $(DIR_BUILD) :
