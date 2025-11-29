@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 09:17:26 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 16:08:10 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/11/29 21:37:12 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 # include "text_formatting.h"
 
 # define MIN_WIDTH	80
-# define MIN_HEIGHT	30
-# define CAM_TRESH	8
+# define MIN_HEIGHT	32
+# define MAX_WIDTH	100
+# define MAX_HEIGHT 52
+
 
 bool	resize(void);
 void	render(t_game *game);
