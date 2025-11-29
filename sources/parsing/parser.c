@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "shmup.h"
-#include "game->h"
+#include "game.h"
 #include "parser.h"
 
 static int	get_length(char info_line[INFO_LINE_SIZE])

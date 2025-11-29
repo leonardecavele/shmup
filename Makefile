@@ -52,9 +52,9 @@ COMPONENTS :=	PARSING		\
 				GAME		\
 
 # FILES ===============================================================================
-F_MAIN :=		main.c
+F_MAIN		:=	main.c
 
-F_PARSING :=	parser.c	\
+F_PARSING	:=	parser.c	\
 
 F_RENDERING :=	render.c	\
 				frame.c		\
