@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 08:57:01 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 00:05:04 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/30 00:52:31 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ typedef struct	s_game
   
 int		update_game(int c, t_game *game);
 void	move_hero(int c, t_game *game, int frame);
-void	hero_attack(t_game *game);
+void	hero_attack(t_entity *hero);
+void	hero_attack_dir(t_projectile *hero_proj, int c);
 void	update_enemy_behaviour(t_game *game, int frame);
 void	move_entity(t_game *game, short which, short move);
 void	update_projectiles(t_game *game, int frame);

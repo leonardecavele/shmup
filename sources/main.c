@@ -110,11 +110,10 @@ int	main(int ac, char **av)
 			if (update_game(c, &game))
 				playing = false;
 
-			//clear();
+			// clear();
 			// mvprintw(5, 10, "running");
 			render(&game);
 		}
-
 		frame_end = get_time();
 		frame_time = frame_end - frame_start;
 		if (frame_time < TARGET_FRAME_TIME)
