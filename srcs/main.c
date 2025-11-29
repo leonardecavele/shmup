@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 21:47:32 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 10:51:18 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/29 10:58:52 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	main(void)
 			correct_size = resize();
 			if (correct_size)
 				to_resize = false;
+			usleep(5000);
 		}
 		if (correct_size == true)
 		{
