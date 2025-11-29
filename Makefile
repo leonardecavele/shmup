@@ -12,7 +12,9 @@ MAKEFLAGS+= -j $$(nproc)
 # files
 SRCS =\
 	main.c\
-	frame.c
+	frame.c\
+	game.c\
+	render.c
 
 OBJS = $(SRCS:%.c=$(BUILD)/%.o)
 DEPS = $(OBJS:.o=.d)
