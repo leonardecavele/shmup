@@ -81,8 +81,8 @@ extern int	parse(t_game *game, int fd)
 					if (!hero_count)
 					{
 						game->entities[0].type = HERO;
-						game->entities[0].x = i;
-						game->entities[0].y = j;
+						game->entities[0].x = j;
+						game->entities[0].y = i;
 						game->entities[0].x_dir = 0;
 						game->entities[0].y_dir = 0;
 					}
