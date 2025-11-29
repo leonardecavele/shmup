@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 22:13:58 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 23:41:14 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/29 23:53:45 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,13 @@ static void	shoot_bot_right(t_entity *enemy, int i)
 	enemy->projectiles[i].y_dir = 1;
 }
 
-static void	update_enemy1(t_entity *enemy)
+static void	update_enemy1(t_entity *enemy, int frame)
 {
 	int		i = 0;
 	bool	can_shoot = true;
 
+	if (frame < 15 || (frame >= 30 && frame <= 45))
+		return ;
 	while (i < MAX_PROJECTILES)
 		if (enemy->projectiles[i++].active)
 			can_shoot = false;
@@ -105,12 +107,14 @@ static void	update_enemy1(t_entity *enemy)
 	shoot_bot_right(enemy, 8);
 }
 
-static void	update_enemy2(t_entity *enemy, t_entity *hero)
+static void	update_enemy2(t_entity *enemy, t_entity *hero, int frame)
 {
 	int		i = -1;
 	int		distance, dx, dy;
 	bool	can_shoot = true;
 
+	if ((frame >= 15 && frame <= 30) && (frame >= 45 && frame <= 60))
+		goto skip_shoot;
 	while (i < MAX_PROJECTILES)
 		if (!enemy->projectiles[++i].active)
 			break ;
@@ -133,13 +137,14 @@ static void	update_enemy2(t_entity *enemy, t_entity *hero)
 		else if (hero->y > enemy->y && hero->x < enemy->x)
 			shoot_bot_left(enemy, i);
 	}
+skip_shoot:
 	do {
         enemy->dir_x = rand() % 3 - 1;
         enemy->dir_y = rand() % 3 - 1;
     } while (!dx && !dy);
 }
 
-static void	update_enemy3(t_entity *enemy, t_entity *hero)
+static void	update_enemy3(t_entity *enemy, t_entity *hero, int frame)
 {
 	int		i = -1;
 	int		distance, dx, dy;
@@ -167,13 +172,14 @@ static void	update_enemy3(t_entity *enemy, t_entity *hero)
 		else
 			shoot_top(enemy, i);
 	}
+	if ((frame >= 5 && frame <= 25) && (frame >= 35 && frame <= 45))
 	do {
         enemy->dir_x = rand() % 3 - 1;
         enemy->dir_y = rand() % 3 - 1;
     } while (!dx && !dy);
 }
 
-extern void	update_enemy_behaviour(t_game *game)
+extern void	update_enemy_behaviour(t_game *game, int frame)
 {
 	int	i = 2;
 
@@ -182,11 +188,11 @@ extern void	update_enemy_behaviour(t_game *game)
 		if (game->entities[i].is_alive)
 		{
 			if (game->entities[i].type == ENEMY1)
-				update_enemy1(&game->entities[i]);
+				update_enemy1(&game->entities[i], frame);
 			else if (game->entities[i].type == ENEMY2)
-				update_enemy2(&game->entities[i], &game->entities[0]);
+				update_enemy2(&game->entities[i], &game->entities[0], frame);
 			else if (game->entities[i].type == ENEMY3)
-				update_enemy3(&game->entities[i], &game->entities[0]);
+				update_enemy3(&game->entities[i], &game->entities[0], frame);
 		}
 		i++;
 	}
