@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 00:17:01 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 01:15:59 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/29 01:43:23 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@
 
 void	sleep_remaining(double time);
 double	get_time(void);
+void	display_fps(double time);
 
 #endif

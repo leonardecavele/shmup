@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 00:16:18 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 01:14:09 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/29 01:39:44 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,20 @@ extern double	get_time(void)
 
 	clock_gettime(CLOCK_MONOTONIC, &tp);
 	return (tp.tv_sec + tp.tv_nsec / 1e9);
+}
+
+extern void	display_fps(double time)
+{
+	static double	added_time = 0.0;
+	static int		added_frame = 0;
+
+	added_frame++;
+	added_time += time;
+	if (added_time >= 1.0)
+	{
+		mvprintw(0, 0, "%6.1f fps", added_frame / added_time);
+		refresh();
+		added_time = 0.0;
+		added_frame = 0;
+	}
 }
