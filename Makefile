@@ -14,7 +14,8 @@ SRCS =\
 	main.c\
 	frame.c\
 	game.c\
-	render.c
+	render.c\
+	parser.c
 
 OBJS = $(SRCS:%.c=$(BUILD)/%.o)
 DEPS = $(OBJS:.o=.d)
