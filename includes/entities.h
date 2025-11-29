@@ -14,6 +14,7 @@
 # define ENTITIES_H
 
 # define HERO	'@'
+# define PROJ	'*'
 # define ENEMY1	'1'
 # define ENEMY2	'2'
 # define ENEMY3	'3'

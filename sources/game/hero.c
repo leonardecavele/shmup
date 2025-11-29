@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 17:30:39 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/29 19:25:45 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/11/29 19:54:29 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,9 @@ extern void	move_hero(int c, t_game *game)
 		--game->camera.x;
 	else if (screen_x >= max_x - CAM_TRESH && game->camera.x < game->board_width - max_x)
 		++game->camera.x;
+}
+
+extern void	hero_attack(t_game *game)
+{
+	(void) game;
 }
