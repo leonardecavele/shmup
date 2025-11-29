@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shmup.h                                            :+:      :+:    :+:   */
+/*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/29 00:50:08 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 09:27:19 by ldecavel         ###   ########lyon.fr   */
+/*   Created: 2025/11/29 09:17:26 by ldecavel          #+#    #+#             */
+/*   Updated: 2025/11/29 10:44:46 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHMUP_H
-# define SHMUP_H
+#ifndef RENDER_H
+# define RENDER_H
 
 # include <stdbool.h>
-# include <ncurses.h>
-# include <signal.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <string.h>
+
+# define MIN_WIDTH 80
+# define MIN_HEIGHT 30
+
+bool	resize(void);
 
 #endif

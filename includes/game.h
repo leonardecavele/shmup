@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shmup.h                                            :+:      :+:    :+:   */
+/*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/29 00:50:08 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 09:27:19 by ldecavel         ###   ########lyon.fr   */
+/*   Created: 2025/11/29 08:57:01 by ldecavel          #+#    #+#             */
+/*   Updated: 2025/11/29 09:08:31 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHMUP_H
-# define SHMUP_H
-
-# include <stdbool.h>
-# include <ncurses.h>
-# include <signal.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <string.h>
+#ifndef GAME_H
+# define GAME_H
+  
+int	update_game(int c);
 
 #endif
