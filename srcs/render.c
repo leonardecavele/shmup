@@ -6,14 +6,13 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 22:08:21 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 10:51:03 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/29 11:49:23 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "game.h"
 #include "render.h"
 #include "shmup.h"
-
-// to simulate layers we can draw in a specific order
 
 extern bool	resize(void)
 {
@@ -32,10 +31,13 @@ extern bool	resize(void)
 	return (false);
 }
 
-void	render(void)
+extern void	render(t_game *game)
 {
+	(void)game;
+
 	// draw map
 	// draw character
 	// draw enemies
-	// refresh();
+
+	return ;
 }

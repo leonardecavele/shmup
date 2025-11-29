@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 21:47:32 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 10:58:52 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/29 11:55:37 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,18 @@
 #include "frame.h"
 #include "game.h"
 #include "render.h"
+#include "parser.h"
 
 static volatile sig_atomic_t	to_resize = true;
+static volatile sig_atomic_t	fd = -1;
 
 static void	panic(int sig)
 {
 	(void)sig;
+	if (fd != -1)
+		close(fd);
 	endwin();
-	exit(0);
+	exit(1);
 }
 
 static void	handle_winch(int sig)
@@ -38,14 +42,33 @@ static void	handle_signal(void)
 	signal(SIGWINCH, handle_winch);
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
+	if (ac != 2)
+	{
+		dprintf(2, "%sPlease give a path to a map as second argument.\n", RED);
+		dprintf(2, "example: ./ft_shmup map/00%s\n", RESET);
+		return (2);
+	}
+
+	t_game	game = {0};
 	bool	correct_size, playing = true;
 	double	frame_start, frame_time, frame_end, fps;
 	int		c;
 
+	fd = open(av[1], O_RDONLY);
+	if (fd < 0)
+	{
+		dprintf(2, "%sInvalid path to map.\n", RED);
+		dprintf(2, "example: ./ft_shmup map/00%s\n", RESET);
+		return (3);
+	}
+
 	frame_start = frame_time = frame_end = fps = 0.0;
 
+	parse(&game, fd);			// get map info
+	close(fd);
+	fd = -1;
 	handle_signal();				// to properly exit
 	initscr();						// init screen
 	cbreak();						// keys instantly works
@@ -60,14 +83,13 @@ int	main(void)
 		if (to_resize)
 		{
 			correct_size = resize();
-			if (correct_size)
-				to_resize = false;
+			if (correct_size) to_resize = false;
 			usleep(5000);
 		}
 		if (correct_size == true)
 		{
 			c = getch();
-			if (update_game(c))
+			if (update_game(c, &game))
 				playing = false;
 
 			clear();
