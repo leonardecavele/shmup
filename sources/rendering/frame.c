@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 00:16:18 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/29 10:30:16 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/30 00:17:44 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ extern double	get_time(void)
 
 extern void	display_fps(double time) 
 {
+	static int		seconds = 0;
+	static int		minutes = 0;
+	static int		hours = 0;
+
 	static double	fps = 0;
 	static double	added_time = 0.0;
 	static int		added_frame = 0;
@@ -46,5 +50,17 @@ extern void	display_fps(double time)
 		fps = added_frame / added_time;
 		added_time = 0.0;
 		added_frame = 0;
+		seconds++;
 	}
+	if (seconds == 60)
+	{
+		seconds = 0;
+		minutes++;
+	}
+	if (minutes == 60)
+	{
+		hours++;
+		minutes = 0;
+	}
+	mvprintw(0, 12, "%02dh%02dm%02ds", hours, minutes, seconds);
 }

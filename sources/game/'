@@ -1,0 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   enemy.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/29 22:13:58 by ldecavel          #+#    #+#             */
+/*   Updated: 2025/11/29 22:47:47 by ldecavel         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
+static void	update_enemy1(t_entity *enemy)
+{
+	int		i = 0;
+	bool	can_shoot = true;
+
+	while (i < MAX_PROJECTILES)
+		if (enemy->projectiles[i++].active)
+			can_shoot = false;
+	if (!can_shoot)
+		return ;
+	enemy->projectiles[0].x = enemy->x + 1;
+	enemy->projectiles[0].y = enemy->y;
+	
+		
+}
+
+extern void	update_enemy_behaviour(t_game *game)
+{
+	int	i = 2;
+
+	while (i < game.ent_qty)
+	{
+		if (game.entities[i].is_alive)
+		{
+			if (game.entities[i].type == ENEMY1)
+				update_enemy1(&game.entities[i]);
+			else if (game.entities[i].type == ENEMY2)
+				update_enemy1(&game.entities[i]);
+			else if (game.entities[i].type == ENEMY3)
+				update_enemy1(&game.entities[i]);
+		}
+		i++;
+	}
+}

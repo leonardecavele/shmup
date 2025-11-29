@@ -14,8 +14,10 @@
 #include "render.h"
 #include "ncurses.h"
 
-extern void	move_hero(int c, t_game *game)
+extern void	move_hero(int c, t_game *game, int frame)
 {
+	if (frame % 3 == 0)
+		return ;
 	int max_y, max_x;
 	int screen_x, screen_y;
 	getmaxyx(stdscr, max_y, max_x);
