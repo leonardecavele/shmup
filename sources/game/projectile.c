@@ -21,6 +21,38 @@ static bool	is_wall(unsigned char c)
 	return (0);
 }
 
+static void	handle_hit(t_game *game, int hit)
+{
+	switch (hit)
+	{
+		case (HERO_HIT):
+			--game->entities[0].hp;
+			if (game->entities[0].hp <= 0)
+			{
+				game->board[game->entities[0].y][game->entities[0].x] = DEAD;
+			}
+			break;
+		case (BOSS_HIT):
+			--game->entities[1].hp;
+			if (game->entities[1].hp == 0)
+			{
+				game->entities[1].alive = false;
+				game->board[game->entities[1].y][game->entities[1].x] = DEAD;
+				game->board[game->entities[1].y][game->entities[1].x + 1] = GROUND;
+			}
+			break;
+		case (ENEMY_HIT): // find enemy + handle death
+			// --game->entities[1].hp;
+			// if (game->entities[1].hp == 0)
+			// {
+			// 	game->entities[1].alive = false;
+			// 	game->board[game->entities[1].y][game->entities[1].x] = DEAD;
+			// 	game->board[game->entities[1].y][game->entities[1].x + 1] = GROUND;
+			// }
+			break;
+	}
+}
+
 static int	update_projectile(t_game *game, t_projectile *proj, unsigned short *active_proj)
 {
 	int nx = proj->x + proj->x_dir;
@@ -38,7 +70,7 @@ static int	update_projectile(t_game *game, t_projectile *proj, unsigned short *a
 			game->board[proj->y][proj->x] = GROUND;
 		proj->active = false;
 		--(*active_proj);
-		return (1);
+		return (OUTOFBOUND);
 	}
 	else if (game->board[ny][nx] == HERO_PROJ
 			|| game->board[ny][nx] == ENEMY_PROJ
@@ -73,7 +105,7 @@ static int	update_projectile(t_game *game, t_projectile *proj, unsigned short *a
 			game->board[proj->y][proj->x] = GROUND;
 		proj->active = false;
 		--(*active_proj);
-		return (2);
+		return (WALL_HIT);
 	}
 	else if (game->board[ny][nx] == HERO)
 	{
@@ -87,7 +119,7 @@ static int	update_projectile(t_game *game, t_projectile *proj, unsigned short *a
 			game->board[proj->y][proj->x] = GROUND;
 		proj->active = false;
 		--(*active_proj);
-		return (3);
+		return (HERO_HIT);
 	}
 	if (game->board[proj->y][proj->x] != HERO
 			&& game->board[proj->y][proj->x] != ENEMY1
@@ -99,7 +131,7 @@ static int	update_projectile(t_game *game, t_projectile *proj, unsigned short *a
 	proj->x = nx;
 	proj->y = ny;
 	game->board[proj->y][proj->x] = HERO_PROJ;
-	return (0);
+	return (NO_HIT);
 }
 
 extern void	update_projectiles(t_game *game, int frame)
@@ -111,7 +143,11 @@ extern void	update_projectiles(t_game *game, int frame)
 		for (int j = 0; j < MAX_PROJECTILES; ++j)
 		{
 			if (game->entities[i].projectiles[j].active)
-				update_projectile(game, &(game->entities[i].projectiles[j]), &(game->entities[i].active_proj_qty));
+			{
+				int hit = update_projectile(game, &(game->entities[i].projectiles[j]), &(game->entities[i].active_proj_qty));
+				if (hit != NO_HIT)
+					handle_hit(game, hit);
+			}
 		}
 	}
 	for (int y = 0; y < game->board_height; ++y)

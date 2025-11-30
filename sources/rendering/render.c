@@ -35,9 +35,6 @@ extern bool	resize(void)
 extern void	render(t_game *game)
 {
 	display_board(game);
-	// draw map
-	// draw character
-	// draw enemies
 
 	return ;
 }

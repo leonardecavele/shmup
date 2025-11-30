@@ -109,9 +109,21 @@ int	main(int ac, char **av)
 		if (correct_size == true)
 		{
 			c = getch();
-			if (update_game(c, &game))
-				playing = false;
+			int quit = update_game(c, &game);
 			render(&game);
+			switch (quit)
+			{
+				case (0):
+					break;
+				case (USER_QUIT):
+					// menu fin
+					playing = false;
+					break;
+				case (HERO_DEATH):
+					// menu death
+					playing = false;
+					break;
+			}
 		}
 		frame_end = get_time();
 		frame_time = frame_end - frame_start;

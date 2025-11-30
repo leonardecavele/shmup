@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 08:56:10 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 15:39:23 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 15:42:00 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,12 @@ extern int	update_game(int c, t_game *game)
 	++frame;
 	update_enemy_behaviour(game, frame);
 	update_passive_behaviour(game, frame, seconds);
+	if (!game->entities[0].hp)
+	{
+		return (HERO_DEATH);
+	}
 	if (handle_user_input(c, game, frame))
-		return (1);
+		return (USER_QUIT);
 	if (frame == 60)
 	{
 		frame = 0;

@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 08:57:01 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 15:39:30 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 15:41:35 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,24 @@
 # define CAM_TRESH			8
 # define ENEMY_SHOOT_RANGE	20
 # define MOB_HP				1
-# define BOSS_HP			3
+# define BOSS_HP			5
+# define HERO_HP			3
+
+enum				e_quit
+{
+	USER_QUIT = 1,
+	HERO_DEATH,
+};
+
+enum				e_hit
+{
+	NO_HIT,
+	WALL_HIT,
+	HERO_HIT,
+	BOSS_HIT,
+	ENEMY_HIT,
+	OUTOFBOUND,
+};
 
 typedef	struct		s_projectile
 {

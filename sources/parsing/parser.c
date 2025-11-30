@@ -89,6 +89,7 @@ extern int	parse(t_game *game, int fd)
 					if (!hero_count)
 					{
 						game->entities[0].type = HERO;
+						game->entities[0].hp = HERO_HP;
 						game->entities[0].x = j;
 						game->entities[0].y = i;
 						game->entities[0].x_dir = 0;
@@ -113,6 +114,7 @@ extern int	parse(t_game *game, int fd)
 					if (game->board[i][j] != BOSS_RIGHT)
 						return (WRONG_ENTITIES);
 					game->entities[1].type = BOSS_LEFT;
+					game->entities[1].hp = BOSS_HP;
 					game->entities[1].x = j;
 					game->entities[1].y = i;
 					game->entities[1].alive = true;
