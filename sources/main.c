@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 21:47:32 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 20:32:11 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 20:57:27 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ int	main(int ac, char **av)
 
 	game.score = 0;
 
+play:
 	while (playing)
 	{
 		frame_start = get_time();
@@ -126,12 +127,10 @@ int	main(int ac, char **av)
 			{
 				case (0):
 					break;
-				case (USER_QUIT):
-					// menu fin
+				case (USER_QUIT): // menu fin
 					playing = false;
 					break;
-				case (HERO_DEATH):
-					// menu death
+				case (HERO_DEATH): // menu death
 					playing = false;
 					break;
 			}
@@ -143,20 +142,46 @@ int	main(int ac, char **av)
 		display_fps(get_time() - frame_start, &game);
 		refresh();
 	}
+	int height, width;
+
+	nodelay(stdscr, false);
+	clear();
+	refresh();
+	getmaxyx(stdscr, height, width);
 	if (quitv == HERO_DEATH)
 	{
-		int height, width;
-		
 		const char message[] = "Press any key to exit.";
 
-		nodelay(stdscr, false);
-		clear();
-		refresh();
-		getmaxyx(stdscr, height, width);
 		mvprintw((height >> 1) + 1, (width  >> 1) - (strlen(message)  >> 1), "Score: %d", game.score);
 		mvprintw((height >> 1) - 1, (width  >> 1) - (strlen(message)  >> 1), message);
 		refresh();
+		sleep(2);
 		getch();
+	}
+	else if (quitv == USER_QUIT)
+	{
+		const char message1[] = "Do you want to quit ?";
+		const char message2[] = "Press 'y' to quit, 'n' to keep playing.";
+		const char message3[] = "Wrong input.";
+
+		mvprintw((height >> 1) + 1, (width  >> 1) - (strlen(message1)  >> 1), message1);
+		mvprintw((height >> 1) - 1, (width  >> 1) - (strlen(message2)  >> 1), message2);
+		refresh();
+		int c = getch();
+		while (c != 'y' && c != 'n')
+		{
+			clear();
+			mvprintw((height >> 1) + 1, (width  >> 1) - (strlen(message3)  >> 1), message3);
+			mvprintw((height >> 1) - 1, (width  >> 1) - (strlen(message2)  >> 1), message2);
+			refresh();
+			c = getch();
+		}
+		if (c == 'n')
+		{
+			nodelay(stdscr, true);
+			playing = true;
+			goto play;
+		}
 	}
 	endwin();
 	return (0);
