@@ -85,6 +85,29 @@ static void display_ammo(int ammo, int x)
 	}
 }
 
+static void	display_attack_dir(short dir, int x)
+{
+	attron(A_BOLD);
+	attron(COLOR_PAIR(6));
+	switch (dir)
+	{
+		case (UP):
+			mvprintw(0, (x >> 2) - 6, "U");
+			break;
+		case (DOWN):
+			mvprintw(0, (x >> 2) - 6, "B");
+			break;
+		case (LEFT):
+			mvprintw(0, (x >> 2) - 6, "L");
+			break;
+		case (RIGHT):
+			mvprintw(0, (x >> 2) - 6, "R");
+			break;
+	}
+	attroff(COLOR_PAIR(6));
+	attroff(A_BOLD);
+}
+
 extern void	display_gui(t_game *game)
 {
 	int x, y, hp, score, ammo;
@@ -98,6 +121,7 @@ extern void	display_gui(t_game *game)
 	display_hp(hp, x);
 	display_score(score, x);
 	display_ammo(ammo, x);
+	display_attack_dir(game->entities[0].dir, x);
 	
 	// munitions
 	// boss_hp
