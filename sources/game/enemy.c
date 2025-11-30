@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 825/11/29 22:13:58 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 19:06:41 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 19:07:37 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static bool is_enemy(unsigned char c)
 static bool	is_wall(unsigned char c)
 {
 	if (c == WALL1 || c == WALL2 || c == WALL3 || c == WALL4
-			|| c == WALL5 || c == WALL6 || c == WALL7 || c == WALL8)
+			|| c == WALL5 || c == WALL6 || c == WALL7 || c == WALL8
+			|| c == COLLEC)
 		return (1);
 	return (0);
 }
