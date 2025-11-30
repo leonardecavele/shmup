@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 08:56:10 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 19:31:31 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 19:52:02 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,11 +126,11 @@ extern int	update_game(int c, t_game *game)
 		seconds++;
 		if (seconds % 1 == 0)
 		{
-			if (game->score_calc >= 500)
+			if (game->score_calc >= 750)
 			{
-				while (game->score_calc >= 500)
+				while (game->score_calc >= 750)
 				{
-					game->score_calc -= 500;
+					game->score_calc -= 750;
 					if (game->entities[0].hp < 5)
 						game->entities[0].hp++;
 				}
