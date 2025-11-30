@@ -242,7 +242,6 @@ extern void	update_enemy_behaviour(t_game *game, int frame)
 	{
 		if (game->entities[i].alive)
 		{
-<<<<<<< HEAD
 			if (game->entities[i].y_dir < 0)
 				move_entity(game, i, UP);
 			else if (game->entities[i].y_dir < 0)
@@ -251,12 +250,9 @@ extern void	update_enemy_behaviour(t_game *game, int frame)
 				move_entity(game, i, RIGHT);
 			else if (game->entities[i].x_dir < 0)
 				move_entity(game, i, LEFT);
-			if (game->entities[i].type == ENEMY1)
-=======
 			if (game->entities[i].type == BOSS_LEFT)
 				update_boss(&game->entities[i], frame);
 			else if (game->entities[i].type == ENEMY1)
->>>>>>> 50bb9cf (edit: boss)
 				update_enemy1(&game->entities[i], frame);
 			else if (game->entities[i].type == ENEMY2)
 				update_enemy2(&game->entities[i], &game->entities[0], frame);
