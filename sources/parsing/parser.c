@@ -70,9 +70,9 @@ extern int	parse(t_game *game, int fd)
 	if (current_line != game->board_height)
 		return (WRONG_HEIGHT_SIZE);
 
-	int	j, hero_count, enemy_count, boss_count, error, i = -1;
+	int	j, hero_count, enemy_count, boss_count, collec_count, error, i = -1;
 
-	hero_count = enemy_count = boss_count = error = 0;
+	hero_count = enemy_count = boss_count = error = collec_count = 0;
 	while (++i < 1000)
 	{
 		j = -1;
@@ -102,8 +102,9 @@ extern int	parse(t_game *game, int fd)
 				{
 					game->collectibles[game->collec_qty].x = j; 
 					game->collectibles[game->collec_qty].y = i;
-					game->collectibles[game->collec_qty].active = true 
+					game->collectibles[game->collec_qty].active = true;
 					game->collec_qty++;
+					collec_count++;
 				}
 				else if (game->board[i][j] == ENEMY1 || game->board[i][j] == ENEMY2
 						|| game->board[i][j] == ENEMY3)
@@ -135,7 +136,7 @@ extern int	parse(t_game *game, int fd)
 				game->board[i][j] = EMPTY;
 		}
 	}
-	if (error || enemy_count < 1 || boss_count != 1 || hero_count != 1)
+	if (error || enemy_count < 1 || boss_count != 1 || hero_count != 1 || (collec_count && collec_count != 8))
 		return (WRONG_ENTITIES);
 	game->camera.x = (game->entities[0].x + 0.5f) - MIN_WIDTH;
 	game->camera.y = (game->entities[0].y + 0.5f) - MIN_HEIGHT;
