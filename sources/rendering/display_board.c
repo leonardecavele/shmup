@@ -35,7 +35,7 @@ extern void	display_board(t_game *game)
 			if (board_x >= 0 && board_x < game->board_width && 
 					board_y >= 0 && board_y < game->board_height)
 			{
-				if (is_wall(game->board[board_y][board_x]))
+				if (is_wall(game->board[board_y][board_x]) || game->board[board_y][board_x] == EMPTY)
 				{
 					attron(COLOR_PAIR(2));
 					mvprintw(j, i, "%c", game->board[board_y][board_x]);
@@ -46,6 +46,12 @@ extern void	display_board(t_game *game)
 					attron(COLOR_PAIR(6));
 					mvprintw(j, i, "%c", game->board[board_y][board_x]);
 					attroff(COLOR_PAIR(6));
+				}
+				else if (game->board[board_y][board_x] == BOSS_LEFT || game->board[board_y][board_x] == BOSS_RIGHT)
+				{
+					attron(COLOR_PAIR(2));
+					mvprintw(j, i, "%c", game->board[board_y][board_x]);
+					attroff(COLOR_PAIR(2));
 				}
 				else
 					mvprintw(j, i, "%c", game->board[board_y][board_x]);
