@@ -41,7 +41,7 @@ static void	handle_hit(t_game *game, int hit, t_projectile *proj)
 				game->score += 1000;
 			}
 			break;
-		case (ENEMY_HIT): // find enemy + handle death
+		case (ENEMY_HIT):
 			hit_ent = find_entity(game->entities, proj->x, proj->y);
 			if (!hit_ent)
 				break ;
