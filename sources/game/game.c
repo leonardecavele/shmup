@@ -41,9 +41,8 @@ extern int	update_game(int c, t_game *game)
 	++frame;
 	update_enemy_behaviour(game, frame);
 	update_passive_behaviour(game, frame);
-	if (!game->entities[0].hp)
+	if (game->entities[0].hp <= 0)
 	{
-		mvprintw(0, 100, "PLAYER DEAD");
 		return (HERO_DEATH);
 	}
 	if (handle_user_input(c, game, frame))

@@ -111,6 +111,7 @@ int	main(int ac, char **av)
 		{
 			c = getch();
 			int quit = update_game(c, &game);
+			render(&game);
 			switch (quit)
 			{
 				case (0):
@@ -124,7 +125,6 @@ int	main(int ac, char **av)
 					playing = false;
 					break;
 			}
-			render(&game);
 		}
 		frame_end = get_time();
 		frame_time = frame_end - frame_start;
