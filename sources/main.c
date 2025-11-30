@@ -43,6 +43,17 @@ static void	handle_signal(void)
 	signal(SIGWINCH, handle_winch);
 }
 
+void	welcome(void)
+{
+	// const char message[] = "Press any key to exit.";
+	//
+	// mvprintw((height >> 1) + 1, (width  >> 1) - (strlen(message)  >> 1), "Score: %d", game.score);
+	// mvprintw((height >> 1) - 1, (width  >> 1) - (strlen(message)  >> 1), message);
+	// refresh();
+	// sleep(1);
+	// getch();
+}
+
 int	main(int ac, char **av)
 {
 	if (ac != 2)
@@ -107,6 +118,7 @@ int	main(int ac, char **av)
 	game.score = 0;
 
 play:
+	welcome();
 	while (playing)
 	{
 		frame_start = get_time();
