@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 17:54:35 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/30 19:19:10 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/11/30 19:31:10 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ extern void     		move_entity(t_game *game, short which, short move)
 		{	
 			find_collectible(game->collectibles, pos_x, pos_y - 1)->active = false;
 			game->score += COLLEC_REWARD;	
+			game->score_calc += COLLEC_REWARD;
 		}	
         game->board[pos_y][pos_x] = GROUND;
         game->board[--pos_y][pos_x] = game->entities[which].type;
@@ -70,6 +71,7 @@ extern void     		move_entity(t_game *game, short which, short move)
 		{	
 			find_collectible(game->collectibles, pos_x, pos_y + 1)->active = false;
 			game->score += COLLEC_REWARD;
+			game->score_calc += COLLEC_REWARD;
 		}	
         game->board[pos_y][pos_x] = GROUND;
         game->board[++pos_y][pos_x] = game->entities[which].type;
@@ -82,6 +84,7 @@ extern void     		move_entity(t_game *game, short which, short move)
 		{	
 			find_collectible(game->collectibles, pos_x - 1, pos_y)->active = false;
 			game->score += COLLEC_REWARD;
+			game->score_calc += COLLEC_REWARD;
 		}	
         game->board[pos_y][pos_x] = GROUND;
         game->board[pos_y][--pos_x] = game->entities[which].type;
@@ -94,6 +97,7 @@ extern void     		move_entity(t_game *game, short which, short move)
 		{	
 			find_collectible(game->collectibles, pos_x + 1, pos_y)->active = false;
 			game->score += COLLEC_REWARD;
+			game->score_calc += COLLEC_REWARD;
 		}	
         game->board[pos_y][pos_x] = GROUND;
         game->board[pos_y][++pos_x] = game->entities[which].type;

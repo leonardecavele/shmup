@@ -13,6 +13,13 @@
 #include "game.h"
 #include "ncurses.h"
 
+static bool	is_wall(unsigned char c)
+{
+	if (c == WALL1 || c == WALL2 || c == WALL3 || c == WALL4
+		|| c == WALL5 || c == WALL6 || c == WALL7 || c == WALL8)
+		return (1);
+	return (0);
+}
 
 extern void	display_board(t_game *game)
 {
@@ -28,7 +35,20 @@ extern void	display_board(t_game *game)
 			if (board_x >= 0 && board_x < game->board_width && 
 					board_y >= 0 && board_y < game->board_height)
 			{
-				mvprintw(j, i, "%c", game->board[board_y][board_x]);
+				if (is_wall(game->board[board_y][board_x]))
+				{
+					attron(COLOR_PAIR(2));
+					mvprintw(j, i, "%c", game->board[board_y][board_x]);
+					attroff(COLOR_PAIR(2));
+				}
+				else if (game->board[board_y][board_x] == HERO || game->board[board_y][board_x] == HERO_PROJ)
+				{
+					attron(COLOR_PAIR(6));
+					mvprintw(j, i, "%c", game->board[board_y][board_x]);
+					attroff(COLOR_PAIR(6));
+				}
+				else
+					mvprintw(j, i, "%c", game->board[board_y][board_x]);
 			}
 		}
 	}
