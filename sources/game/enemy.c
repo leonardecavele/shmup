@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 825/11/29 22:13:58 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 13:45:49 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 14:20:19 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,74 +303,99 @@ static void update_enemy3(t_entity *enemy, t_entity *hero, int frame)
 	}
 }
 
-
-
-static void	update_boss(t_entity *enemy, int frame)
+void    update_boss(t_entity *enemy, t_entity *hero, int frame)
 {
-	bool	can_shoot = true;
-	int		i = 0;
-	static	int test = 0;
+        static int  step = 0;
+        static int  pattern = 0;
+        int         any_active = 0;
+        int         dx;
+        int         dy;
 
-	(void)frame;
-	while (i < MAX_PROJECTILES)
-		if (enemy->projectiles[i++].active)
-			can_shoot = false;
-	if (!can_shoot)
-		return ;
+        (void)frame;
+        dx = hero->x - enemy->x;
+        dy = hero->y - enemy->y;
 
-	++test;
-	if (test % 2 == 0)
-	{
-		enemy->projectiles[0].active = true;
-		enemy->projectiles[0].x = enemy->x + 3;
-		enemy->projectiles[0].y = enemy->y;
-		enemy->projectiles[0].x_dir = -1;
-		enemy->projectiles[0].y_dir = -1;
+        for (int i = 0; i < MAX_PROJECTILES; ++i)
+        {
+                if (enemy->projectiles[i].active)
+                {
+                        any_active = 1;
+                        break;
+                }
+        }
+        if (any_active)
+                return;
 
-		enemy->projectiles[1].active = true;
-		enemy->projectiles[1].x = enemy->x - 2;
-		enemy->projectiles[1].y = enemy->y;
-		enemy->projectiles[1].x_dir = -1;
-		enemy->projectiles[1].y_dir = -1;
+        int slots[8];
+        int nslots = 0;
+        for (int i = 0; i < MAX_PROJECTILES && nslots < 8; ++i)
+                slots[nslots++] = i;
+        if (nslots == 0)
+                return;
 
-		enemy->projectiles[2].active = true;
-		enemy->projectiles[2].x = enemy->x + 3;
-		enemy->projectiles[2].y = enemy->y;
-		enemy->projectiles[2].x_dir = 1;
-		enemy->projectiles[2].y_dir = 1;
+        if (pattern == 0)
+        {
+                static const int dirs[8][2] = {
+                        { 0,  1},
+                        {-1,  1},
+                        {-1,  0},
+                        {-1, -1},
+                        { 0, -1},
+                        { 1, -1},
+                        { 1,  0},
+                        { 1,  1}
+                };
+                for (int k = 0; k < nslots; ++k)
+                {
+                        int idx = (step + k) & 7;
+                        t_projectile *p = &enemy->projectiles[slots[k]];
 
-		enemy->projectiles[3].active = true;
-		enemy->projectiles[3].x = enemy->x - 2;
-		enemy->projectiles[3].y = enemy->y;
-		enemy->projectiles[3].x_dir = 1;
-		enemy->projectiles[3].y_dir = 1;
-	}
-	else
-	{
-		enemy->projectiles[0].active = true;
-		enemy->projectiles[0].x = enemy->x + 3;
-		enemy->projectiles[0].y = enemy->y;
-		enemy->projectiles[0].x_dir = 1;
-		enemy->projectiles[0].y_dir = 1;
+                        p->active = true;
+                        p->x = enemy->x + dirs[idx][0];
+                        p->y = enemy->y + dirs[idx][1];
+                        p->x_dir = dirs[idx][0];
+                        p->y_dir = dirs[idx][1];
+                }
+                step = (step + 1) & 7;
+                pattern = 1;
+        }
+        else
+        {
+                int offsets[6] = { -3, -2, -1, 1, 2, 3 };
+                int to_spawn = (nslots < 6) ? nslots : 6;
 
-		enemy->projectiles[1].active = true;
-		enemy->projectiles[1].x = enemy->x - 2;
-		enemy->projectiles[1].y = enemy->y;
-		enemy->projectiles[1].x_dir = 1;
-		enemy->projectiles[1].y_dir = 1;
+                if (dx * dx >= dy * dy)
+                {
+                        int dir_x = (dx >= 0) ? 1 : -1;
 
-		enemy->projectiles[2].active = true;
-		enemy->projectiles[2].x = enemy->x + 3;
-		enemy->projectiles[2].y = enemy->y;
-		enemy->projectiles[2].x_dir = -1;
-		enemy->projectiles[2].y_dir = -1;
+                        for (int k = 0; k < to_spawn; ++k)
+                        {
+                                t_projectile *p = &enemy->projectiles[slots[k]];
 
-		enemy->projectiles[3].active = true;
-		enemy->projectiles[3].x = enemy->x - 2;
-		enemy->projectiles[3].y = enemy->y;
-		enemy->projectiles[3].x_dir = -1;
-		enemy->projectiles[3].y_dir = -1;
-	}
+                                p->active = true;
+                                p->x = enemy->x;
+                                p->y = enemy->y + offsets[k];
+                                p->x_dir = dir_x;
+                                p->y_dir = 0;
+                        }
+                }
+                else
+                {
+                        int dir_y = (dy >= 0) ? 1 : -1;
+
+                        for (int k = 0; k < to_spawn; ++k)
+                        {
+                                t_projectile *p = &enemy->projectiles[slots[k]];
+
+                                p->active = true;
+                                p->x = enemy->x + offsets[k];
+                                p->y = enemy->y;
+                                p->x_dir = 0;
+                                p->y_dir = dir_y;
+                        }
+                }
+                pattern = 0;
+        }
 }
 
 extern void	update_enemy_behaviour(t_game *game, int frame)
@@ -390,7 +415,7 @@ extern void	update_enemy_behaviour(t_game *game, int frame)
 			else if (game->entities[i].x_dir < 0)
 				move_entity(game, i, LEFT);
 			if (game->entities[i].type == BOSS_LEFT)
-				update_boss(&game->entities[i], frame);
+				update_boss(&game->entities[1], &game->entities[0], frame);
 			else if (game->entities[i].type == ENEMY1)
 				update_enemy1(&game->entities[i], frame);
 			else if (game->entities[i].type == ENEMY2)
