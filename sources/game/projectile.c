@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 20:03:55 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/30 02:19:01 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/30 03:15:16 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,34 +23,32 @@ static bool	is_wall(unsigned char c)
 
 static int	update_projectile(t_game *game, t_projectile *proj, unsigned short *active_proj)
 {
-	mvprintw(0, 60, "%dx %dy", proj->x, proj->y);
 	if (proj->y + proj->y_dir < 0 || proj->y + proj->y_dir > game->board_height
 		|| proj->x + proj->x_dir < 0 || proj->x + proj->x_dir > game->board_width)
 	{
-		mvprintw(0, 80, "OUTOFBOUND");
-		mvprintw(0, 60, "%dx %dy", proj->x + proj->x_dir, proj->y + proj->y_dir);
 		proj->active = false;
 		--(*active_proj);
 		return (1);
 	}
 	else if (is_wall(game->board[proj->y + proj->y_dir][proj->x + proj->x_dir]))
 	{
-		mvprintw(0, 80, "WALLHIT");
 		proj->active = false;
 		game->board[proj->y][proj->x] = GROUND;
 		--(*active_proj);
-		return (1);
+		return (2);
 	}
 	else if (game->board[proj->y + proj->y_dir][proj->x + proj->x_dir] == HERO)
 	{
-		mvprintw(0, 80, "HEROHIT");
 		game->entities[0].alive = false;
 		proj->active = false;
 		--(*active_proj);
-		return (2);
+		return (3);
 	}
-	mvprintw(0, 80, "MOVE");
-	if (game->board[proj->y][proj->x] != HERO)
+	if (game->board[proj->y][proj->x] != HERO
+		&& game->board[proj->y][proj->x] != ENEMY1
+		&& game->board[proj->y][proj->x] != ENEMY2
+		&& game->board[proj->y][proj->x] != ENEMY3
+		&& game->board[proj->y][proj->x] != BOSS
 		game->board[proj->y][proj->x] = GROUND;
 	proj->x += proj->x_dir;
 	proj->y += proj->y_dir;
@@ -70,10 +68,7 @@ extern void	update_projectiles(t_game *game, int frame)
 		for (int j = 0; j < MAX_PROJECTILES; ++j)
 		{
 			if (game->entities[i].projectiles[j].active)
-			{
-				mvprintw(0, 40, "%d is checked", j);
 				hit = update_projectile(game, &(game->entities[i].projectiles[j]), &(game->entities[i].active_proj_qty));
-			}
 		}
 	}
 }
