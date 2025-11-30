@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 20:03:55 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/30 17:49:05 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 18:26:51 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ static void	handle_hit(t_game *game, int hit, t_projectile *proj)
 static int  update_projectile(t_game *game, int i, t_projectile *proj, unsigned short *active_proj, int frame)
 {
 
-	(void)frame;
+	if (i != 0 && frame % 2)
+		return (TIME_NO_SHOOT);
 
     int nx = proj->x + proj->x_dir;
     int ny = proj->y + proj->y_dir;
