@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 20:03:55 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/30 19:02:14 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 19:19:19 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	handle_hit(t_game *game, int hit, t_projectile *proj)
 	switch (hit)
 	{
 		case (HERO_HIT):
+			blink(game);
 			--game->entities[0].hp;
 			if (game->entities[0].hp <= 0)
 				game->entities[0].alive = false;

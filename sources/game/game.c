@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 08:56:10 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 19:04:43 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 19:21:41 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,24 @@
 #include "render.h"
 #include "shmup.h"
 
-#include "game.h"
+void	blink(t_game *game)
+{
+	int	i;
 
-void	check_enemies_damage(t_game *game)
+	i = 0;
+	while (i < 3)
+	{
+		clear();
+		refresh();
+		napms(100);
+		display_board(game);
+		refresh();
+		napms(100);
+		i++;
+	}
+}
+
+static void	check_enemies_damage(t_game *game)
 {
 	int				hx, hy, nx, ny;
 	unsigned char	tile;
@@ -61,6 +76,7 @@ void	check_enemies_damage(t_game *game)
 	}
 	return ;
 hit:
+	blink(game);
 	game->entities[0].hp--;
 	if (game->entities[0].hp <= 0)
 		game->entities[0].alive = false;

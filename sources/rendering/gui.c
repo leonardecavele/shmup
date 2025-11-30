@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 16:26:36 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/30 18:30:20 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/11/30 19:14:30 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void display_score(int score, int x)
 {
 	attron(A_BOLD);
 	attron(COLOR_PAIR(5));
-	mvprintw(0, (x >> 1) - 1, "%d %c", score, KEY);
+	mvprintw(0, (x >> 1) - 1, "%d %c", score, COLLEC);
 	attroff(COLOR_PAIR(5));
 	attroff(A_BOLD);
 }

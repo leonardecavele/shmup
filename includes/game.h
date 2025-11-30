@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 08:57:01 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 19:00:35 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 19:20:24 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void		update_enemy_behaviour(t_game *game, int frame);
 void		move_entity(t_game *game, short which, short move);
 void		update_projectiles(t_game *game, int frame);
 void		respawn_enemy(t_game *game, int seconds);
+void		blink(t_game *game);
 t_entity	*find_entity(t_entity *entities, short x, short y);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 13:59:37 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 03:09:10 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/30 19:13:30 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define HERO		'+'
 # define DEAD		'|'
-# define KEY		'{'
+# define COLLEC		'{'
 # define ENEMY_PROJ	'Y'
 # define HERO_PROJ	'Z'
 # define ENEMY1		'B'
