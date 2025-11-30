@@ -100,6 +100,8 @@ extern int	parse(t_game *game, int fd)
 				}
 				else if (game->board[i][j] == COLLEC)
 				{
+					if (game->collec_qty == MAX_COLLECTIBLES - 1)
+						return (WRONG_ENTITIES);
 					game->collectibles[game->collec_qty].x = j; 
 					game->collectibles[game->collec_qty].y = i;
 					game->collectibles[game->collec_qty].active = true;
@@ -109,6 +111,8 @@ extern int	parse(t_game *game, int fd)
 				else if (game->board[i][j] == ENEMY1 || game->board[i][j] == ENEMY2
 						|| game->board[i][j] == ENEMY3)
 				{
+					if (game->ent_qty == MAX_ENTITY - 1)
+						return (WRONG_ENTITIES);
 					game->entities[game->ent_qty].type = game->board[i][j];
 					game->entities[game->ent_qty].x = j;
 					game->entities[game->ent_qty].y = i;
