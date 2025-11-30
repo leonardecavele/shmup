@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 16:03:28 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/29 16:28:09 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/11/30 03:49:16 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,6 @@ extern void	display_board(t_game *game)
 			{
 				mvprintw(j, i, "%c", game->board[board_y][board_x]);
 			}
-			else
-			{
-				mvprintw(j, i, "X"); 
-			}			
 		}
 	}
 	(void)game;

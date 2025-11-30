@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 22:13:58 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 03:16:59 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/30 03:42:58 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,14 @@ extern void	update_enemy_behaviour(t_game *game, int frame)
 	{
 		if (game->entities[i].alive)
 		{
+			if (game->entities[i].y_dir < 0)
+				move_entity(game, i, UP);
+			else if (game->entities[i].y_dir < 0)
+				move_entity(game, i, DOWN);
+			if (game->entities[i].x_dir > 0)
+				move_entity(game, i, RIGHT);
+			else if (game->entities[i].x_dir < 0)
+				move_entity(game, i, LEFT);
 			if (game->entities[i].type == ENEMY1)
 				update_enemy1(&game->entities[i], frame);
 			else if (game->entities[i].type == ENEMY2)
