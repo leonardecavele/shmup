@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 08:57:01 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 15:06:40 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 15:39:30 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # define MAX_BOARD_HEIGHT	1000
 # define CAM_TRESH			8
 # define ENEMY_SHOOT_RANGE	20
+# define MOB_HP				1
+# define BOSS_HP			3
 
 typedef	struct		s_projectile
 {
@@ -71,5 +73,6 @@ void	hero_attack_dir(t_entity *hero, int c);
 void	update_enemy_behaviour(t_game *game, int frame);
 void	move_entity(t_game *game, short which, short move);
 void	update_projectiles(t_game *game, int frame);
+void	respawn_enemy(t_game *game, int seconds);
 
 #endif

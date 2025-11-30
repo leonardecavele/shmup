@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 08:56:10 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 00:10:09 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/30 15:39:23 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #include "render.h"
 #include "shmup.h"
 
-static void	update_passive_behaviour(t_game *game, int frame)
+static void	update_passive_behaviour(t_game *game, int frame, int seconds)
 {
 	update_projectiles(game, frame);
-	// animate sprites
+	respawn_enemy(game, seconds);
 }
 
 static int handle_user_input(int c, t_game *game, int frame)
@@ -37,13 +37,17 @@ static int handle_user_input(int c, t_game *game, int frame)
 extern int	update_game(int c, t_game *game)
 {
 	static int	frame = 0;
+	static int	seconds = 0;
 
 	++frame;
 	update_enemy_behaviour(game, frame);
-	update_passive_behaviour(game, frame);
+	update_passive_behaviour(game, frame, seconds);
 	if (handle_user_input(c, game, frame))
 		return (1);
 	if (frame == 60)
+	{
 		frame = 0;
+		seconds++;
+	}
 	return (0);
 }
