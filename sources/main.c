@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 21:47:32 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 20:57:27 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 21:00:36 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ play:
 		mvprintw((height >> 1) + 1, (width  >> 1) - (strlen(message)  >> 1), "Score: %d", game.score);
 		mvprintw((height >> 1) - 1, (width  >> 1) - (strlen(message)  >> 1), message);
 		refresh();
-		sleep(2);
+		sleep(1);
 		getch();
 	}
 	else if (quitv == USER_QUIT)
