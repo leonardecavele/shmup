@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 08:56:10 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 19:52:02 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 20:07:46 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ static int handle_user_input(int c, t_game *game, int frame)
 		return (1);
 	return (0);
 }
+
 extern int	update_game(int c, t_game *game)
 {
 	static int	frame = 0;
