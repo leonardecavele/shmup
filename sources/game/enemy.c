@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 825/11/29 22:13:58 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 19:07:37 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 20:14:39 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,47 +19,14 @@ static bool is_enemy(unsigned char c)
         || c == BOSS_LEFT || c == BOSS_RIGHT);
 }
 
-static bool	is_wall(unsigned char c)
-{
-	if (c == WALL1 || c == WALL2 || c == WALL3 || c == WALL4
-			|| c == WALL5 || c == WALL6 || c == WALL7 || c == WALL8
-			|| c == COLLEC)
-		return (1);
-	return (0);
-}
-
-static void    random_pos(t_game *game, t_entity *ent, unsigned short *new_x, unsigned short *new_y)
-{
-	int try, dy, dx, nx, ny;
-	try = dy = dx = nx = ny = 0;
-
-	*new_x = ent->x;
-	*new_y = ent->y;
-	while (try++ < 64)
-	{
-		dx = (rand() % 5) - 2;
-		dy = (rand() % 5) - 2;
-
-		if (dx == 0 && dy == 0)
-				continue;
-		if (dx * dx + dy * dy > 4)
-				continue;
-
-		nx = ent->x + dx;
-		ny = ent->y + dy;
-
-		if (nx < 0 || nx >= game->board_width
-				|| ny < 0 || ny >= game->board_height)
-				continue;
-		if (is_wall(game->board[ny][nx] || game->board[ny][nx] == HERO
-			|| is_enemy(game->board[ny][nx])))
-				continue;
-
-		*new_x = nx;
-		*new_y = ny;
-		break;
-	}
-}
+//static bool	is_wall(unsigned char c)
+//{
+//	if (c == WALL1 || c == WALL2 || c == WALL3 || c == WALL4
+//			|| c == WALL5 || c == WALL6 || c == WALL7 || c == WALL8
+//			|| c == COLLEC)
+//		return (1);
+//	return (0);
+//}
 
 extern void	respawn_enemy(t_game *game, int seconds)
 {
@@ -93,7 +60,6 @@ extern void	respawn_enemy(t_game *game, int seconds)
 				}
 				game->entities[i].alive = true;
 				game->entities[i].hp = MOB_HP;
-				random_pos(game, &game->entities[i], &game->entities[i].x, &game->entities[i].y);
 				game->board[game->entities[i].y][game->entities[i].x] = game->entities[i].type;
 			}
 		}

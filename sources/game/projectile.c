@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 20:03:55 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/30 19:19:19 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 20:17:44 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static bool	is_wall(unsigned char c)
 {
 	if (c == WALL1 || c == WALL2 || c == WALL3 || c == WALL4
-			|| c == WALL5 || c == WALL6 || c == WALL7 || c == WALL8 || c == DEAD)
+			|| c == WALL5 || c == WALL6 || c == WALL7 || c == WALL8 || c == DEAD || c == COLLEC)
 		return (1);
 	return (0);
 }
