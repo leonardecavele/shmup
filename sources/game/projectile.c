@@ -6,12 +6,20 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 20:03:55 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/30 02:07:19 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/11/30 02:19:01 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 #include <ncurses.h>
+
+static bool	is_wall(unsigned char c)
+{
+	if (c == WALL1 || c == WALL2 || c == WALL3 || c == WALL4
+		|| c == WALL5 || c == WALL6 || c == WALL7 || c == WALL8)
+		return (1);
+	return (0);
+}
 
 static int	update_projectile(t_game *game, t_projectile *proj, unsigned short *active_proj)
 {
@@ -25,7 +33,7 @@ static int	update_projectile(t_game *game, t_projectile *proj, unsigned short *a
 		--(*active_proj);
 		return (1);
 	}
-	else if (game->board[proj->y + proj->y_dir][proj->x + proj->x_dir] == WALL)
+	else if (is_wall(game->board[proj->y + proj->y_dir][proj->x + proj->x_dir]))
 	{
 		mvprintw(0, 80, "WALLHIT");
 		proj->active = false;
