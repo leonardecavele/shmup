@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 20:03:55 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/30 03:15:16 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/11/30 03:21:02 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static int	update_projectile(t_game *game, t_projectile *proj, unsigned short *a
 		&& game->board[proj->y][proj->x] != ENEMY1
 		&& game->board[proj->y][proj->x] != ENEMY2
 		&& game->board[proj->y][proj->x] != ENEMY3
-		&& game->board[proj->y][proj->x] != BOSS
+		&& game->board[proj->y][proj->x] != BOSS_LEFT
+		&& game->board[proj->y][proj->x] != BOSS_RIGHT)
 		game->board[proj->y][proj->x] = GROUND;
 	proj->x += proj->x_dir;
 	proj->y += proj->y_dir;
