@@ -38,7 +38,7 @@ extern int	update_game(int c, t_game *game)
 {
 	static int	frame = 0;
 
-	frame++;
+	++frame;
 	update_enemy_behaviour(game, frame);
 	update_passive_behaviour(game, frame);
 	if (handle_user_input(c, game, frame))

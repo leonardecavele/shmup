@@ -28,8 +28,8 @@ typedef	struct		s_projectile
 {
 	unsigned short	x;
 	unsigned short	y;
-	unsigned short	x_dir;
-	unsigned short	y_dir;
+	short	x_dir;
+	short	y_dir;
 	bool			active;
 }					t_projectile;
 

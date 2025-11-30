@@ -22,7 +22,7 @@ DIR_BUILD	:= .build/
 CC 			:= cc
 DEPS_FLAGS  := -MMD -MP
 WARN_FLAGS	:= -Wall -Werror -Wextra
-C_FLAGS		:= $(WARN_FLAGS) $(DEPS_FLAGS)
+C_FLAGS		:= $(WARN_FLAGS) $(DEPS_FLAGS) -g3
 INC_FLAGS 	:= -I$(DIR_INC)
 
 LINK		:= -lncurses -lm

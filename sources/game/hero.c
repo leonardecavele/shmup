@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 17:30:39 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/30 00:52:34 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/11/30 01:03:53 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,22 @@ extern void	hero_attack_dir(t_projectile *hero_proj, int c)
 		switch (c)
 		{
 			case (KEY_UP):
-				mvprintw(0, 30, "T");
+				mvprintw(0, 40, "T");
 				hero_proj[i].x_dir = 0;
 				hero_proj[i].y_dir = -1;
 				break;
 			case (KEY_DOWN):
-				mvprintw(0, 30, "D");
+				mvprintw(0, 40, "D");
 				hero_proj[i].x_dir = 0;
 				hero_proj[i].y_dir = 1;
 				break;
 			case (KEY_LEFT):
-				mvprintw(0, 30, "L");
+				mvprintw(0, 40, "L");
 				hero_proj[i].x_dir = -1;
 				hero_proj[i].y_dir = 0;
 				break;
 			case (KEY_RIGHT):
-				mvprintw(0, 30, "R");
+				mvprintw(0, 40, "R");
 				hero_proj[i].x_dir = 1;
 				hero_proj[i].y_dir = 0;
 				break;
