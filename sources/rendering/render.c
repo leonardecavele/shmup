@@ -16,7 +16,7 @@
 
 extern bool	resize(void)
 {
-	const char	message[] = "Please get a window betwen 32x80 and 42x90.";
+	const char	message[] = "Please get a window larger than 100x42.";
 	int			height, width;
 	
 	height = width = 0;
@@ -25,8 +25,7 @@ extern bool	resize(void)
 	refresh();
 	clear();
 	getmaxyx(stdscr, height, width);
-	if (height >= MIN_HEIGHT && width >= MIN_WIDTH
-		&& height <= MAX_HEIGHT && width <= MAX_WIDTH)
+	if (height == HEIGHT && width == WIDTH)
 		return (true);
 	mvprintw(height  >> 1, (width  >> 1) - (strlen(message)  >> 1), message);
 	return (false);
@@ -36,6 +35,5 @@ extern void	render(t_game *game)
 {
 	display_gui(game);
 	display_board(game);
-
 	return ;
 }

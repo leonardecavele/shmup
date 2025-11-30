@@ -173,6 +173,7 @@ play:
 		mvprintw((height >> 1) - 1, (width  >> 1) - (strlen(message)  >> 1), message);
 		refresh();
 		sleep(1);
+		noecho();
 		getch();
 	}
 	else if (quitv == USER_QUIT)

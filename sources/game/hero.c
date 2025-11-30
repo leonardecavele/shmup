@@ -18,7 +18,7 @@ extern void	move_hero(int c, t_game *game, int frame)
 {
 	int max_y, max_x;
 	int screen_x, screen_y;
-	
+
 	(void)frame;
 	getmaxyx(stdscr, max_y, max_x);
 	switch (c)
@@ -46,7 +46,6 @@ extern void	move_hero(int c, t_game *game, int frame)
 		--game->camera.x;
 	else if (screen_x >= max_x - CAM_TRESH && game->camera.x < game->board_width - max_x)
 		++game->camera.x;
-	
 }
 
 extern void	hero_attack_dir(t_entity *hero, int c)
