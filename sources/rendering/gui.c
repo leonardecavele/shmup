@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 16:26:36 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/30 18:07:35 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/11/30 18:30:20 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,52 +19,39 @@ static void display_hp(int hp, int x)
 	if (hp == HERO_HP)
 	{
 		attron(COLOR_PAIR(1));
-		for (int i = 0; i < HERO_HP; ++i)
+		for (int i = 0; i < HERO_MAX_HP; ++i)
 		{
-			mvprintw(0, (x >> 2) + 3 + i, "%c", (i < hp ? HERO : ' '));
+			mvprintw(0, (x >> 2) + HERO_MAX_HP + i, "%c", (i < hp ? HERO : ' '));
 		}
 		attroff(COLOR_PAIR(1));
 	}
-	else if (hp > (HERO_HP >> 1))
+	else if (hp > (HERO_MAX_HP >> 1))
 	{
 		attron(COLOR_PAIR(3));
-		for (int i = 0; i < HERO_HP; ++i)
+		for (int i = 0; i < HERO_MAX_HP; ++i)
 		{
-			mvprintw(0, (x >> 2) + 3 + i, "%c", (i < hp ? HERO : ' '));
+			mvprintw(0, (x >> 2) + HERO_MAX_HP + i, "%c", (i < hp ? HERO : ' '));
 		}
 		attroff(COLOR_PAIR(3));
 	}
 	else
 	{
 		attron(COLOR_PAIR(2));
-		for (int i = 0; i < HERO_HP; ++i)
+		for (int i = 0; i < HERO_MAX_HP; ++i)
 		{
-			mvprintw(0, (x >> 2) + 3 + i, "%c", (i < hp ? HERO : ' '));
+			mvprintw(0, (x >> 2) + HERO_MAX_HP + i, "%c", (i < hp ? HERO : ' '));
 		}
 		attroff(COLOR_PAIR(2));
 	}
 }
 
-static void display_score(int score, int best, int x)
+static void display_score(int score, int x)
 {
-	if (score == best)
-	{
-		attron(COLOR_PAIR(1));
-		mvprintw(0, (x >> 1) - 1, "%d %c", score, KEY);
-		attroff(COLOR_PAIR(1));
-	}
-	else if (score > (best >> 1))
-	{
-		attron(COLOR_PAIR(3));
-		mvprintw(0, (x >> 1) - 1, "%d %c", score, KEY);
-		attroff(COLOR_PAIR(3));
-	}
-	else
-	{
-		attron(COLOR_PAIR(2));
-		mvprintw(0, (x >> 1) - 1, "%d %c", score, KEY);
-		attroff(COLOR_PAIR(2));
-	}
+	attron(A_BOLD);
+	attron(COLOR_PAIR(5));
+	mvprintw(0, (x >> 1) - 1, "%d %c", score, KEY);
+	attroff(COLOR_PAIR(5));
+	attroff(A_BOLD);
 }
 
 static void display_ammo(int ammo, int x)
@@ -100,20 +87,17 @@ static void display_ammo(int ammo, int x)
 
 extern void	display_gui(t_game *game)
 {
-	int x, y, hp, score, best, ammo;
+	int x, y, hp, score, ammo;
 	getmaxyx(stdscr, y, x);
 	(void)y;
 
 	hp = game->entities[0].hp;
 	score = game->score;
-	best = 200;
 	ammo = MAX_PROJECTILES - game->entities[0].active_proj_qty;
 
-	attron(A_BOLD);
 	display_hp(hp, x);
-	display_score(score, best, x);
+	display_score(score, x);
 	display_ammo(ammo, x);
-	attroff(A_BOLD);
 	
 	// munitions
 	// boss_hp

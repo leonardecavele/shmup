@@ -26,6 +26,7 @@
 # define MOB_HP				1
 # define BOSS_HP			5
 # define HERO_HP			3
+# define HERO_MAX_HP		5
 
 enum				e_quit
 {
