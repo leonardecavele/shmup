@@ -98,6 +98,13 @@ extern int	parse(t_game *game, int fd)
 					}
 					++hero_count;
 				}
+				else if (game->board[i][j] == COLLEC)
+				{
+					game->collectibles[game->collec_qty].x = j; 
+					game->collectibles[game->collec_qty].y = i;
+					game->collectibles[game->collec_qty].active = true 
+					game->collec_qty++;
+				}
 				else if (game->board[i][j] == ENEMY1 || game->board[i][j] == ENEMY2
 						|| game->board[i][j] == ENEMY3)
 				{

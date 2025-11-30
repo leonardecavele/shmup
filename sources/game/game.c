@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 08:56:10 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 19:21:41 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 19:31:31 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ void	blink(t_game *game)
 		refresh();
 		napms(100);
 		display_board(game);
+		attron(COLOR_PAIR(2));
+		mvprintw(0, 2, "HIT!");
+		attroff(COLOR_PAIR(2));
+		display_gui(game);
 		refresh();
 		napms(100);
 		i++;
