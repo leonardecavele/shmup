@@ -16,10 +16,8 @@
 
 static void	update_passive_behaviour(t_game *game, int frame)
 {
-	(void)game;
-	(void)frame;
 	// animate sprites
-	// move_projectiles
+	update_projectiles(game, frame);
 }
 
 static int handle_user_input(int c, t_game *game, int frame)
@@ -28,8 +26,10 @@ static int handle_user_input(int c, t_game *game, int frame)
 		move_camera(c, game);
 	else if (c == 'w' || c == 's' || c == 'a' || c == 'd')
 		move_hero(c, game, frame);
+	else if (c == KEY_UP || c == KEY_DOWN || c == KEY_RIGHT || c == KEY_LEFT)
+		hero_attack_dir(&game->entities[0], c);
 	else if (c == ' ')
-		hero_attack(game); // frame
+		hero_attack(&(game->entities[0]));
 	else if (c == 'q')
 		return (1);
 	return (0);
@@ -38,7 +38,7 @@ extern int	update_game(int c, t_game *game)
 {
 	static int	frame = 0;
 
-	frame++;
+	++frame;
 	update_enemy_behaviour(game, frame);
 	update_passive_behaviour(game, frame);
 	if (handle_user_input(c, game, frame))

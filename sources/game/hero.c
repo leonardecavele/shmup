@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 17:30:39 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/30 00:20:10 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/30 02:06:23 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,67 @@ extern void	move_hero(int c, t_game *game, int frame)
 		++game->camera.x;
 }
 
-extern void	hero_attack(t_game *game)
+extern void	hero_attack_dir(t_entity *hero, int c)
 {
-	(void) game;
+	for (int i = 0; i < MAX_PROJECTILES; ++i)
+	{
+		switch (c)
+		{
+			case (KEY_UP):
+				mvprintw(0, 40, "U");
+				hero->dir = UP;
+				break;
+			case (KEY_DOWN):
+				mvprintw(0, 40, "D");
+				hero->dir = DOWN;
+				break;
+			case (KEY_LEFT):
+				mvprintw(0, 40, "L");
+				hero->dir = LEFT;
+				break;
+			case (KEY_RIGHT):
+				mvprintw(0, 40, "R");
+				hero->dir = RIGHT;
+				break;
+		}
+	}
+}
+
+extern void	hero_attack(t_entity *hero)
+{
+	int					i = 0;
+
+	for (int j = 0; j < MAX_PROJECTILES; ++j)
+	{
+		mvprintw(0, 40 + j + 1, (hero->projectiles[j].active ? "x" : "o"));
+	}
+	if (hero->active_proj_qty == MAX_PROJECTILES)
+	{
+		return;
+	}
+	while (i < MAX_PROJECTILES && hero->projectiles[i].active)
+		++i;
+	switch (hero->dir)
+	{
+		case (UP):
+			hero->projectiles[i].x_dir = 0;
+			hero->projectiles[i].y_dir = -1;
+			break;
+		case (DOWN):
+			hero->projectiles[i].x_dir = 0;
+			hero->projectiles[i].y_dir = 1;
+			break;
+		case (LEFT):
+			hero->projectiles[i].x_dir = -1;
+			hero->projectiles[i].y_dir = 0;
+			break;
+		case (RIGHT):
+			hero->projectiles[i].x_dir = 1;
+			hero->projectiles[i].y_dir = 0;
+			break;
+	}
+	hero->projectiles[i].x = hero->x;
+	hero->projectiles[i].y = hero->y;
+	hero->projectiles[i].active = true;
+	++hero->active_proj_qty;
 }

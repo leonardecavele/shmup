@@ -6,18 +6,19 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 08:57:01 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 00:39:44 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/30 00:52:31 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAME_H
 # define GAME_H
 
+# include <stdbool.h>
 # include "shmup.h"
 # include "entities.h"
 
 # define MAX_ENTITY			30
-# define MAX_PROJECTILES	10
+# define MAX_PROJECTILES	8
 # define MAX_BOARD_WIDTH	1000
 # define MAX_BOARD_HEIGHT	1000
 # define CAM_TRESH			8
@@ -27,8 +28,8 @@ typedef	struct		s_projectile
 {
 	unsigned short	x;
 	unsigned short	y;
-	unsigned short	x_dir;
-	unsigned short	y_dir;
+	short			x_dir;
+	short			y_dir;
 	bool			active;
 }					t_projectile;
 
@@ -37,9 +38,11 @@ typedef struct		s_entity
 	unsigned char	type;
 	unsigned short	x;
 	unsigned short	y;
-	unsigned short	x_dir;
-	unsigned short	y_dir;
+	short			x_dir;
+	short			y_dir;
+	short			dir;
 	t_projectile	projectiles[MAX_PROJECTILES];
+	unsigned short	active_proj_qty;
 	bool			alive;
 }					t_entity;
 
@@ -63,8 +66,10 @@ typedef struct	s_game
   
 int		update_game(int c, t_game *game);
 void	move_hero(int c, t_game *game, int frame);
-void	hero_attack(t_game *game);
+void	hero_attack(t_entity *hero);
+void	hero_attack_dir(t_entity *hero, int c);
 void	update_enemy_behaviour(t_game *game, int frame);
 void	move_entity(t_game *game, short which, short move);
+void	update_projectiles(t_game *game, int frame);
 
 #endif
