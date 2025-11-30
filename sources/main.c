@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 21:47:32 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 21:49:16 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 23:01:11 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ play:
 		frame_time = frame_end - frame_start;
 		if (frame_time < TARGET_FRAME_TIME)
 			sleep_remaining(TARGET_FRAME_TIME - frame_time);
-		display_fps(get_time() - frame_start, &game);
+		display_fps(get_time() - frame_start, &game, correct_size);
 		refresh();
 	}
 	int height, width;

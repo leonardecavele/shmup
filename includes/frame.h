@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 00:17:01 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 00:51:29 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/30 23:02:46 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@
 
 void	sleep_remaining(double time);
 double	get_time(void);
-void	display_fps(double time, t_game *game);
+void	display_fps(double time, t_game *game, bool correct_size);
 
 #endif
