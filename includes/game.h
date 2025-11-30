@@ -40,6 +40,7 @@ enum				e_hit
 	WALL_HIT,
 	HERO_HIT,
 	ENEMY_HIT,
+	BOSS_HIT,
 	TIME_NO_SHOOT
 };
 
