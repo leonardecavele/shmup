@@ -41,7 +41,7 @@ extern int	update_game(int c, t_game *game)
 	++frame;
 	update_enemy_behaviour(game, frame);
 	update_passive_behaviour(game, frame);
-	if (game->entities[0].hp <= 0)
+	if (!game->entities[0].hp)
 	{
 		return (HERO_DEATH);
 	}
