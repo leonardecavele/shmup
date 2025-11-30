@@ -117,7 +117,6 @@ static int	update_projectile(t_game *game, t_projectile *proj, unsigned short *a
 				&& game->board[proj->y][proj->x] != BOSS_LEFT
 				&& game->board[proj->y][proj->x] != BOSS_RIGHT)
 			game->board[proj->y][proj->x] = GROUND;
-		--game->entities[0].hp;
 		proj->active = false;
 		--(*active_proj);
 		return (HERO_HIT);
