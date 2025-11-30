@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 08:57:01 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 19:23:15 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 19:26:25 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 # define MAX_ENTITY			30
 # define MAX_PROJECTILES	8
-# define MAX_COLLECTIBLES	8
+# define MAX_COLLECTIBLES	9
 # define MAX_BOARD_WIDTH	1000
 # define MAX_BOARD_HEIGHT	1000
 # define CAM_TRESH			8
