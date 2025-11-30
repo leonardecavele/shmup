@@ -16,8 +16,8 @@
 
 static void	update_passive_behaviour(t_game *game, int frame)
 {
-	// animate sprites
 	update_projectiles(game, frame);
+	// animate sprites
 }
 
 static int handle_user_input(int c, t_game *game, int frame)

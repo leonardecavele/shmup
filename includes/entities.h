@@ -33,7 +33,7 @@
 # define EMPTY		')' 
 # define GROUND		' '
 
-enum	e_mooves
+enum	e_moves
 {
 	UP,
 	DOWN,
