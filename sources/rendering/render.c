@@ -16,7 +16,7 @@
 
 extern bool	resize(void)
 {
-	const char	message[] = "Please get a window larger than 100x42.";
+	const char	message[] = "Please resize the window to 100x42.";
 	int			height, width;
 	
 	height = width = 0;
