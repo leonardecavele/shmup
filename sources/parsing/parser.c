@@ -39,7 +39,7 @@ static int	get_length(char info_line[INFO_LINE_SIZE])
 
 extern int	parse(t_game *game, int fd)
 {
-	char	info_line[INFO_LINE_SIZE];
+	char	info_line[INFO_LINE_SIZE + 1];
 	int		current_line, nread;
 
 	game->board_height = game->board_width = current_line = nread = -1;

@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 20:03:55 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/30 03:21:02 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/11/30 11:50:22 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static int	update_projectile(t_game *game, t_projectile *proj, unsigned short *a
 extern void	update_projectiles(t_game *game, int frame)
 {
 	int hit = 0;
+	(void)hit;
 
 	if (frame % 2)
 		return;
