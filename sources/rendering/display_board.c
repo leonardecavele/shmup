@@ -47,6 +47,12 @@ extern void	display_board(t_game *game)
 					mvprintw(j, i, "%c", game->board[board_y][board_x]);
 					attroff(COLOR_PAIR(6));
 				}
+				else if (game->board[board_y][board_x] == COLLEC)
+				{
+					attron(COLOR_PAIR(3));
+					mvprintw(j, i, "%c", game->board[board_y][board_x]);
+					attroff(COLOR_PAIR(3));
+				}
 				else if (game->board[board_y][board_x] == BOSS_LEFT || game->board[board_y][board_x] == BOSS_RIGHT)
 				{
 					attron(COLOR_PAIR(2));
