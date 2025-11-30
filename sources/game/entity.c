@@ -12,13 +12,22 @@
 
 #include "game.h"
 
-static bool is_enemy(unsigned char c)
+static bool		is_enemy(unsigned char c)
 {
     return (c == ENEMY1 || c == ENEMY2 || c == ENEMY3
         || c == BOSS_LEFT || c == BOSS_RIGHT);
 }
 
-extern void	move_entity(t_game *game, short which, short move)
+extern t_entity	*find_entity(t_entity *entities, short x, short y)
+{
+	int i = 0;
+
+	while (entities[i].x != x && entities[i].y != y)
+		++i;
+	return (&entities[i]);
+}
+
+extern void		move_entity(t_game *game, short which, short move)
 {
 	unsigned short	pos_x = game->entities[which].x;
 	unsigned short	pos_y = game->entities[which].y;

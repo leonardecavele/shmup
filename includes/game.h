@@ -83,12 +83,13 @@ typedef struct	s_game
 	t_camera		camera;
 }					t_game;
   
-int		update_game(int c, t_game *game);
-void	move_hero(int c, t_game *game, int frame);
-void	hero_attack(t_entity *hero);
-void	hero_attack_dir(t_entity *hero, int c);
-void	update_enemy_behaviour(t_game *game, int frame);
-void	move_entity(t_game *game, short which, short move);
-void	update_projectiles(t_game *game, int frame);
+int			update_game(int c, t_game *game);
+void		move_hero(int c, t_game *game, int frame);
+void		hero_attack(t_entity *hero);
+void		hero_attack_dir(t_entity *hero, int c);
+void		update_enemy_behaviour(t_game *game, int frame);
+void		move_entity(t_game *game, short which, short move);
+t_entity	*find_entity(t_entity *entities, short x, short y);
+void		update_projectiles(t_game *game, int frame);
 
 #endif
