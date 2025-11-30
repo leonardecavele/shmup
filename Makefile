@@ -62,6 +62,7 @@ F_RENDERING :=	render.c		\
 				frame.c			\
 				display_board.c	\
 				camera.c		\
+				gui.c			\
 
 F_GAME		:=	game.c			\
 				hero.c			\

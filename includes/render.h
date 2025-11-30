@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 09:17:26 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 02:07:31 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/30 16:33:07 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define RENDER_H
 
 # include <stdbool.h>
+# include "game.h"
 # include "text_formatting.h"
 
 # define MIN_WIDTH	40
@@ -27,5 +28,6 @@ void	render(t_game *game);
 
 void	move_camera(int c, t_game *game);
 void	display_board(t_game *game);
+void	display_gui(t_game *game);
 
 #endif

@@ -94,7 +94,17 @@ int	main(int ac, char **av)
 	keypad(stdscr, TRUE);
 	curs_set(0);					// hide cursor
 
+	start_color();
+	init_pair(1, COLOR_GREEN, COLOR_BLACK);  // Green text on black background
+	init_pair(2, COLOR_RED, COLOR_BLACK);    // Red text on black background
+	init_pair(3, COLOR_YELLOW, COLOR_BLACK); // Yellow text
+	init_pair(4, COLOR_BLUE, COLOR_BLACK);   // Blue text
+	init_pair(5, COLOR_CYAN, COLOR_BLACK);   // Cyan text
+	init_pair(6, COLOR_MAGENTA, COLOR_BLACK);// Magenta text
+	init_pair(7, COLOR_WHITE, COLOR_BLACK);  // White text
+
 	game.score = 0;
+
 	while (playing)
 	{
 		frame_start = get_time();

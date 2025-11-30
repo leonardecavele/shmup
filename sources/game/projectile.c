@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 20:03:55 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/30 17:42:08 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 17:49:05 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static bool	is_wall(unsigned char c)
 static void	handle_hit(t_game *game, int hit, t_projectile *proj)
 {
 	t_entity *hit_ent = NULL;
+	(void)hit_ent;
+	(void)proj;
 	switch (hit)
 	{
 		case (HERO_HIT):

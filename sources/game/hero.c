@@ -55,19 +55,15 @@ extern void	hero_attack_dir(t_entity *hero, int c)
 		switch (c)
 		{
 			case (KEY_UP):
-				mvprintw(0, 40, "U");
 				hero->dir = UP;
 				break;
 			case (KEY_DOWN):
-				mvprintw(0, 40, "D");
 				hero->dir = DOWN;
 				break;
 			case (KEY_LEFT):
-				mvprintw(0, 40, "L");
 				hero->dir = LEFT;
 				break;
 			case (KEY_RIGHT):
-				mvprintw(0, 40, "R");
 				hero->dir = RIGHT;
 				break;
 		}
@@ -78,10 +74,6 @@ extern void	hero_attack(t_entity *hero)
 {
 	int					i = 0;
 
-	for (int j = 0; j < MAX_PROJECTILES; ++j)
-	{
-		mvprintw(0, 40 + j + 1, (hero->projectiles[j].active ? "x" : "o"));
-	}
 	if (hero->active_proj_qty == MAX_PROJECTILES)
 	{
 		return;
