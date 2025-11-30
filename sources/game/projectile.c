@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 20:03:55 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/30 18:26:51 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 19:02:14 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ static void	handle_hit(t_game *game, int hit, t_projectile *proj)
 			if (game->entities[1].hp == 0)
 			{
 				game->entities[1].alive = false;
-				game->score += 1000;
+				game->score += 500;
+				game->score_calc += 500;
 			}
 			break;
 		case (ENEMY_HIT):
@@ -49,7 +50,8 @@ static void	handle_hit(t_game *game, int hit, t_projectile *proj)
 			if (hit_ent->hp <= 0)
 			{
 				hit_ent->alive = false;
-				game->score += 500;
+				game->score += 250;
+				game->score_calc += 250;
 			}
 			break;
 		default:

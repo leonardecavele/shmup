@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 08:56:10 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 18:51:58 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 19:04:43 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,18 @@ extern int	update_game(int c, t_game *game)
 		frame = 0;
 		seconds++;
 		if (seconds % 1 == 0)
+		{
+			if (game->score_calc >= 500)
+			{
+				while (game->score_calc >= 500)
+				{
+					game->score_calc -= 500;
+					if (game->entities[0].hp < 5)
+						game->entities[0].hp++;
+				}
+			}
 			check_enemies_damage(game);
+		}
 	}
 	return (0);
 }
