@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 00:16:18 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 20:02:55 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 23:03:08 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ extern double	get_time(void)
 	return (tp.tv_sec + tp.tv_nsec / 1e9);
 }
 
-extern void	display_fps(double time, t_game *game)
+extern void	display_fps(double time, t_game *game, bool correct_size)
 {
 	int x, y;
 	getmaxyx(stdscr, y, x);
@@ -72,7 +72,8 @@ extern void	display_fps(double time, t_game *game)
 		fps = added_frame / added_time;
 		added_time = 0.0;
 		added_frame = 0;
-		++seconds;
+		if (correct_size)
+			++seconds;
 	}
 	if (seconds == 30)
 	{
