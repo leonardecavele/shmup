@@ -49,7 +49,7 @@ static void display_score(int score, int x)
 {
 	attron(A_BOLD);
 	attron(COLOR_PAIR(5));
-	mvprintw(0, (x >> 1) - 1, "%d %c", score, KEY);
+	mvprintw(0, (x >> 1) - 1, "%d %c", score, COLLEC);
 	attroff(COLOR_PAIR(5));
 	attroff(A_BOLD);
 }
