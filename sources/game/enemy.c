@@ -6,12 +6,95 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 825/11/29 22:13:58 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 15:07:08 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 15:39:10 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shmup.h"
 #include "game.h"
+
+static bool is_enemy(unsigned char c)
+{
+    return (c == ENEMY1 || c == ENEMY2 || c == ENEMY3
+        || c == BOSS_LEFT || c == BOSS_RIGHT);
+}
+
+static bool	is_wall(unsigned char c)
+{
+	if (c == WALL1 || c == WALL2 || c == WALL3 || c == WALL4
+			|| c == WALL5 || c == WALL6 || c == WALL7 || c == WALL8)
+		return (1);
+	return (0);
+}
+
+static void    random_pos(t_game *game, t_entity *ent, unsigned short *new_x, unsigned short *new_y)
+{
+	int try, dy, dx, nx, ny;
+	try = dy = dx = nx = ny = 0;
+
+	*new_x = ent->x;
+	*new_y = ent->y;
+	while (try++ < 64)
+	{
+		dx = (rand() % 5) - 2;
+		dy = (rand() % 5) - 2;
+
+		if (dx == 0 && dy == 0)
+				continue;
+		if (dx * dx + dy * dy > 4)
+				continue;
+
+		nx = ent->x + dx;
+		ny = ent->y + dy;
+
+		if (nx < 0 || nx >= game->board_width
+				|| ny < 0 || ny >= game->board_height)
+				continue;
+		if (is_wall(game->board[ny][nx] || game->board[ny][nx] == HERO
+			|| is_enemy(game->board[ny][nx])))
+				continue;
+
+		*new_x = nx;
+		*new_y = ny;
+		break;
+	}
+}
+
+extern void	respawn_enemy(t_game *game, int seconds)
+{
+	int			i = 1;
+	int			e_x, e_y;
+
+	if (seconds % 20 != 0)
+		return ;
+	while (i < MAX_ENTITY)
+	{
+		e_x = game->entities[i].x;
+		e_y = game->entities[i].y;
+		if (!game->entities[i].alive)
+		{
+			if (is_enemy(game->entities[i].type) && game->entities[i].type != BOSS_LEFT)
+			{
+				game->entities[i].alive = true;
+				game->entities[i].hp = MOB_HP;
+				random_pos(game, &game->entities[i], &game->entities[i].x, &game->entities[i].y);
+				game->board[game->entities[i].y][game->entities[i].x] = game->entities[i].type;
+			}
+			else if (game->entities[i].type == BOSS_LEFT)
+			{
+				if (seconds % 60 != 0)
+				{
+					i++;
+					continue ;
+				}
+				game->board[e_y][e_x] = game->entities[i].type;
+				game->entities[i].alive = true;
+				game->entities[i].hp = BOSS_HP;
+			}
+		}
+		i++;
+	}
+}
 
 static void	shoot_up(t_entity *enemy, int i)
 {
@@ -187,7 +270,7 @@ static void update_enemy2(t_entity *enemy, t_entity *hero, int frame)
 		}
 		else
 		{
-			int attempts = 0;
+			int try = 0;
 
 			do {
 				int xdir = rand() % 3 - 1;
@@ -208,7 +291,7 @@ static void update_enemy2(t_entity *enemy, t_entity *hero, int frame)
 					enemy->y_dir = ydir;
 					break;
 				}
-			} while (++attempts < 6);
+			} while (++try < 6);
 		}
 	}
 }
@@ -291,7 +374,7 @@ static void update_enemy3(t_entity *enemy, t_entity *hero, int frame)
 		}
 		else
 		{
-			int attempts = 0;
+			int try = 0;
 
 			do {
 				int xdir = rand() % 3 - 1;
@@ -312,7 +395,7 @@ static void update_enemy3(t_entity *enemy, t_entity *hero, int frame)
 					enemy->y_dir = ydir;
 					break;
 				}
-			} while (++attempts < 6);
+			} while (++try < 6);
 		}
 	}
 }
