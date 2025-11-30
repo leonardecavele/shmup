@@ -13,6 +13,7 @@
 #include "shmup.h"
 #include "game.h"
 #include "frame.h"
+#include "text_formatting.h"
 
 extern void	sleep_remaining(double time)
 {
@@ -35,6 +36,8 @@ extern double	get_time(void)
 
 extern void	display_fps(double time, t_game *game)
 {
+	int x, y;
+	getmaxyx(stdscr, y, x);
 	static int		seconds = 0;
 	static int		minutes = 0;
 	static int		hours = 0;
@@ -45,13 +48,24 @@ extern void	display_fps(double time, t_game *game)
 
 	added_frame++;
 	added_time += time;
-	mvprintw(0, 0, "%6.1f fps", fps);
+	if (fps > 40.0)
+	{
+		attron(COLOR_PAIR(1));
+		mvprintw(0, 0, "%6.1f fps", fps);
+		attroff(COLOR_PAIR(1));
+	}
+	else
+	{
+		attron(COLOR_PAIR(2));
+		mvprintw(0, 0, "%6.1f fps", fps);
+		attroff(COLOR_PAIR(2));
+	}
 	if (added_time >= 1.0)
 	{
 		fps = added_frame / added_time;
 		added_time = 0.0;
 		added_frame = 0;
-		seconds++;
+		++seconds;
 	}
 	if (seconds == 30)
 		game->score += 2;
@@ -60,7 +74,7 @@ extern void	display_fps(double time, t_game *game)
 	if (seconds == 60)
 	{
 		seconds = 0;
-		minutes++;
+		++minutes;
 	}
 	if (minutes == 3)
 		game->score += 7;
@@ -68,9 +82,9 @@ extern void	display_fps(double time, t_game *game)
 		game->score += 10;
 	if (minutes == 60)
 	{
-		hours++;
+		++hours;
 		minutes = 0;
 	}
-	mvprintw(0, 11, "%02dh%02dm%02ds", hours, minutes, seconds);
-	mvprintw(0, 21, "score: %d hp: %d", game->score, game->entities[0].hp);
+	mvprintw(0, x - 9, "%02dh%02dm%02ds", hours, minutes, seconds);
+	mvprintw(0, 11, "score: %d hp: %d", game->score, game->entities[0].hp);
 }

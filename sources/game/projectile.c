@@ -24,10 +24,12 @@ static bool	is_wall(unsigned char c)
 static void	handle_hit(t_game *game, int hit, t_projectile *proj)
 {
 	t_entity *hit_ent = NULL;
+	(void)hit_ent;
+	(void)proj;
 	switch (hit)
 	{
 		case (HERO_HIT):
-			--game->entities[0].hp;
+			// --game->entities[0].hp;
 			if (game->entities[0].hp <= 0)
 			{
 				game->board[game->entities[0].y][game->entities[0].x] = DEAD;
@@ -43,13 +45,13 @@ static void	handle_hit(t_game *game, int hit, t_projectile *proj)
 			}
 			break;
 		case (ENEMY_HIT): // find enemy + handle death
-			hit_ent = find_entity(game->entities, proj->x, proj->y);
-			--hit_ent->hp;
-			if (hit_ent->hp == 0)
-			{
-				hit_ent->alive = false;
-				game->board[hit_ent->y][hit_ent->x] = DEAD;
-			}
+			// hit_ent = find_entity(game->entities, proj->x + proj->x_dir, proj->y + proj->y_dir);
+			// --hit_ent->hp;
+			// if (hit_ent->hp == 0)
+			// {
+			// 	hit_ent->alive = false;
+			// 	game->board[hit_ent->y][hit_ent->x] = DEAD;
+			// }
 			break;
 	}
 }
