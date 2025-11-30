@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 17:30:39 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/30 01:03:53 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/11/30 02:06:23 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,33 +48,27 @@ extern void	move_hero(int c, t_game *game, int frame)
 		++game->camera.x;
 }
 
-extern void	hero_attack_dir(t_projectile *hero_proj, int c)
+extern void	hero_attack_dir(t_entity *hero, int c)
 {
 	for (int i = 0; i < MAX_PROJECTILES; ++i)
 	{
-		if (hero_proj[i].active)
-			continue;
 		switch (c)
 		{
 			case (KEY_UP):
-				mvprintw(0, 40, "T");
-				hero_proj[i].x_dir = 0;
-				hero_proj[i].y_dir = -1;
+				mvprintw(0, 40, "U");
+				hero->dir = UP;
 				break;
 			case (KEY_DOWN):
 				mvprintw(0, 40, "D");
-				hero_proj[i].x_dir = 0;
-				hero_proj[i].y_dir = 1;
+				hero->dir = DOWN;
 				break;
 			case (KEY_LEFT):
 				mvprintw(0, 40, "L");
-				hero_proj[i].x_dir = -1;
-				hero_proj[i].y_dir = 0;
+				hero->dir = LEFT;
 				break;
 			case (KEY_RIGHT):
 				mvprintw(0, 40, "R");
-				hero_proj[i].x_dir = 1;
-				hero_proj[i].y_dir = 0;
+				hero->dir = RIGHT;
 				break;
 		}
 	}
@@ -94,6 +88,25 @@ extern void	hero_attack(t_entity *hero)
 	}
 	while (i < MAX_PROJECTILES && hero->projectiles[i].active)
 		++i;
+	switch (hero->dir)
+	{
+		case (UP):
+			hero->projectiles[i].x_dir = 0;
+			hero->projectiles[i].y_dir = -1;
+			break;
+		case (DOWN):
+			hero->projectiles[i].x_dir = 0;
+			hero->projectiles[i].y_dir = 1;
+			break;
+		case (LEFT):
+			hero->projectiles[i].x_dir = -1;
+			hero->projectiles[i].y_dir = 0;
+			break;
+		case (RIGHT):
+			hero->projectiles[i].x_dir = 1;
+			hero->projectiles[i].y_dir = 0;
+			break;
+	}
 	hero->projectiles[i].x = hero->x;
 	hero->projectiles[i].y = hero->y;
 	hero->projectiles[i].active = true;

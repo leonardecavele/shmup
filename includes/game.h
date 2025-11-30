@@ -28,8 +28,8 @@ typedef	struct		s_projectile
 {
 	unsigned short	x;
 	unsigned short	y;
-	short	x_dir;
-	short	y_dir;
+	short			x_dir;
+	short			y_dir;
 	bool			active;
 }					t_projectile;
 
@@ -38,8 +38,9 @@ typedef struct		s_entity
 	unsigned char	type;
 	unsigned short	x;
 	unsigned short	y;
-	unsigned short	x_dir;
-	unsigned short	y_dir;
+	short			x_dir;
+	short			y_dir;
+	short			dir;
 	t_projectile	projectiles[MAX_PROJECTILES];
 	unsigned short	active_proj_qty;
 	bool			alive;
@@ -66,7 +67,7 @@ typedef struct	s_game
 int		update_game(int c, t_game *game);
 void	move_hero(int c, t_game *game, int frame);
 void	hero_attack(t_entity *hero);
-void	hero_attack_dir(t_projectile *hero_proj, int c);
+void	hero_attack_dir(t_entity *hero, int c);
 void	update_enemy_behaviour(t_game *game, int frame);
 void	move_entity(t_game *game, short which, short move);
 void	update_projectiles(t_game *game, int frame);

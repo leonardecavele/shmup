@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 20:03:55 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/30 01:33:59 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/11/30 02:07:19 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,8 @@ extern void	update_projectiles(t_game *game, int frame)
 
 	if (frame % 2)
 		return;
-	int i = 0;
-	// for (int i = 0; i < game->ent_qty; ++i)
-	// {
+	for (int i = 0; i < game->ent_qty; ++i)
+	{
 		for (int j = 0; j < MAX_PROJECTILES; ++j)
 		{
 			if (game->entities[i].projectiles[j].active)
@@ -68,5 +67,5 @@ extern void	update_projectiles(t_game *game, int frame)
 				hit = update_projectile(game, &(game->entities[i].projectiles[j]), &(game->entities[i].active_proj_qty));
 			}
 		}
-	// }
+	}
 }

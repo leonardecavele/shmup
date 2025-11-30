@@ -27,7 +27,7 @@ static int handle_user_input(int c, t_game *game, int frame)
 	else if (c == 'w' || c == 's' || c == 'a' || c == 'd')
 		move_hero(c, game, frame);
 	else if (c == KEY_UP || c == KEY_DOWN || c == KEY_RIGHT || c == KEY_LEFT)
-		hero_attack_dir(game->entities[0].projectiles, c);
+		hero_attack_dir(&game->entities[0], c);
 	else if (c == ' ')
 		hero_attack(&(game->entities[0]));
 	else if (c == 'q')

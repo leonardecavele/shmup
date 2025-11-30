@@ -12,6 +12,7 @@
 #include "shmup.h"
 #include "game.h"
 #include "parser.h"
+#include "render.h"
 #include "entities.h"
 
 static int	get_length(char info_line[INFO_LINE_SIZE])
@@ -84,9 +85,11 @@ extern int	parse(t_game *game, int fd)
 						game->entities[0].x = j;
 						game->entities[0].y = i;
 						game->entities[0].x_dir = 0;
-						game->entities[0].y_dir = -1;
+						game->entities[0].y_dir = 0;
+						game->entities[0].dir = UP;
 					}
-					hero_count++;
+					++hero_count;
+					++game->ent_qty;
 				}
 				else if (game->board[i][j] == ENEMY1 || game->board[i][j] == ENEMY2
 						|| game->board[i][j] == ENEMY3)
@@ -102,7 +105,7 @@ extern int	parse(t_game *game, int fd)
 	}
 	if (error || enemy_count < 1 || boss_count != 1 || hero_count != 1)
 		return (WRONG_ENTITIES);
-	game->camera.x = game->entities[0].x - 80 / 2;
-	game->camera.y = game->entities[0].y - 32 / 2;
+	game->camera.x = game->entities[0].x - (MIN_WIDTH >> 1);
+	game->camera.y = game->entities[0].y - (MIN_HEIGHT >> 1);
 	return (0);
 }
