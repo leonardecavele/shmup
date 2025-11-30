@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 825/11/29 22:13:58 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 17:43:52 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 18:06:43 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,19 @@ extern void	respawn_enemy(t_game *game, int seconds)
 		e_y = game->entities[i].y;
 		if (!game->entities[i].alive)
 		{
-			if (is_enemy(game->entities[i].type) && game->entities[i].type != BOSS_LEFT)
+			if (i == 1)
+			{
+				if (seconds % 60 != 0)
+				{
+					i++;
+					continue ;
+				}
+				game->board[e_y][e_x - 1] = BOSS_LEFT;
+				game->board[e_y][e_x] = BOSS_RIGHT;
+				game->entities[i].alive = true;
+				game->entities[i].hp = BOSS_HP;
+			}
+			else if (is_enemy(game->entities[i].type) && game->entities[i].type != BOSS_LEFT)
 			{
 				if (seconds % 20 != 0)
 				{
@@ -82,17 +94,6 @@ extern void	respawn_enemy(t_game *game, int seconds)
 				game->entities[i].hp = MOB_HP;
 				random_pos(game, &game->entities[i], &game->entities[i].x, &game->entities[i].y);
 				game->board[game->entities[i].y][game->entities[i].x] = game->entities[i].type;
-			}
-			else if (game->entities[i].type == BOSS_LEFT)
-			{
-				if (seconds % 60 != 0)
-				{
-					i++;
-					continue ;
-				}
-				game->board[e_y][e_x] = game->entities[i].type;
-				game->entities[i].alive = true;
-				game->entities[i].hp = BOSS_HP;
 			}
 		}
 		i++;

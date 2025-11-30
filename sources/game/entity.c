@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 17:54:35 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/30 17:28:54 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 18:05:52 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ extern void     move_entity(t_game *game, short which, short move)
          || game->entities[which].type == ENEMY3)
         && !game->entities[which].alive)
     {
+        game->board[pos_y][pos_x] = DEAD;
+        return;
+    }
+   if (game->entities[which].type == BOSS_LEFT && !game->entities[which].alive)
+    {
+        game->board[pos_y][pos_x - 1] = DEAD;
         game->board[pos_y][pos_x] = DEAD;
         return;
     }

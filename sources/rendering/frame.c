@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 00:16:18 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 17:50:09 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 18:11:39 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,15 @@ extern void	display_fps(double time, t_game *game)
 		game->score += 2;
 	if (seconds == 60)
 		game->score += 5;
+	if (minutes == 3)
+		game->score += 7;
+	if (minutes == 60)
+		game->score += 10;
 	if (seconds == 60)
 	{
 		seconds = 0;
 		++minutes;
 	}
-	if (minutes == 3)
-		game->score += 7;
-	if (minutes == 60)
-		game->score += 10;
 	if (minutes == 60)
 	{
 		++hours;
