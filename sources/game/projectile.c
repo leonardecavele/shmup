@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 20:03:55 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/30 02:19:01 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/30 03:09:42 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	update_projectile(t_game *game, t_projectile *proj, unsigned short *a
 		game->board[proj->y][proj->x] = GROUND;
 	proj->x += proj->x_dir;
 	proj->y += proj->y_dir;
-	game->board[proj->y][proj->x] = PROJ;
+	game->board[proj->y][proj->x] = HERO_PROJ;
 	
 	return (0);
 }
