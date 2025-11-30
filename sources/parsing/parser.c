@@ -50,7 +50,6 @@ extern int	parse(t_game *game, int fd)
 	game->board_height = get_length(info_line);	// get info
 	game->board_width = get_length(info_line);	// get info
 
-
 	if (game->board_height == -1 || game->board_width == -1
 		|| game->board_height > 1000 - 1 || game->board_height < MIN_BOARD_HEIGHT
 		|| game->board_width > 1000 - 1	|| game->board_width < MIN_BOARD_WIDTH)
@@ -97,16 +96,26 @@ extern int	parse(t_game *game, int fd)
 						game->entities[0].dir = UP;
 					}
 					++hero_count;
-					++game->ent_qty;
 				}
 				else if (game->board[i][j] == ENEMY1 || game->board[i][j] == ENEMY2
 						|| game->board[i][j] == ENEMY3)
+				{
+					game->entities[game->ent_qty].type = game->board[i][j];
+					game->entities[game->ent_qty].x = j;
+					game->entities[game->ent_qty].y = i;
+					game->entities[game->ent_qty].alive = true;
+					game->ent_qty++;
 					enemy_count++;
+				}
 				else if (game->board[i][j] == BOSS_LEFT)
 				{
 					j++;
 					if (game->board[i][j] != BOSS_RIGHT)
 						return (WRONG_ENTITIES);
+					game->entities[1].type = BOSS_LEFT;
+					game->entities[1].x = j;
+					game->entities[1].y = i;
+					game->entities[1].alive = true;
 					boss_count++;
 				}
 				else if (!is_wall(game->board[i][j]) && game->board[i][j] != EMPTY && game->board[i][j] != GROUND)
