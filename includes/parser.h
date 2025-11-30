@@ -18,8 +18,8 @@
 # define FD_MAX					1024
 # define INFO_LINE_SIZE			16
 
-# define MIN_BOARD_HEIGHT		10
-# define MIN_BOARD_WIDTH		10
+# define MIN_BOARD_HEIGHT		42
+# define MIN_BOARD_WIDTH		100
 
 # define WRONG_INFO_LINE		1
 # define WRONG_SIZE_INFO		2
