@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 20:03:55 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/30 12:24:47 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 13:17:57 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,13 @@ extern void	update_projectiles(t_game *game, int frame)
 
 			if (p->active)
 			{
-				unsigned char tile = HERO_PROJ;
+				unsigned char tile;
+
+				if (i == 0)
+					tile = HERO_PROJ;
+				else
+					tile = ENEMY_PROJ; // ennemis + boss
+
 				game->board[p->y][p->x] = tile;
 			}
 		}

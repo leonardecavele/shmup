@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/29 22:13:58 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 03:42:58 by abetemps         ###   ########.fr       */
+/*   Created: 825/11/29 22:13:58 by ldecavel          #+#    #+#             */
+/*   Updated: 2025/11/30 13:12:24 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,18 @@ static void	shoot_bot_right(t_entity *enemy, int i)
 	enemy->projectiles[i].y_dir = 1;
 }
 
+//static bool is_enemy(unsigned char c)
+//{
+//    return (c == ENEMY1 || c == ENEMY2 || c == ENEMY3
+//        || c == BOSS_LEFT || c == BOSS_RIGHT);
+//}
+
 static void	update_enemy1(t_entity *enemy, int frame)
 {
 	int		i = 0;
 	bool	can_shoot = true;
 
-	if (frame < 15)
+	if (frame < 30 || frame > 40)
 		return ;
 	while (i < MAX_PROJECTILES)
 		if (enemy->projectiles[i++].active)
@@ -107,16 +113,19 @@ static void	update_enemy1(t_entity *enemy, int frame)
 	shoot_bot_right(enemy, 7);
 }
 
-static void	update_enemy2(t_entity *enemy, t_entity *hero, int frame)
+static void update_enemy2(t_entity *enemy, t_entity *hero, int frame)
 {
-	int		i = -1;
-	int		distance, dx, dy;
+	int         i = -1;
+	int         dx, dy;
+	int         dist2;
+	const int   max_dist = 15;
+	const int   max2 = max_dist * max_dist;
 
-	dx = dy = 0;
 	dx = hero->x - enemy->x;
 	dy = hero->y - enemy->y;
-	distance = sqrt(dx * dx + dy * dy);
-	if (distance > ENEMY_SHOOT_RANGE || (frame >= 15 && frame <= 30) || (frame >= 45 && frame <= 60))
+	dist2 = dx * dx + dy * dy;
+
+	if (dist2 > ENEMY_SHOOT_RANGE || (frame % 15) != 0)
 		goto skip_shoot;
 	while (i < MAX_PROJECTILES - 1)
 		if (!enemy->projectiles[++i].active)
@@ -136,47 +145,171 @@ static void	update_enemy2(t_entity *enemy, t_entity *hero, int frame)
 			shoot_bot_left(enemy, i);
 	}
 skip_shoot:
-	do {
-        enemy->x_dir = rand() % 3 - 1;
-        enemy->y_dir = rand() % 3 - 1;
-    } while (!enemy->x_dir && !enemy->y_dir);
-}
-
-static void	update_enemy3(t_entity *enemy, t_entity *hero, int frame)
-{
-	int		i = -1;
-	int		dx, dy, distance;
-
-	dx = dy = 0;
-	while (i < MAX_PROJECTILES - 1)
-		if (!enemy->projectiles[++i].active)
-			break ;
-	dx = hero->x - enemy->x;
-	dy = hero->y - enemy->y;
-	distance = sqrt(dx * dx + dy * dy);
-	if (distance > ENEMY_SHOOT_RANGE)
-		goto skip_shoot;
-	if (abs(hero->x - enemy->x) > abs(hero->y - enemy->y))
+	enemy->x_dir = 0;
+	enemy->y_dir = 0;
+	if ((frame % 30) != 0)
 	{
-		if (hero->x - enemy->x > 0)
-			shoot_right(enemy, i);
-		else
-			shoot_left(enemy, i);
+		return ;
+	}
+
+	if (dist2 > max2)
+	{
+		if (dx > 0)
+			enemy->x_dir = 1;
+		else if (dx < 0)
+			enemy->x_dir = -1;
+
+		if (dy > 0)
+			enemy->y_dir = 1;
+		else if (dy < 0)
+			enemy->y_dir = -1;
+
+		return;
+	}
+
+	if (abs(dx) > abs(dy))
+	{
+		if (dx > 0)
+			enemy->x_dir = 1;
+		else if (dx < 0)
+			enemy->x_dir = -1;
+	}
+	else if (abs(dy) > abs(dx))
+	{
+		if (dy > 0)
+			enemy->y_dir = 1;
+		else if (dy < 0)
+			enemy->y_dir = -1;
 	}
 	else
 	{
-		if (hero->y - enemy->y > 0)
-			shoot_bot(enemy, i);
-		else
-			shoot_up(enemy, i);
+		int attempts = 0;
+
+		do {
+			int xdir = rand() % 3 - 1;
+			int ydir = rand() % 3 - 1;
+
+			if (!xdir && !ydir)
+				continue;
+
+			int nx = enemy->x + xdir;
+			int ny = enemy->y + ydir;
+			int ndx = hero->x - nx;
+			int ndy = hero->y - ny;
+			int nd2 = ndx * ndx + ndy * ndy;
+
+			if (nd2 <= max2)
+			{
+				enemy->x_dir = xdir;
+				enemy->y_dir = ydir;
+				break;
+			}
+		} while (++attempts < 6);
 	}
-skip_shoot:
-	if ((frame >= 5 && frame <= 25) || (frame >= 35 && frame <= 45))
-	do {
-        enemy->x_dir = rand() % 3 - 1;
-        enemy->y_dir = rand() % 3 - 1;
-    } while (!enemy->x_dir && !enemy->y_dir);
 }
+
+static void update_enemy3(t_entity *enemy, t_entity *hero, int frame)
+{
+	int         i = -1;
+	int         dx, dy;
+	int         dist2;
+	const int   max_dist = 15;
+	const int   max2 = max_dist * max_dist;
+
+	dx = hero->x - enemy->x;
+	dy = hero->y - enemy->y;
+	dist2 = dx * dx + dy * dy;
+
+	while (i < MAX_PROJECTILES - 1)
+		if (!enemy->projectiles[++i].active)
+			break ;
+
+	if (sqrt(dist2) <= ENEMY_SHOOT_RANGE && frame < 6)
+	{
+		if (abs(dx) >= abs(dy))
+		{
+			if (dx > 0)
+				shoot_right(enemy, i);
+			else if (dx < 0)
+				shoot_left(enemy, i);
+		}
+		else
+		{
+			if (dy > 0)
+				shoot_bot(enemy, i);
+			else if (dy < 0)
+				shoot_up(enemy, i);
+		}
+	}
+
+	enemy->x_dir = 0;
+	enemy->y_dir = 0;
+
+	if ((frame % 20) != 0)
+		return ;
+
+	if (dist2 > max2)
+	{
+		if (abs(dx) >= abs(dy))
+		{
+			if (dx > 0)
+				enemy->x_dir = 1;
+			else if (dx < 0)
+				enemy->x_dir = -1;
+		}
+		else
+		{
+			if (dy > 0)
+				enemy->y_dir = 1;
+			else if (dy < 0)
+				enemy->y_dir = -1;
+		}
+	}
+	else
+	{
+		if (abs(dx) > abs(dy))
+		{
+			if (dx > 0)
+				enemy->x_dir = 1;
+			else if (dx < 0)
+				enemy->x_dir = -1;
+		}
+		else if (abs(dy) > abs(dx))
+		{
+			if (dy > 0)
+				enemy->y_dir = 1;
+			else if (dy < 0)
+				enemy->y_dir = -1;
+		}
+		else
+		{
+			int attempts = 0;
+
+			do {
+				int xdir = rand() % 3 - 1;
+				int ydir = rand() % 3 - 1;
+
+				if (!xdir && !ydir)
+					continue;
+
+				int nx = enemy->x + xdir;
+				int ny = enemy->y + ydir;
+				int ndx = hero->x - nx;
+				int ndy = hero->y - ny;
+				int nd2 = ndx * ndx + ndy * ndy;
+
+				if (nd2 <= max2)
+				{
+					enemy->x_dir = xdir;
+					enemy->y_dir = ydir;
+					break;
+				}
+			} while (++attempts < 6);
+		}
+	}
+}
+
+
 
 static void	update_boss(t_entity *enemy, int frame)
 {
