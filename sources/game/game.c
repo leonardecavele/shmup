@@ -103,7 +103,7 @@ static int handle_user_input(int c, t_game *game, int frame)
 		hero_attack_dir(&game->entities[0], c);
 	else if (game->entities[0].hp && c == ' ')
 		hero_attack(&(game->entities[0]));
-	else if (c == 'q')
+	else if (c == 27)
 		return (1);
 	return (0);
 }

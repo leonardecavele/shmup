@@ -45,13 +45,18 @@ static void	handle_signal(void)
 
 void	welcome(void)
 {
-	// const char message[] = "Press any key to exit.";
-	//
-	// mvprintw((height >> 1) + 1, (width  >> 1) - (strlen(message)  >> 1), "Score: %d", game.score);
-	// mvprintw((height >> 1) - 1, (width  >> 1) - (strlen(message)  >> 1), message);
-	// refresh();
-	// sleep(1);
-	// getch();
+	const char message[] = "Welcome dear player!";
+	int height, width;
+	getmaxyx(stdscr, height, width);
+
+	for (int i = 3; i >= 0; --i)
+	{
+		mvprintw((height >> 1) - 1, (width  >> 1) - (strlen(message)  >> 1), "%s", message);
+		mvprintw((height >> 1), (width  >> 1) - (strlen(message)  >> 1), "%d", i);
+		sleep(1);
+		refresh();
+		clear();
+	}
 }
 
 int	main(int ac, char **av)
