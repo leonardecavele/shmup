@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 20:03:55 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/30 13:52:04 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 15:56:01 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,10 @@ static void	handle_hit(t_game *game, int hit)
 	}
 }
 
-static int	update_projectile(t_game *game, t_projectile *proj, unsigned short *active_proj)
+static int	update_projectile(t_game *game, int i, t_projectile *proj, unsigned short *active_proj, int frame)
 {
+	if (i != 0 && frame % 3 == 0)
+		return (TIME_NO_SHOOT);
 	int nx = proj->x + proj->x_dir;
 	int ny = proj->y + proj->y_dir;
 
@@ -144,8 +146,8 @@ extern void	update_projectiles(t_game *game, int frame)
 		{
 			if (game->entities[i].projectiles[j].active)
 			{
-				int hit = update_projectile(game, &(game->entities[i].projectiles[j]), &(game->entities[i].active_proj_qty));
-				if (hit != NO_HIT)
+				int hit = update_projectile(game, i, &(game->entities[i].projectiles[j]), &(game->entities[i].active_proj_qty), frame);
+				if (hit != NO_HIT && hit != TIME_NO_SHOOT)
 					handle_hit(game, hit);
 			}
 		}
@@ -172,7 +174,7 @@ extern void	update_projectiles(t_game *game, int frame)
 				if (i == 0)
 					tile = HERO_PROJ;
 				else
-					tile = ENEMY_PROJ; // ennemis + boss
+					tile = ENEMY_PROJ;
 
 				game->board[p->y][p->x] = tile;
 			}

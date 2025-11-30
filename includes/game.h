@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 08:57:01 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 15:41:35 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 15:55:42 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ enum				e_hit
 	BOSS_HIT,
 	ENEMY_HIT,
 	OUTOFBOUND,
+	TIME_NO_SHOOT
 };
 
 typedef	struct		s_projectile
