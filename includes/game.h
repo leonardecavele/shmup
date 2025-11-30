@@ -45,6 +45,12 @@ enum				e_hit
 	TIME_NO_SHOOT
 };
 
+enum				e_collectible
+{
+	HEAL,
+	POINT,
+};
+
 typedef	struct		s_projectile
 {
 	unsigned short	x;
@@ -53,6 +59,14 @@ typedef	struct		s_projectile
 	short			y_dir;
 	bool			active;
 }					t_projectile;
+
+typedef	struct		s_collectible
+{
+	unsigned short	type;
+	unsigned short	x;	
+	unsigned short	y;	
+	bool			active;
+}					t_collectible;
 
 typedef struct		s_entity
 {
