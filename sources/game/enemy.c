@@ -116,9 +116,7 @@ static void	update_enemy2(t_entity *enemy, t_entity *hero, int frame)
 	dx = hero->x - enemy->x;
 	dy = hero->y - enemy->y;
 	distance = sqrt(dx * dx + dy * dy);
-	if (distance > ENEMY_SHOOT_RANGE)
-		return ;
-	if ((frame >= 15 && frame <= 30) || (frame >= 45 && frame <= 60))
+	if (distance > ENEMY_SHOOT_RANGE || (frame >= 15 && frame <= 30) || (frame >= 45 && frame <= 60))
 		goto skip_shoot;
 	while (i < MAX_PROJECTILES - 1)
 		if (!enemy->projectiles[++i].active)
@@ -157,7 +155,7 @@ static void	update_enemy3(t_entity *enemy, t_entity *hero, int frame)
 	dy = hero->y - enemy->y;
 	distance = sqrt(dx * dx + dy * dy);
 	if (distance > ENEMY_SHOOT_RANGE)
-		return ;
+		goto skip_shoot;
 	if (abs(hero->x - enemy->x) > abs(hero->y - enemy->y))
 	{
 		if (hero->x - enemy->x > 0)
@@ -172,6 +170,7 @@ static void	update_enemy3(t_entity *enemy, t_entity *hero, int frame)
 		else
 			shoot_up(enemy, i);
 	}
+skip_shoot:
 	if ((frame >= 5 && frame <= 25) || (frame >= 35 && frame <= 45))
 	do {
         enemy->x_dir = rand() % 3 - 1;
