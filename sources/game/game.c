@@ -24,11 +24,11 @@ static int handle_user_input(int c, t_game *game, int frame)
 {
 	if (c == 'h' || c == 'j' || c == 'k' || c == 'l')
 		move_camera(c, game);
-	else if (c == 'w' || c == 's' || c == 'a' || c == 'd')
+	else if (game->entities[0].hp && (c == 'w' || c == 's' || c == 'a' || c == 'd'))
 		move_hero(c, game, frame);
-	else if (c == KEY_UP || c == KEY_DOWN || c == KEY_RIGHT || c == KEY_LEFT)
+	else if (game->entities[0].hp && (c == KEY_UP || c == KEY_DOWN || c == KEY_RIGHT || c == KEY_LEFT))
 		hero_attack_dir(&game->entities[0], c);
-	else if (c == ' ')
+	else if (game->entities[0].hp && c == ' ')
 		hero_attack(&(game->entities[0]));
 	else if (c == 'q')
 		return (1);

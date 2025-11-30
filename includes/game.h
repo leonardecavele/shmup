@@ -35,12 +35,12 @@ enum				e_quit
 
 enum				e_hit
 {
+	OUTOFBOUND,
 	NO_HIT,
 	WALL_HIT,
 	HERO_HIT,
-	BOSS_HIT,
 	ENEMY_HIT,
-	OUTOFBOUND,
+	BOSS_HIT,
 };
 
 typedef	struct		s_projectile

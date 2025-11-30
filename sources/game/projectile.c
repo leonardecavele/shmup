@@ -21,8 +21,9 @@ static bool	is_wall(unsigned char c)
 	return (0);
 }
 
-static void	handle_hit(t_game *game, int hit)
+static void	handle_hit(t_game *game, int hit, t_projectile *proj)
 {
+	(void)proj;
 	switch (hit)
 	{
 		case (HERO_HIT):
@@ -38,7 +39,7 @@ static void	handle_hit(t_game *game, int hit)
 			{
 				game->entities[1].alive = false;
 				game->board[game->entities[1].y][game->entities[1].x] = DEAD;
-				game->board[game->entities[1].y][game->entities[1].x + 1] = GROUND;
+				game->board[game->entities[1].y][game->entities[1].x - 1] = GROUND;
 			}
 			break;
 		case (ENEMY_HIT): // find enemy + handle death
@@ -80,6 +81,8 @@ static int	update_projectile(t_game *game, t_projectile *proj, unsigned short *a
 			|| game->board[ny][nx] == BOSS_RIGHT
 			|| game->board[ny][nx] == ENEMY3)
 	{
+		bool boss_hit = (game->board[ny][nx] == BOSS_LEFT || game->board[ny][nx] == BOSS_RIGHT);
+
 		if (game->board[ny][nx] == HERO_PROJ
 				|| game->board[ny][nx] == ENEMY_PROJ)
 			game->board[ny][nx] = GROUND;
@@ -92,7 +95,24 @@ static int	update_projectile(t_game *game, t_projectile *proj, unsigned short *a
 			game->board[proj->y][proj->x] = GROUND;
 		proj->active = false;
 		--(*active_proj);
-		return (4);
+
+		if (boss_hit)
+			return (BOSS_HIT);
+		else
+			return (ENEMY_HIT);
+		// if (game->board[ny][nx] == HERO_PROJ
+		// 		|| game->board[ny][nx] == ENEMY_PROJ)
+		// 	game->board[ny][nx] = GROUND;
+		// if (game->board[proj->y][proj->x] != HERO
+		// 		&& game->board[proj->y][proj->x] != ENEMY1
+		// 		&& game->board[proj->y][proj->x] != ENEMY2
+		// 		&& game->board[proj->y][proj->x] != ENEMY3
+		// 		&& game->board[proj->y][proj->x] != BOSS_LEFT
+		// 		&& game->board[proj->y][proj->x] != BOSS_RIGHT)
+		// 	game->board[proj->y][proj->x] = GROUND;
+		// proj->active = false;
+		// --(*active_proj);
+		// return (ENEMY_HIT);
 	}
 	else if (is_wall(game->board[ny][nx]))
 	{
@@ -146,7 +166,7 @@ extern void	update_projectiles(t_game *game, int frame)
 			{
 				int hit = update_projectile(game, &(game->entities[i].projectiles[j]), &(game->entities[i].active_proj_qty));
 				if (hit != NO_HIT)
-					handle_hit(game, hit);
+					handle_hit(game, hit, &(game->entities[i].projectiles[j]));
 			}
 		}
 	}
