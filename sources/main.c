@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 21:47:32 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 21:13:56 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 21:14:40 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,7 @@ play:
 			refresh();
 			c = getch();
 		}
-		if (c == 'n')
+		if (c == 'p')
 		{
 			nodelay(stdscr, true);
 			playing = true;
