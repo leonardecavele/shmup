@@ -29,6 +29,7 @@
 # define HERO_HP			3
 # define HERO_MAX_HP		5
 # define COLLEC_REWARD		300
+# define COLLEC_RESPAWN		20
 
 enum				e_quit
 {
