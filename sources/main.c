@@ -110,8 +110,20 @@ int	main(int ac, char **av)
 		if (correct_size == true)
 		{
 			c = getch();
-			if (update_game(c, &game))
-				playing = false;
+			int quit = update_game(c, &game);
+			switch (quit)
+			{
+				case (0):
+					break;
+				case (USER_QUIT):
+					// menu fin
+					playing = false;
+					break;
+				case (HERO_DEATH):
+					// menu death
+					playing = false;
+					break;
+			}
 			render(&game);
 		}
 		frame_end = get_time();
