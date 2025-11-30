@@ -6,7 +6,7 @@
 #    By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/29 14:33:54 by abetemps          #+#    #+#              #
-#    Updated: 2025/11/30 00:16:17 by ldecavel         ###   ########lyon.fr    #
+#    Updated: 2025/11/30 21:22:07 by ldecavel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ DIR_BUILD	:= .build/
 CC 			:= cc
 DEPS_FLAGS  := -MMD -MP
 WARN_FLAGS	:= -Wall -Werror -Wextra
-C_FLAGS		:= $(WARN_FLAGS) $(DEPS_FLAGS) -g3
+C_FLAGS		:= $(WARN_FLAGS) $(DEPS_FLAGS)
 INC_FLAGS 	:= -I$(DIR_INC)
 
 LINK		:= -lncurses -lm
