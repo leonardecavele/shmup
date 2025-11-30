@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 00:16:18 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 14:50:10 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 17:50:09 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ extern void	display_fps(double time, t_game *game)
 {
 	int x, y;
 	getmaxyx(stdscr, y, x);
+	(void)y;
 	static int		seconds = 0;
 	static int		minutes = 0;
 	static int		hours = 0;

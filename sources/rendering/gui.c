@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 16:26:36 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/30 17:37:25 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/11/30 17:50:23 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ extern void	display_gui(t_game *game)
 {
 	int x, y, hp, score, best, ammo;
 	getmaxyx(stdscr, y, x);
+	(void)y;
 
 	hp = game->entities[0].hp;
 	score = game->score;
