@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 21:47:32 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 14:27:51 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 20:32:11 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	main(int ac, char **av)
 		return (2);
 	}
 
+	int quitv;
 	t_game	game = {0};
 	bool	correct_size, playing = true;
 	double	frame_start, frame_time, frame_end, fps;
@@ -119,9 +120,9 @@ int	main(int ac, char **av)
 		if (correct_size == true)
 		{
 			c = getch();
-			int quit = update_game(c, &game);
+			quitv = update_game(c, &game);
 			render(&game);
-			switch (quit)
+			switch (quitv)
 			{
 				case (0):
 					break;
@@ -141,6 +142,21 @@ int	main(int ac, char **av)
 			sleep_remaining(TARGET_FRAME_TIME - frame_time);
 		display_fps(get_time() - frame_start, &game);
 		refresh();
+	}
+	if (quitv == HERO_DEATH)
+	{
+		int height, width;
+		
+		const char message[] = "Press any key to exit.";
+
+		nodelay(stdscr, false);
+		clear();
+		refresh();
+		getmaxyx(stdscr, height, width);
+		mvprintw((height >> 1) + 1, (width  >> 1) - (strlen(message)  >> 1), "Score: %d", game.score);
+		mvprintw((height >> 1) - 1, (width  >> 1) - (strlen(message)  >> 1), message);
+		refresh();
+		getch();
 	}
 	endwin();
 	return (0);
