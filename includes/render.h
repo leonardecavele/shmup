@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 09:17:26 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 00:29:27 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/30 02:07:31 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # include <stdbool.h>
 # include "text_formatting.h"
 
-# define MIN_WIDTH	80
-# define MIN_HEIGHT	32
-# define MAX_WIDTH	90
-# define MAX_HEIGHT 42
+# define MIN_WIDTH	40
+# define MIN_HEIGHT	22
+# define MAX_WIDTH	100
+# define MAX_HEIGHT 142
 
 
 bool	resize(void);

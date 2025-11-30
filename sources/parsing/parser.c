@@ -14,6 +14,14 @@
 #include "parser.h"
 #include "entities.h"
 
+static bool	is_wall(unsigned char c)
+{
+	if (c == WALL1 || c == WALL2 || c == WALL3 || c == WALL4
+		|| c == WALL5 || c == WALL6 || c == WALL7 || c == WALL8)
+		return (1);
+	return (0);
+}
+
 static int	get_length(char info_line[INFO_LINE_SIZE])
 {
 	static int	i = 0;
@@ -91,9 +99,14 @@ extern int	parse(t_game *game, int fd)
 				else if (game->board[i][j] == ENEMY1 || game->board[i][j] == ENEMY2
 						|| game->board[i][j] == ENEMY3)
 					enemy_count++;
-				else if (game->board[i][j] == BOSS)
+				else if (game->board[i][j] == BOSS_LEFT)
+				{
+					j++;
+					if (game->board[i][j] != BOSS_RIGHT)
+						return (WRONG_ENTITIES);
 					boss_count++;
-				else if (game->board[i][j] != WALL && game->board[i][j] != EMPTY && game->board[i][j] != GROUND)
+				}
+				else if (!is_wall(game->board[i][j]) && game->board[i][j] != EMPTY && game->board[i][j] != GROUND)
 					error++;
 			}
 			else
