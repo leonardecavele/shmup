@@ -68,7 +68,7 @@ int	main(int ac, char **av)
 	frame_start = frame_time = frame_end = fps = 0.0;
 
 	game.ent_qty = 2;
-	if ((ret = parse(&game, fd)))			// get map info // MUST HANDLE FAILED PARSING
+	if ((ret = parse(&game, fd)))
 	{
 		dprintf(2, "%sMap is invalid.\n", RED);
 		if (ret == WRONG_INFO_LINE)
@@ -86,22 +86,22 @@ int	main(int ac, char **av)
 	close(fd);
 	fd = -1;
 	srand(time(NULL));
-	handle_signal();				// to properly exit
-	initscr();						// init screen
-	cbreak();						// keys instantly works
-	noecho();						// typed char are not printed
-	nodelay(stdscr, true);			// getch returns ERR if no char
+	handle_signal();
+	initscr();
+	cbreak();
+	noecho();
+	nodelay(stdscr, true);
 	keypad(stdscr, TRUE);
-	curs_set(0);					// hide cursor
+	curs_set(0);
 
 	start_color();
-	init_pair(1, COLOR_GREEN, COLOR_BLACK);  // Green text on black background
-	init_pair(2, COLOR_RED, COLOR_BLACK);    // Red text on black background
-	init_pair(3, COLOR_YELLOW, COLOR_BLACK); // Yellow text
-	init_pair(4, COLOR_BLUE, COLOR_BLACK);   // Blue text
-	init_pair(5, COLOR_CYAN, COLOR_BLACK);   // Cyan text
-	init_pair(6, COLOR_MAGENTA, COLOR_BLACK);// Magenta text
-	init_pair(7, COLOR_WHITE, COLOR_BLACK);  // White text
+	init_pair(1, COLOR_GREEN, COLOR_BLACK);
+	init_pair(2, COLOR_RED, COLOR_BLACK);
+	init_pair(3, COLOR_YELLOW, COLOR_BLACK);
+	init_pair(4, COLOR_BLUE, COLOR_BLACK);
+	init_pair(5, COLOR_CYAN, COLOR_BLACK);
+	init_pair(6, COLOR_MAGENTA, COLOR_BLACK);
+	init_pair(7, COLOR_WHITE, COLOR_BLACK);
 
 	game.score = 0;
 
