@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 08:56:10 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 18:43:26 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 18:51:58 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,47 +14,56 @@
 #include "render.h"
 #include "shmup.h"
 
+#include "game.h"
+
 void	check_enemies_damage(t_game *game)
 {
-	short		hx, hy;
-	int			dx, dy, nx, ny;
+	int				hx, hy, nx, ny;
+	unsigned char	tile;
 
 	hx = game->entities[0].x;
 	hy = game->entities[0].y;
-	dy = -1;
-	while (dy <= 1)
+	nx = hx + 1;
+	ny = hy;
+	if (nx < game->board_width)
 	{
-		dx = -1;
-		while (dx <= 1)
-		{
-			nx = hx + dx;
-			ny = hy + dy;
-			unsigned char tile;
-
-			if (dx == 0 && dy == 0)
-			{
-				dx++;
-				continue;
-			}
-			if (nx < 0 || nx >= game->board_width
-				|| ny < 0 || ny >= game->board_height)
-			{
-				dx++;
-				continue;
-			}
-			tile = game->board[ny][nx];
-			if (tile == ENEMY1 || tile == ENEMY2 || tile == ENEMY3
-				|| tile == BOSS_LEFT || tile == BOSS_RIGHT)
-			{
-				game->entities[0].hp--;
-				if (game->entities[0].hp <= 0)
-					game->entities[0].alive = false;
-				return ;
-			}
-			dx++;
-		}
-		dy++;
+		tile = game->board[ny][nx];
+		if (tile == ENEMY1 || tile == ENEMY2 || tile == ENEMY3
+			|| tile == BOSS_LEFT || tile == BOSS_RIGHT)
+			goto hit;
 	}
+	nx = hx - 1;
+	ny = hy;
+	if (nx >= 0)
+	{
+		tile = game->board[ny][nx];
+		if (tile == ENEMY1 || tile == ENEMY2 || tile == ENEMY3
+			|| tile == BOSS_LEFT || tile == BOSS_RIGHT)
+			goto hit;
+	}
+	nx = hx;
+	ny = hy + 1;
+	if (ny < game->board_height)
+	{
+		tile = game->board[ny][nx];
+		if (tile == ENEMY1 || tile == ENEMY2 || tile == ENEMY3
+			|| tile == BOSS_LEFT || tile == BOSS_RIGHT)
+			goto hit;
+	}
+	nx = hx;
+	ny = hy - 1;
+	if (ny >= 0)
+	{
+		tile = game->board[ny][nx];
+		if (tile == ENEMY1 || tile == ENEMY2 || tile == ENEMY3
+			|| tile == BOSS_LEFT || tile == BOSS_RIGHT)
+			goto hit;
+	}
+	return ;
+hit:
+	game->entities[0].hp--;
+	if (game->entities[0].hp <= 0)
+		game->entities[0].alive = false;
 }
 
 static void	update_passive_behaviour(t_game *game, int frame, int seconds)
