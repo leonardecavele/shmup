@@ -15,7 +15,7 @@
 
 # define HERO		'+'
 # define DEAD		'|'
-# define KEY		'{'
+# define COLLEC		'{'
 # define ENEMY_PROJ	'Y'
 # define HERO_PROJ	'Z'
 # define ENEMY1		'B'

@@ -19,6 +19,7 @@
 
 # define MAX_ENTITY			30
 # define MAX_PROJECTILES	8
+# define MAX_COLLECTIBLES	8
 # define MAX_BOARD_WIDTH	1000
 # define MAX_BOARD_HEIGHT	1000
 # define CAM_TRESH			8
@@ -27,6 +28,7 @@
 # define BOSS_HP			5
 # define HERO_HP			3
 # define HERO_MAX_HP		5
+# define COLLEC_REWARD		100
 
 enum				e_quit
 {
@@ -62,7 +64,6 @@ typedef	struct		s_projectile
 
 typedef	struct		s_collectible
 {
-	unsigned short	type;
 	unsigned short	x;	
 	unsigned short	y;	
 	bool			active;
@@ -96,17 +97,20 @@ typedef struct	s_game
 	int				score;
 	t_entity		entities[MAX_ENTITY];
 	unsigned short	ent_qty;
+	t_collectible	collectibles[MAX_COLLECTIBLES];
+	unsigned short	collec_qty;
 	t_camera		camera;
 }					t_game;
   
-int			update_game(int c, t_game *game);
-void		move_hero(int c, t_game *game, int frame);
-void		hero_attack(t_entity *hero);
-void		hero_attack_dir(t_entity *hero, int c);
-void		update_enemy_behaviour(t_game *game, int frame);
-void		move_entity(t_game *game, short which, short move);
-void		update_projectiles(t_game *game, int frame);
-void		respawn_enemy(t_game *game, int seconds);
-t_entity	*find_entity(t_entity *entities, short x, short y);
+int				update_game(int c, t_game *game);
+void			move_hero(int c, t_game *game, int frame);
+void			hero_attack(t_entity *hero);
+void			hero_attack_dir(t_entity *hero, int c);
+void			update_enemy_behaviour(t_game *game, int frame);
+void			move_entity(t_game *game, short which, short move);
+void			update_projectiles(t_game *game, int frame);
+void			respawn_enemy(t_game *game, int seconds);
+t_entity		*find_entity(t_entity *entities, short x, short y);
+t_collectible	*find_collectible(t_collectible *collec, short x, short y);
 
 #endif
