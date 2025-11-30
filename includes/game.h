@@ -23,6 +23,7 @@
 # define MAX_BOARD_HEIGHT	1000
 # define CAM_TRESH			8
 # define ENEMY_SHOOT_RANGE	20
+# define MOB_HP				1;
 # define HERO_HP			3;
 # define BOSS_HP			5;
 
