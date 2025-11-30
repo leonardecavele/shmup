@@ -68,6 +68,7 @@ F_GAME		:=	game.c			\
 				hero.c			\
 				entity.c		\
 				projectile.c	\
+				collectible.c	\
 				enemy.c			\
 
 # VARS GENERATION =====================================================================
