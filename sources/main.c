@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 21:47:32 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 21:00:36 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 21:12:18 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,16 +162,18 @@ play:
 	{
 		const char message1[] = "Do you want to quit ?";
 		const char message2[] = "Press 'y' to quit, 'n' to keep playing.";
-		const char message3[] = "Wrong input.";
+		const char message3[] = "Wrong input. Do you want to quit ?";
 
-		mvprintw((height >> 1) + 1, (width  >> 1) - (strlen(message1)  >> 1), message1);
+		mvprintw((height >> 1) + 1, (width  >> 1) - (strlen(message2)  >> 1), message1);
+		mvprintw((height >> 1), (width  >> 1) - (strlen(message2)  >> 1), "Current score: %d", game.score);
 		mvprintw((height >> 1) - 1, (width  >> 1) - (strlen(message2)  >> 1), message2);
 		refresh();
 		int c = getch();
 		while (c != 'y' && c != 'n')
 		{
 			clear();
-			mvprintw((height >> 1) + 1, (width  >> 1) - (strlen(message3)  >> 1), message3);
+			mvprintw((height >> 1) + 1, (width  >> 1) - (strlen(message2)  >> 1), message3);
+			mvprintw((height >> 1), (width  >> 1) - (strlen(message2)  >> 1), "Current score: %d", game.score);
 			mvprintw((height >> 1) - 1, (width  >> 1) - (strlen(message2)  >> 1), message2);
 			refresh();
 			c = getch();
