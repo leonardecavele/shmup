@@ -48,11 +48,17 @@ extern void	display_fps(double time, t_game *game)
 
 	added_frame++;
 	added_time += time;
-	if (fps > 40.0)
+	if (fps > 50.0)
 	{
 		attron(COLOR_PAIR(1));
 		mvprintw(0, 0, "%6.1f fps", fps);
 		attroff(COLOR_PAIR(1));
+	}
+	else if (fps > 30.0)
+	{
+		attron(COLOR_PAIR(2));
+		mvprintw(0, 0, "%6.1f fps", fps);
+		attroff(COLOR_PAIR(3));
 	}
 	else
 	{
@@ -86,5 +92,4 @@ extern void	display_fps(double time, t_game *game)
 		minutes = 0;
 	}
 	mvprintw(0, x - 9, "%02dh%02dm%02ds", hours, minutes, seconds);
-	mvprintw(0, 11, "score: %d hp: %d", game->score, game->entities[0].hp);
 }

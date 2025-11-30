@@ -29,7 +29,7 @@ static void	handle_hit(t_game *game, int hit, t_projectile *proj)
 	switch (hit)
 	{
 		case (HERO_HIT):
-			// --game->entities[0].hp;
+			--game->entities[0].hp;
 			if (game->entities[0].hp <= 0)
 			{
 				game->board[game->entities[0].y][game->entities[0].x] = DEAD;
