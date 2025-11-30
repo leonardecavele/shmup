@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 22:13:58 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 02:36:26 by abetemps         ###   ########.fr       */
+/*   Updated: 2025/11/30 03:16:59 by ldecavel         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	shoot_up(t_entity *enemy, int i)
 {
 	enemy->projectiles[i].active = true;
 	enemy->projectiles[i].x = enemy->x;
-	enemy->projectiles[i].y = enemy->y - 1;
+	enemy->projectiles[i].y = enemy->y;
 	enemy->projectiles[i].x_dir = 0;
 	enemy->projectiles[i].y_dir = -1;
 }
@@ -26,7 +26,7 @@ static void	shoot_bot(t_entity *enemy, int i)
 {
 	enemy->projectiles[i].active = true;
 	enemy->projectiles[i].x = enemy->x;
-	enemy->projectiles[i].y = enemy->y + 1;
+	enemy->projectiles[i].y = enemy->y;
 	enemy->projectiles[i].x_dir = 0;
 	enemy->projectiles[i].y_dir = 1;
 }
@@ -34,7 +34,7 @@ static void	shoot_bot(t_entity *enemy, int i)
 static void	shoot_left(t_entity *enemy, int i)
 {
 	enemy->projectiles[i].active = true;
-	enemy->projectiles[i].x = enemy->x - 1;
+	enemy->projectiles[i].x = enemy->x;
 	enemy->projectiles[i].y = enemy->y;
 	enemy->projectiles[i].x_dir = -1;
 	enemy->projectiles[i].y_dir = 0;
@@ -43,7 +43,7 @@ static void	shoot_left(t_entity *enemy, int i)
 static void	shoot_right(t_entity *enemy, int i)
 {
 	enemy->projectiles[i].active = true;
-	enemy->projectiles[i].x = enemy->x + 1;
+	enemy->projectiles[i].x = enemy->x;
 	enemy->projectiles[i].y = enemy->y;
 	enemy->projectiles[i].x_dir = 1;
 	enemy->projectiles[i].y_dir = 0;
@@ -52,8 +52,8 @@ static void	shoot_right(t_entity *enemy, int i)
 static void	shoot_up_left(t_entity *enemy, int i)
 {
 	enemy->projectiles[i].active = true;
-	enemy->projectiles[i].x = enemy->x - 1;
-	enemy->projectiles[i].y = enemy->y - 1;
+	enemy->projectiles[i].x = enemy->x;
+	enemy->projectiles[i].y = enemy->y;
 	enemy->projectiles[i].x_dir = - 1;
 	enemy->projectiles[i].y_dir = - 1;
 }
@@ -61,8 +61,8 @@ static void	shoot_up_left(t_entity *enemy, int i)
 static void	shoot_up_right(t_entity *enemy, int i)
 {
 	enemy->projectiles[i].active = true;
-	enemy->projectiles[i].x = enemy->x + 1;
-	enemy->projectiles[i].y = enemy->y - 1;
+	enemy->projectiles[i].x = enemy->x;
+	enemy->projectiles[i].y = enemy->y;
 	enemy->projectiles[i].x_dir = 1;
 	enemy->projectiles[i].y_dir = -1;
 }
@@ -70,8 +70,8 @@ static void	shoot_up_right(t_entity *enemy, int i)
 static void	shoot_bot_left(t_entity *enemy, int i)
 {
 	enemy->projectiles[i].active = true;
-	enemy->projectiles[i].x = enemy->x - 1;
-	enemy->projectiles[i].y = enemy->y + 1;
+	enemy->projectiles[i].x = enemy->x;
+	enemy->projectiles[i].y = enemy->y;
 	enemy->projectiles[i].x_dir = -1;
 	enemy->projectiles[i].y_dir = 1;
 }
@@ -79,8 +79,8 @@ static void	shoot_bot_left(t_entity *enemy, int i)
 static void	shoot_bot_right(t_entity *enemy, int i)
 {
 	enemy->projectiles[i].active = true;
-	enemy->projectiles[i].x = enemy->x + 1;
-	enemy->projectiles[i].y = enemy->y + 1;
+	enemy->projectiles[i].x = enemy->x;
+	enemy->projectiles[i].y = enemy->y;
 	enemy->projectiles[i].x_dir = 1;
 	enemy->projectiles[i].y_dir = 1;
 }
@@ -90,21 +90,21 @@ static void	update_enemy1(t_entity *enemy, int frame)
 	int		i = 0;
 	bool	can_shoot = true;
 
-	if (frame < 15 || (frame >= 30 && frame <= 45))
+	if (frame < 15)
 		return ;
 	while (i < MAX_PROJECTILES)
 		if (enemy->projectiles[i++].active)
 			can_shoot = false;
 	if (!can_shoot)
 		return ;
-	shoot_left(enemy, 1);
-	shoot_right(enemy, 2);
-	shoot_up(enemy, 3);
-	shoot_bot(enemy, 4);
-	shoot_up_left(enemy, 5);
-	shoot_up_right(enemy, 6);
-	shoot_bot_left(enemy, 7);
-	shoot_bot_right(enemy, 8);
+	shoot_left(enemy, 0);
+	shoot_right(enemy, 1);
+	shoot_up(enemy, 2);
+	shoot_bot(enemy, 3);
+	shoot_up_left(enemy, 4);
+	shoot_up_right(enemy, 5);
+	shoot_bot_left(enemy, 6);
+	shoot_bot_right(enemy, 7);
 }
 
 static void	update_enemy2(t_entity *enemy, t_entity *hero, int frame)
@@ -113,16 +113,16 @@ static void	update_enemy2(t_entity *enemy, t_entity *hero, int frame)
 	int		distance, dx, dy;
 
 	dx = dy = 0;
-	if ((frame >= 15 && frame <= 30) && (frame >= 45 && frame <= 60))
-		goto skip_shoot;
-	while (i < MAX_PROJECTILES)
-		if (!enemy->projectiles[++i].active)
-			break ;
 	dx = hero->x - enemy->x;
 	dy = hero->y - enemy->y;
 	distance = sqrt(dx * dx + dy * dy);
 	if (distance > ENEMY_SHOOT_RANGE)
 		return ;
+	if ((frame >= 15 && frame <= 30) || (frame >= 45 && frame <= 60))
+		goto skip_shoot;
+	while (i < MAX_PROJECTILES - 1)
+		if (!enemy->projectiles[++i].active)
+			break ;
 	if (hero->x - enemy->x > hero->y - enemy->y)
 	{
 		if (hero->y < enemy->y && hero->x > enemy->x)
@@ -141,15 +141,16 @@ skip_shoot:
 	do {
         enemy->x_dir = rand() % 3 - 1;
         enemy->y_dir = rand() % 3 - 1;
-    } while (!dx && !dy);
+    } while (!enemy->x_dir && !enemy->y_dir);
 }
 
 static void	update_enemy3(t_entity *enemy, t_entity *hero, int frame)
 {
 	int		i = -1;
-	int		distance, dx, dy;
+	int		dx, dy, distance;
 
-	while (i < MAX_PROJECTILES)
+	dx = dy = 0;
+	while (i < MAX_PROJECTILES - 1)
 		if (!enemy->projectiles[++i].active)
 			break ;
 	dx = hero->x - enemy->x;
@@ -171,11 +172,11 @@ static void	update_enemy3(t_entity *enemy, t_entity *hero, int frame)
 		else
 			shoot_up(enemy, i);
 	}
-	if ((frame >= 5 && frame <= 25) && (frame >= 35 && frame <= 45))
+	if ((frame >= 5 && frame <= 25) || (frame >= 35 && frame <= 45))
 	do {
         enemy->x_dir = rand() % 3 - 1;
         enemy->y_dir = rand() % 3 - 1;
-    } while (!dx && !dy);
+    } while (!enemy->x_dir && !enemy->y_dir);
 }
 
 extern void	update_enemy_behaviour(t_game *game, int frame)

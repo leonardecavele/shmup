@@ -53,7 +53,7 @@ static int	update_projectile(t_game *game, t_projectile *proj, unsigned short *a
 		game->board[proj->y][proj->x] = GROUND;
 	proj->x += proj->x_dir;
 	proj->y += proj->y_dir;
-	game->board[proj->y][proj->x] = PROJ;
+	game->board[proj->y][proj->x] = HERO_PROJ;
 	
 	return (0);
 }
