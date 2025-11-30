@@ -178,14 +178,71 @@ skip_shoot:
     } while (!enemy->x_dir && !enemy->y_dir);
 }
 
+static void	update_boss(t_entity *enemy, int frame)
+{
+	if (frame <= 30)
+	{
+		enemy->projectiles[0].active = true;
+		enemy->projectiles[0].x = enemy->x + 3;
+		enemy->projectiles[0].y = enemy->y;
+		enemy->projectiles[0].x_dir = 0;
+		enemy->projectiles[0].y_dir = 2;
+
+		enemy->projectiles[1].active = true;
+		enemy->projectiles[1].x = enemy->x - 2;
+		enemy->projectiles[1].y = enemy->y;
+		enemy->projectiles[1].x_dir = 0;
+		enemy->projectiles[1].y_dir = 2;
+
+		enemy->projectiles[2].active = true;
+		enemy->projectiles[2].x = enemy->x + 3;
+		enemy->projectiles[2].y = enemy->y;
+		enemy->projectiles[2].x_dir = 0;
+		enemy->projectiles[2].y_dir = -2;
+
+		enemy->projectiles[3].active = true;
+		enemy->projectiles[3].x = enemy->x - 2;
+		enemy->projectiles[3].y = enemy->y;
+		enemy->projectiles[3].x_dir = 0;
+		enemy->projectiles[3].y_dir = -2;
+	}
+	else
+	{
+		enemy->projectiles[0].active = true;
+		enemy->projectiles[0].x = enemy->x + 3;
+		enemy->projectiles[0].y = enemy->y;
+		enemy->projectiles[0].x_dir = 2;
+		enemy->projectiles[0].y_dir = 2;
+
+		enemy->projectiles[1].active = true;
+		enemy->projectiles[1].x = enemy->x - 2;
+		enemy->projectiles[1].y = enemy->y;
+		enemy->projectiles[1].x_dir = 2;
+		enemy->projectiles[1].y_dir = 2;
+
+		enemy->projectiles[2].active = true;
+		enemy->projectiles[2].x = enemy->x + 3;
+		enemy->projectiles[2].y = enemy->y;
+		enemy->projectiles[2].x_dir = -2;
+		enemy->projectiles[2].y_dir = -2;
+
+		enemy->projectiles[3].active = true;
+		enemy->projectiles[3].x = enemy->x - 2;
+		enemy->projectiles[3].y = enemy->y;
+		enemy->projectiles[3].x_dir = -2;
+		enemy->projectiles[3].y_dir = -2;
+	}
+}
+
 extern void	update_enemy_behaviour(t_game *game, int frame)
 {
-	int	i = 2;
+	int	i = 1;
 
 	while (i < game->ent_qty)
 	{
 		if (game->entities[i].alive)
 		{
+<<<<<<< HEAD
 			if (game->entities[i].y_dir < 0)
 				move_entity(game, i, UP);
 			else if (game->entities[i].y_dir < 0)
@@ -195,6 +252,11 @@ extern void	update_enemy_behaviour(t_game *game, int frame)
 			else if (game->entities[i].x_dir < 0)
 				move_entity(game, i, LEFT);
 			if (game->entities[i].type == ENEMY1)
+=======
+			if (game->entities[i].type == BOSS_LEFT)
+				update_boss(&game->entities[i], frame);
+			else if (game->entities[i].type == ENEMY1)
+>>>>>>> 50bb9cf (edit: boss)
 				update_enemy1(&game->entities[i], frame);
 			else if (game->entities[i].type == ENEMY2)
 				update_enemy2(&game->entities[i], &game->entities[0], frame);
