@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 17:54:35 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/30 13:25:36 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 17:28:54 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,44 +22,54 @@ extern t_entity	*find_entity(t_entity *entities, short x, short y)
 {
 	int i = 0;
 
-	while (entities[i].x != x && entities[i].y != y)
+	while (i < MAX_ENTITY && (entities[i].x != x || entities[i].y != y))
 		++i;
 	return (&entities[i]);
 }
 
-extern void		move_entity(t_game *game, short which, short move)
+extern void     move_entity(t_game *game, short which, short move)
 {
-	unsigned short	pos_x = game->entities[which].x;
-	unsigned short	pos_y = game->entities[which].y;
+    unsigned short  pos_x = game->entities[which].x;
+    unsigned short  pos_y = game->entities[which].y;
 
-	if (game->entities[which].type == ENEMY1
-		|| game->entities[which].type == ENEMY2
-		|| game->entities[which].type == ENEMY3)
-		if (is_enemy(game->board[game->entities[which].y + game->entities[which].y_dir][game->entities[which].x + game->entities[which].x_dir]))
-			return ;
+    if ((game->entities[which].type == ENEMY1
+         || game->entities[which].type == ENEMY2
+         || game->entities[which].type == ENEMY3)
+        && !game->entities[which].alive)
+    {
+        game->board[pos_y][pos_x] = DEAD;
+        return;
+    }
 
-	if (move == UP && game->board[pos_y - 1][pos_x] == GROUND)
-	{
-		game->board[pos_y][pos_x] = GROUND;
-		game->board[--pos_y][pos_x] = game->entities[which].type;
-		--game->entities[which].y;
-	}
-	else if (move == DOWN && game->board[pos_y + 1][pos_x] == GROUND)
-	{
-		game->board[pos_y][pos_x] = GROUND;
-		game->board[++pos_y][pos_x] = game->entities[which].type;
-		++game->entities[which].y;
-	}
-	else if (move == LEFT && game->board[pos_y][pos_x - 1] == GROUND)
-	{
-		game->board[pos_y][pos_x] = GROUND;
-		game->board[pos_y][--pos_x] = game->entities[which].type;
-		--game->entities[which].x;
-	}
-	else if (move == RIGHT && game->board[pos_y][pos_x + 1] == GROUND)
-	{
-		game->board[pos_y][pos_x] = GROUND;
-		game->board[pos_y][++pos_x] = game->entities[which].type;
-		++game->entities[which].x;
-	}
+    if (game->entities[which].type == ENEMY1
+        || game->entities[which].type == ENEMY2
+        || game->entities[which].type == ENEMY3)
+        if (is_enemy(game->board[game->entities[which].y + game->entities[which].y_dir]
+                                   [game->entities[which].x + game->entities[which].x_dir]))
+            return ;
+
+    if (move == UP && game->board[pos_y - 1][pos_x] == GROUND)
+    {
+        game->board[pos_y][pos_x] = GROUND;
+        game->board[--pos_y][pos_x] = game->entities[which].type;
+        --game->entities[which].y;
+    }
+    else if (move == DOWN && game->board[pos_y + 1][pos_x] == GROUND)
+    {
+        game->board[pos_y][pos_x] = GROUND;
+        game->board[++pos_y][pos_x] = game->entities[which].type;
+        ++game->entities[which].y;
+    }
+    else if (move == LEFT && game->board[pos_y][pos_x - 1] == GROUND)
+    {
+        game->board[pos_y][pos_x] = GROUND;
+        game->board[pos_y][--pos_x] = game->entities[which].type;
+        --game->entities[which].x;
+    }
+    else if (move == RIGHT && game->board[pos_y][pos_x + 1] == GROUND)
+    {
+        game->board[pos_y][pos_x] = GROUND;
+        game->board[pos_y][++pos_x] = game->entities[which].type;
+        ++game->entities[which].x;
+    }
 }

@@ -104,6 +104,7 @@ extern int	parse(t_game *game, int fd)
 					game->entities[game->ent_qty].type = game->board[i][j];
 					game->entities[game->ent_qty].x = j;
 					game->entities[game->ent_qty].y = i;
+					game->entities[game->ent_qty].hp = MOB_HP;
 					game->entities[game->ent_qty].alive = true;
 					game->ent_qty++;
 					enemy_count++;

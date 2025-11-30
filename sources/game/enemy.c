@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 825/11/29 22:13:58 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 15:39:10 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 17:43:52 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ extern void	respawn_enemy(t_game *game, int seconds)
 	int			i = 1;
 	int			e_x, e_y;
 
-	if (seconds % 20 != 0)
-		return ;
 	while (i < MAX_ENTITY)
 	{
 		e_x = game->entities[i].x;
@@ -75,6 +73,11 @@ extern void	respawn_enemy(t_game *game, int seconds)
 		{
 			if (is_enemy(game->entities[i].type) && game->entities[i].type != BOSS_LEFT)
 			{
+				if (seconds % 20 != 0)
+				{
+					i++;
+					continue ;
+				}
 				game->entities[i].alive = true;
 				game->entities[i].hp = MOB_HP;
 				random_pos(game, &game->entities[i], &game->entities[i].x, &game->entities[i].y);
@@ -173,7 +176,7 @@ static void	update_enemy1(t_entity *enemy, int frame)
 	int		i = 0;
 	bool	can_shoot = true;
 
-	if (frame < 35 || frame > 40)
+	if (frame == 40)
 		return ;
 	while (i < MAX_PROJECTILES)
 		if (enemy->projectiles[i++].active)
@@ -197,7 +200,6 @@ static void update_enemy2(t_entity *enemy, t_entity *hero, int frame)
 	int         dist2;
 	const int   max_dist = 15;
 	const int   max2 = max_dist * max_dist;
-	const int   shoot_period = 15;
 	bool        skip_move = false;
 
 	dx = hero->x - enemy->x;
@@ -211,7 +213,7 @@ static void update_enemy2(t_entity *enemy, t_entity *hero, int frame)
 	if (dist2 > ENEMY_SHOOT_RANGE * ENEMY_SHOOT_RANGE)
 		skip_move = true;
 
-	if (i < MAX_PROJECTILES && (frame % shoot_period) == 0)
+	if (i < MAX_PROJECTILES && (frame == 10))
 	{
 		if (hero->x - enemy->x > hero->y - enemy->y)
 		{
@@ -315,7 +317,7 @@ static void update_enemy3(t_entity *enemy, t_entity *hero, int frame)
 
 	if (sqrt(dist2) > ENEMY_SHOOT_RANGE)
 		skip_move = true;
-	if (frame < 4)
+	if (frame == 50)
 	{
 		if (abs(dx) >= abs(dy))
 		{
@@ -503,14 +505,6 @@ extern void	update_enemy_behaviour(t_game *game, int frame)
 	{
 		if (game->entities[i].alive)
 		{
-			if (game->entities[i].y_dir < 0)
-				move_entity(game, i, UP);
-			else if (game->entities[i].y_dir < 0)
-				move_entity(game, i, DOWN);
-			if (game->entities[i].x_dir > 0)
-				move_entity(game, i, RIGHT);
-			else if (game->entities[i].x_dir < 0)
-				move_entity(game, i, LEFT);
 			if (game->entities[i].type == BOSS_LEFT)
 				update_boss(&game->entities[1], &game->entities[0], frame);
 			else if (game->entities[i].type == ENEMY1)
@@ -520,6 +514,14 @@ extern void	update_enemy_behaviour(t_game *game, int frame)
 			else if (game->entities[i].type == ENEMY3)
 				update_enemy3(&game->entities[i], &game->entities[0], frame);
 		}
+		if (game->entities[i].y_dir < 0 || !game->entities[i].alive)
+			move_entity(game, i, UP);
+		else if (game->entities[i].y_dir > 0 || !game->entities[i].alive)
+			move_entity(game, i, DOWN);
+		if (game->entities[i].x_dir > 0 || !game->entities[i].alive)
+			move_entity(game, i, RIGHT);
+		else if (game->entities[i].x_dir < 0 || !game->entities[i].alive)
+			move_entity(game, i, LEFT);
 		i++;
 	}
 }
