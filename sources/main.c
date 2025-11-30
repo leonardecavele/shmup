@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 21:47:32 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 21:12:18 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 21:13:56 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ play:
 	getmaxyx(stdscr, height, width);
 	if (quitv == HERO_DEATH)
 	{
-		const char message[] = "Press any key to exit.";
+		const char message[] = "press any key to exit.";
 
 		mvprintw((height >> 1) + 1, (width  >> 1) - (strlen(message)  >> 1), "Score: %d", game.score);
 		mvprintw((height >> 1) - 1, (width  >> 1) - (strlen(message)  >> 1), message);
@@ -160,16 +160,16 @@ play:
 	}
 	else if (quitv == USER_QUIT)
 	{
-		const char message1[] = "Do you want to quit ?";
-		const char message2[] = "Press 'y' to quit, 'n' to keep playing.";
-		const char message3[] = "Wrong input. Do you want to quit ?";
+		const char message1[] = "do you want to quit ?";
+		const char message2[] = "press 'o' to quit, 'p' to keep playing.";
+		const char message3[] = "wrong input. do you want to quit ?";
 
 		mvprintw((height >> 1) + 1, (width  >> 1) - (strlen(message2)  >> 1), message1);
 		mvprintw((height >> 1), (width  >> 1) - (strlen(message2)  >> 1), "Current score: %d", game.score);
 		mvprintw((height >> 1) - 1, (width  >> 1) - (strlen(message2)  >> 1), message2);
 		refresh();
 		int c = getch();
-		while (c != 'y' && c != 'n')
+		while (c != 'o' && c != 'p')
 		{
 			clear();
 			mvprintw((height >> 1) + 1, (width  >> 1) - (strlen(message2)  >> 1), message3);
