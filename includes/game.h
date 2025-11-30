@@ -114,5 +114,6 @@ void			respawn_enemy(t_game *game, int seconds);
 t_entity		*find_entity(t_entity *entities, short x, short y);
 t_collectible	*find_collectible(t_collectible *collec, short x, short y);
 void			blink(t_game *game);
+void			respawn_collectibles(t_game *game, int seconds);
 
 #endif

@@ -21,3 +21,15 @@ extern t_collectible	*find_collectible(t_collectible *collec, short x, short y)
 		++i;
 	return (&collec[i]);
 }
+
+extern void				respawn_collectibles(t_game *game, int seconds)
+{
+	for (int i = 0; i < game->collec_qty; ++i)
+	{
+		if (!(seconds % 20) && !game->collectibles[i].active && game->board[game->collectibles[i].y][game->collectibles[i].x] == GROUND)
+		{
+			game->collectibles[i].active = true;
+			game->board[game->collectibles[i].y][game->collectibles[i].x] = COLLEC;
+		}
+	}
+}
