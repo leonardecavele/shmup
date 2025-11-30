@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 21:47:32 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 21:47:09 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 21:49:16 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ static void	handle_signal(void)
 
 void	welcome(void)
 {
-	const char message[] = "Welcome dear player!";
+	const char message[] = "Welcome dear player !";
 	int height, width;
 	getmaxyx(stdscr, height, width);
 
 	for (int i = 3; i >= 0; --i)
 	{
 		mvprintw((height >> 1) - 1, (width  >> 1) - (strlen(message)  >> 1), "%s", message);
-		mvprintw((height >> 1), (width  >> 1) - (strlen(message)  >> 1), "%d", i);
+		mvprintw((height >> 1) + 1, (width  >> 1) - (strlen(message)  >> 1), "start in: %d", i);
 		sleep(1);
 		refresh();
 		clear();
