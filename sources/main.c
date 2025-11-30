@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 21:47:32 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 02:45:07 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/30 13:43:20 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ int	main(int ac, char **av)
 									//
 
 	game.score = 0;
-	game.hp = 3;
 	while (playing)
 	{
 		frame_start = get_time();

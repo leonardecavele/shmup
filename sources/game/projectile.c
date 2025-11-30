@@ -6,7 +6,7 @@
 /*   By: abetemps <abetemps@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 20:03:55 by abetemps          #+#    #+#             */
-/*   Updated: 2025/11/30 13:17:57 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 13:52:04 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static int	update_projectile(t_game *game, t_projectile *proj, unsigned short *a
 			|| game->board[ny][nx] == ENEMY_PROJ
 			|| game->board[ny][nx] == ENEMY1
 			|| game->board[ny][nx] == ENEMY2
+			|| game->board[ny][nx] == BOSS_LEFT
+			|| game->board[ny][nx] == BOSS_RIGHT
 			|| game->board[ny][nx] == ENEMY3)
 	{
 		if (game->board[ny][nx] == HERO_PROJ

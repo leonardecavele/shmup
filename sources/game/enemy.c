@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 825/11/29 22:13:58 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 13:12:24 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 13:45:49 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,6 @@ static void	shoot_bot_right(t_entity *enemy, int i)
 	enemy->projectiles[i].x_dir = 1;
 	enemy->projectiles[i].y_dir = 1;
 }
-
-//static bool is_enemy(unsigned char c)
-//{
-//    return (c == ENEMY1 || c == ENEMY2 || c == ENEMY3
-//        || c == BOSS_LEFT || c == BOSS_RIGHT);
-//}
 
 static void	update_enemy1(t_entity *enemy, int frame)
 {
@@ -313,57 +307,69 @@ static void update_enemy3(t_entity *enemy, t_entity *hero, int frame)
 
 static void	update_boss(t_entity *enemy, int frame)
 {
-	if (frame <= 30)
+	bool	can_shoot = true;
+	int		i = 0;
+	static	int test = 0;
+
+	(void)frame;
+	while (i < MAX_PROJECTILES)
+		if (enemy->projectiles[i++].active)
+			can_shoot = false;
+	if (!can_shoot)
+		return ;
+
+	++test;
+	if (test % 2 == 0)
 	{
 		enemy->projectiles[0].active = true;
 		enemy->projectiles[0].x = enemy->x + 3;
 		enemy->projectiles[0].y = enemy->y;
-		enemy->projectiles[0].x_dir = 0;
-		enemy->projectiles[0].y_dir = 2;
+		enemy->projectiles[0].x_dir = -1;
+		enemy->projectiles[0].y_dir = -1;
 
 		enemy->projectiles[1].active = true;
 		enemy->projectiles[1].x = enemy->x - 2;
 		enemy->projectiles[1].y = enemy->y;
-		enemy->projectiles[1].x_dir = 0;
-		enemy->projectiles[1].y_dir = 2;
+		enemy->projectiles[1].x_dir = -1;
+		enemy->projectiles[1].y_dir = -1;
 
 		enemy->projectiles[2].active = true;
 		enemy->projectiles[2].x = enemy->x + 3;
 		enemy->projectiles[2].y = enemy->y;
-		enemy->projectiles[2].x_dir = 0;
-		enemy->projectiles[2].y_dir = -2;
+		enemy->projectiles[2].x_dir = 1;
+		enemy->projectiles[2].y_dir = 1;
 
 		enemy->projectiles[3].active = true;
 		enemy->projectiles[3].x = enemy->x - 2;
 		enemy->projectiles[3].y = enemy->y;
-		enemy->projectiles[3].x_dir = 0;
-		enemy->projectiles[3].y_dir = -2;
+		enemy->projectiles[3].x_dir = 1;
+		enemy->projectiles[3].y_dir = 1;
 	}
 	else
 	{
 		enemy->projectiles[0].active = true;
 		enemy->projectiles[0].x = enemy->x + 3;
 		enemy->projectiles[0].y = enemy->y;
-		enemy->projectiles[0].x_dir = 2;
-		enemy->projectiles[0].y_dir = 2;
+		enemy->projectiles[0].x_dir = 1;
+		enemy->projectiles[0].y_dir = 1;
 
 		enemy->projectiles[1].active = true;
 		enemy->projectiles[1].x = enemy->x - 2;
 		enemy->projectiles[1].y = enemy->y;
-		enemy->projectiles[1].x_dir = 2;
-		enemy->projectiles[1].y_dir = 2;
+		enemy->projectiles[1].x_dir = 1;
+		enemy->projectiles[1].y_dir = 1;
 
 		enemy->projectiles[2].active = true;
 		enemy->projectiles[2].x = enemy->x + 3;
 		enemy->projectiles[2].y = enemy->y;
-		enemy->projectiles[2].x_dir = -2;
-		enemy->projectiles[2].y_dir = -2;
+		enemy->projectiles[2].x_dir = -1;
+		enemy->projectiles[2].y_dir = -1;
 
 		enemy->projectiles[3].active = true;
 		enemy->projectiles[3].x = enemy->x - 2;
 		enemy->projectiles[3].y = enemy->y;
-		enemy->projectiles[3].x_dir = -2;
-		enemy->projectiles[3].y_dir = -2;
+		enemy->projectiles[3].x_dir = -1;
+		enemy->projectiles[3].y_dir = -1;
 	}
 }
 

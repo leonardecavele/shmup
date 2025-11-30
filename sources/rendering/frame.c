@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 00:16:18 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 00:57:56 by ldecavel         ###   ########lyon.fr   */
+/*   Updated: 2025/11/30 13:40:57 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,5 @@ extern void	display_fps(double time, t_game *game)
 		minutes = 0;
 	}
 	mvprintw(0, 11, "%02dh%02dm%02ds", hours, minutes, seconds);
-	mvprintw(0, 21, "score: %d hp: %d", game->score, game->hp);
+	mvprintw(0, 21, "score: %d hp: %d", game->score, game->entities[0].hp);
 }
