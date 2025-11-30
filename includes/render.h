@@ -26,7 +26,6 @@
 bool	resize(void);
 void	render(t_game *game);
 
-void	move_camera(int c, t_game *game);
 void	display_board(t_game *game);
 void	display_gui(t_game *game);
 
