@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 08:56:10 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 19:52:02 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 20:00:57 by abetemps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ hit:
 static void	update_passive_behaviour(t_game *game, int frame, int seconds)
 {
 	update_projectiles(game, frame);
+	respawn_collectibles(game, seconds);
 	respawn_enemy(game, seconds);
 }
 
