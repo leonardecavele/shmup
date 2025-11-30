@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 21:47:32 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 13:43:20 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 14:27:51 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ int	main(int ac, char **av)
 	nodelay(stdscr, true);			// getch returns ERR if no char
 	keypad(stdscr, TRUE);
 	curs_set(0);					// hide cursor
-									//
 
 	game.score = 0;
 	while (playing)
