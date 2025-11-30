@@ -6,13 +6,56 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 08:56:10 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 15:42:00 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 18:43:26 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 #include "render.h"
 #include "shmup.h"
+
+void	check_enemies_damage(t_game *game)
+{
+	short		hx, hy;
+	int			dx, dy, nx, ny;
+
+	hx = game->entities[0].x;
+	hy = game->entities[0].y;
+	dy = -1;
+	while (dy <= 1)
+	{
+		dx = -1;
+		while (dx <= 1)
+		{
+			nx = hx + dx;
+			ny = hy + dy;
+			unsigned char tile;
+
+			if (dx == 0 && dy == 0)
+			{
+				dx++;
+				continue;
+			}
+			if (nx < 0 || nx >= game->board_width
+				|| ny < 0 || ny >= game->board_height)
+			{
+				dx++;
+				continue;
+			}
+			tile = game->board[ny][nx];
+			if (tile == ENEMY1 || tile == ENEMY2 || tile == ENEMY3
+				|| tile == BOSS_LEFT || tile == BOSS_RIGHT)
+			{
+				game->entities[0].hp--;
+				if (game->entities[0].hp <= 0)
+					game->entities[0].alive = false;
+				return ;
+			}
+			dx++;
+		}
+		dy++;
+	}
+}
 
 static void	update_passive_behaviour(t_game *game, int frame, int seconds)
 {
@@ -52,6 +95,8 @@ extern int	update_game(int c, t_game *game)
 	{
 		frame = 0;
 		seconds++;
+		if (seconds % 1 == 0)
+			check_enemies_damage(game);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 825/11/29 22:13:58 by ldecavel          #+#    #+#             */
-/*   Updated: 2025/11/30 18:06:43 by ldecavel         ###   ########.fr       */
+/*   Updated: 2025/11/30 18:35:18 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,11 +111,13 @@ static void	shoot_up(t_entity *enemy, int i)
 
 static void	shoot_bot(t_entity *enemy, int i)
 {
-	enemy->projectiles[i].active = true;
-	enemy->projectiles[i].x = enemy->x;
-	enemy->projectiles[i].y = enemy->y;
-	enemy->projectiles[i].x_dir = 0;
-	enemy->projectiles[i].y_dir = 1;
+	(void)enemy;
+	(void)i;
+//	enemy->projectiles[i].active = true;
+//	enemy->projectiles[i].x = enemy->x;
+//	enemy->projectiles[i].y = enemy->y;
+//	enemy->projectiles[i].x_dir = 0;
+//	enemy->projectiles[i].y_dir = 1;
 }
 
 static void	shoot_left(t_entity *enemy, int i)
